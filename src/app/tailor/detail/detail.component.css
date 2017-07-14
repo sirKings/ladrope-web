@@ -1,0 +1,29 @@
+.card{
+	max-width: 450px;
+	padding: 20px;
+	margin: 40px;
+	background-color: white;
+	border: 1px #e5e5e5 solid;
+	color: rgb(0,74,0);
+}
+
+.title{
+	font-size: 2rem;
+	font-weight: bold;
+	margin-top: 30px;
+}
+
+.image{
+	max-width: 200px;
+	max-height: 200px;
+}
+
+.contact{
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+h5{
+	font-size: 1.8rem
+}

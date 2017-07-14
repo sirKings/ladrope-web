@@ -1,0 +1,47 @@
+.card{
+	max-width: 450px;
+	padding: 20px;
+	margin: 40px;
+	background-color: white;
+	border: 1px #e5e5e5 solid;
+	color: rgb(0,74,0);
+}
+
+.upload{
+	min-width: 100px;
+	min-height: 300px;
+	background-color: white;
+	padding-left: 2px;
+	border: 1px #e5e5e5 solid;
+	margin-bottom: 20px;
+	color: rgb(0,74,0);
+}
+
+.post{
+	padding: 5px;
+	padding-top: 30px;
+	color: rgb(0,74,0);
+}
+
+.pad{
+	padding-right: 20px;
+	margin-bottom: 5px;
+}
+
+.image{
+	min-height: 280px;
+	min-width: 100px;
+}
+
+.thumbnail{
+	border: none;
+	padding: 0px
+}
+
+.formGroup{
+
+}
+
+.form-group input{
+	width: 100%
+}
