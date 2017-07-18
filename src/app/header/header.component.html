@@ -6,15 +6,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-        <a href="#" class="navbar-brand">Ladrope</a>
+        <a routerLink = '/' class="navbar-brand">Ladrope</a>
     </div>
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-                <li><a routerLink='/tailor'>Tailor</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a class='pointer' (click)='goToTailor()'>Tailor</a></li>
+                <li><a routerLink="#contact">Contact</a></li>
                 <li><a routerLink='/faq'>FAQ</a></li>
-                <li><a href="#sign_in">Sign In</a></li>
+                <li *ngIf = '!user'><a routerLink = '/signin'>Sign In</a></li>
+                <li *ngIf = 'user'><a routerLink = '/' (click)= 'signout()'>Sign out</a></li>
             </ul>
     </div>
   </div>

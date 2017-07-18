@@ -1,0 +1,109 @@
+<div class='row'>
+
+	<div class= 'col-md-8 col-md-offset-1'>
+		<div #alert class='alert'></div>
+		<div class='content'>
+			<div class='thumbnail'>
+				<img src="{{getImg()}}" #logo>
+					<progress value="0" max="100" #fi></progress>
+				<input type="file" name="logo" (change)='upload($event)'>
+			</div>
+
+			<form [formGroup]="updateForm" (ngSubmit)="update()">
+
+            <div class="form-group pad">
+                <label for="name">Business name</label>
+                <input
+                    type='text'
+                    id="name"
+                    placeholder='What is the name of your business'
+                    formControlName="name"
+                    class="form-control">
+                  <span
+                      *ngIf="!updateForm.get('name').valid && updateForm.get('name').touched"
+                      class="help-block">Please enter your business name</span>
+            </div>
+
+            <div class="form-group pad">
+                <label for="address">Contact person</label>
+                <input
+                    type='text'
+                    id="address"
+                    placeholder="Your company's contact person"
+                    formControlName="contact"
+                    class="form-control">
+                  <span
+                      *ngIf="!updateForm.get('contact').valid && updateForm.get('contact').touched"
+                      class="help-block">Please enter your contact person</span>
+            </div>
+            <div class="form-group pad">
+                <label for="address">Address</label>
+                <input
+                    type='text'
+                    id="address"
+                    placeholder='Where is your business located'
+                    formControlName="address"
+                    class="form-control">
+                  <span
+                      *ngIf="!updateForm.get('address').valid && updateForm.get('address').touched"
+                      class="help-block">Please enter your address</span>
+            </div>
+
+            <div class="form-group pad">
+                <label for="phone">Phone Number</label>
+                <input
+                    type='text'
+                    id="phone"
+                    placeholder='Please enter your phone number'
+                    formControlName="phone"
+                    class="form-control">
+                  <span
+                      *ngIf="!updateForm.get('phone').valid && updateForm.get('phone').touched"
+                      class="help-block">Please enter your phone number</span>
+            </div>
+            <div class="form-group pad">
+                <label for="address">Bank Name</label>
+                <input
+                    type='text'
+                    id="address"
+                    placeholder='Name of your bank'
+                    formControlName="bank"
+                    class="form-control">
+                  <span
+                      *ngIf="!updateForm.get('bank').valid && updateForm.get('bank').touched"
+                      class="help-block">Please enter your bank name</span>
+            </div>
+            <div class="form-group pad">
+                <label for="address">Account Name</label>
+                <input
+                    type='text'
+                    id="address"
+                    placeholder="Your company's bank acount name"
+                    formControlName="accountname"
+                    class="form-control">
+                  <span
+                      *ngIf="!updateForm.get('accountname').valid && updateForm.get('accountname').touched"
+                      class="help-block">Please enter your company account name</span>
+            </div>
+
+            <div class="form-group pad">
+                <label for="phone">Account Number</label>
+                <input
+                    type='text'
+                    id="phone"
+                    placeholder='Please enter your company account number'
+                    formControlName="account"
+                    class="form-control">
+                  <span
+                      *ngIf="!updateForm.get('account').valid && updateForm.get('account').touched"
+                      class="help-block">Please enter your company account number</span>
+            </div>
+
+
+
+        		<button class='btn btn-primary'>Save</button>
+			</form>
+		</div>
+	</div>
+
+</div>

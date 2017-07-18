@@ -39,3 +39,21 @@ h5{
 .edit:focus {
 	outline: none;
 }
+
+progress{
+	background-color: rgb(0,74,0);
+}
+
+.content {
+	text-align: center;
+	border: 1px #e5e5e5 solid;
+	background-color: white;
+	padding: 30px;
+	margin: 30px;
+	color: rgb(0,74,0);
+
+}
+
+.btn-primary {
+	background-color: rgb(0,74,0);
+}

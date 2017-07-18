@@ -1,3 +1,140 @@
-<p>
-  order works!
-</p>
+<div class='order'>
+<ul class='tabs'>
+	<li (click)='pend()' [ngClass]="{'active': pending}">Pending Orders (5)</li>
+	<li (click)='complete()' [ngClass]="{'active': completed}">Completed Orders (34)</li>
+	<li (click)='cancel()' [ngClass]="{'active': canceled}">Canceled Orders (12)</li>
+</ul>
+
+<div *ngIf='pending'>
+	<div class='list'>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer'>
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer' >
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer'>
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf='completed'>
+	<div class='list'>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer' routerLink='21'>
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer'>
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer'>
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf='canceled'>
+	<div class='list'>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer'>
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer' >
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+		<div class="group" routerLink='21'>
+		
+		<div class='content'>
+  			<a class='pointer'>
+    			<h4 >heading</h4>
+    			<p >Delivery date</p>
+    			<p >Price</p>
+  			</a>
+  		</div>
+  		<div class='thumbnail'>
+  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+  		</div>
+		</div>
+	</div>
+</div>
+
+</div>

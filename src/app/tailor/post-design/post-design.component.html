@@ -6,40 +6,52 @@
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png">
+						<img src="assets/images/upload_placeholder.png" #imgfi>
 					</div>
 				</div>
-				<input type="file" name="" id='image1'>
+        <div #f>
+          <progress value="0" max="" #fi></progress>
+				  <input type="file" name="" id='image1' (change)='uploadFirstImage($event)'>
+        </div>
 			</div>
 		</div>
 		<div class='col-md-3 col-sm-6'>
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png">
+						<img src="assets/images/upload_placeholder.png" #imgs>
 					</div>
 				</div>
-				<input type="file" name="" id='image1'>
+				<div >
+          <progress value="0" max="" #s></progress>
+          <input type="file" name="" id='image1' (change)='uploadSecImage($event)'>
+        </div>
 			</div>
 		</div>
 		<div class='col-md-3 col-sm-6'>
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png">
+						<img src="assets/images/upload_placeholder.png" #imgt>
 					</div>
 				</div>
-				<input type="file" name="" id='image1'>
+				<div #h>
+          <progress value="0" max="" #t></progress>
+          <input type="file" name="" id='image1' (change)='uploadThirdImage($event)'>
+        </div>
 			</div>
 		</div>
 		<div class='col-md-3 col-sm-6'>
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png">
+						<img src="assets/images/upload_placeholder.png" #imgf>
 					</div>
 				</div>
-				<input type="file" name="" id='image1'>
+				<div >
+          <progress value="0" max="" #ft></progress>
+          <input type="file" name="" id='image1' (change)='uploadFourthImage($event)'>
+        </div>
 			</div>
 		</div>
 	</div>
@@ -94,18 +106,45 @@
               [value]="gender">   {{ gender }}
           </div>
         </div>
-        <div formArrayName="tags" class='pad'>
-          <label>Tags:  </label> {{postDesign.value.tags}} <br>
-          <input type="text" name="tag" #tag>
+        <div class='form-group pad'>
+          <label for='tags'>Tags:  </label> 
+          <input 
+            type="text" 
+            name="tags" 
+            formControlName="tags"
+            placeholder='e.g. native, shirt, etc' 
+            value='{{postDesign.value.tags}}'> <br>
+          <!-- <input type="text" name="tag"  #tag>
           <button
             class="btn btn-default"
             type="button"
-            (click)="onAddHobby(tag)">Add Tag</button>
+            (click)="onAddTag(tag)">Add Tag</button>
+          <button
+            class="btn btn-default"
+            type="button"
+            (click)="clearTag(tag)">Clear Tag</button> -->
         </div>
         <span
           *ngIf="!postDesign.valid && postDesign.touched"
           class="help-block">Please enter valid data!</span>
+        <div class="form-group pad">
+            <label for="name">Description</label>
+            <textarea
+              rows="4" cols="50"
+              type="text"
+              id="name"
+              placeholder='Tell people about your design, what material is it made of? What occasionis it best suited for? etc'
+              formControlName="description"
+              class="form-control"></textarea>
+            <span
+              *ngIf="!postDesign.get('name').valid && postDesign.get('name').touched"
+              class="help-block">
+              <span *ngIf="postDesign.get('name').errors['required']">This field is required!</span>
+
+            </span>
+        </div>
         <button class="btn btn-primary" type="submit">Submit</button>
         </div>
+
     </form>
 </div>

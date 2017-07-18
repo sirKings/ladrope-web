@@ -1,0 +1,13 @@
+	.header img {
+		height: 200px;
+	}
+
+	.detail{
+		padding: 20px;
+		margin: 10px;
+	}
+
+	.content{
+		padding: 5px;
+		margin: 5px;
+	}

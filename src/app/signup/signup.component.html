@@ -1,0 +1,97 @@
+<div class='row'>
+
+	<div class= 'col-md-6 col-md-offset-3'>
+		<div #alert class='alert'></div>
+		<div class='content'>
+			<h3>Welcome to LadRope</h3>
+			<p>Please create an account</p>
+
+			<form [formGroup]="signupForm" (ngSubmit)="signup()">
+				    <div class="form-group pad">
+           			<label for="name">Email</label>
+            		<input
+              			type="email"
+              			id="email"
+              			placeholder='Enter your email'
+              			formControlName="email"
+              			class="form-control">
+            		<span
+              			*ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
+              			class="help-block">Please enter a valid email</span>
+              		
+        		</div>
+        		<div class="form-group pad">
+            		<label for="password">Password</label>
+            		<input
+              			type='password'
+              			id="password"
+              			placeholder='Please enter your password'
+              			formControlName="password"
+              			class="form-control">
+            			<span
+              				*ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
+              				class="help-block">Please password must be atleast six characters</span>
+        		</div>
+            <div class="form-group pad">
+                <label for="password2"> Re-enter Password</label>
+                <input
+                    type='password'
+                    id="password2"
+                    placeholder='Please re-enter your password'
+                    formControlName="password2"
+                    class="form-control">
+                  <span
+                      *ngIf="!signupForm.get('password2').valid && signupForm.get('password2').touched"
+                      class="help-block">Re-enter your password</span>
+                  <span
+                      *ngIf="!passwordMatch"
+                      class="help-block">Please your password must match</span>
+            </div>
+
+            <div class="form-group pad">
+                <label for="name">Business name</label>
+                <input
+                    type='text'
+                    id="name"
+                    placeholder='What is the name of your business'
+                    formControlName="name"
+                    class="form-control">
+                  <span
+                      *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched"
+                      class="help-block">Please enter your business name</span>
+            </div>
+
+            <div class="form-group pad">
+                <label for="address">Address</label>
+                <input
+                    type='text'
+                    id="address"
+                    placeholder='Where is your business located'
+                    formControlName="address"
+                    class="form-control">
+                  <span
+                      *ngIf="!signupForm.get('address').valid && signupForm.get('address').touched"
+                      class="help-block">Please enter your address</span>
+            </div>
+
+            <div class="form-group pad">
+                <label for="phone">Phone Number</label>
+                <input
+                    type='text'
+                    id="phone"
+                    placeholder='Please enter your phone number'
+                    formControlName="phone"
+                    class="form-control">
+                  <span
+                      *ngIf="!signupForm.get('phone').valid && signupForm.get('phone').touched"
+                      class="help-block">Please enter your phone number</span>
+            </div>
+
+
+
+        		<button class='btn btn-primary'>SignUp</button>
+			</form>
+		</div>
+	</div>
+
+</div>

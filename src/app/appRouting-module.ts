@@ -10,16 +10,29 @@ import { PostDesignComponent } from './tailor/post-design/post-design.component'
 import { MyDesignComponent } from './tailor/my-design/my-design.component';
 import { DetailComponent } from './tailor/detail/detail.component';
 import { OrderComponent } from './tailor/order/order.component';
+import { OrderDetailsComponent } from './tailor/order-details/order-details.component';
+import { ClothComponent } from './cloth/cloth.component';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { EditDetailsComponent } from './edit-details/edit-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'privacy', component: PrivayComponent },
-  { path: 'tailor', component: TailorComponent, children: [
-    { path: '', component: DashboardComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'reset-password', component: ForgetPasswordComponent },
+  { path: 'tailor', redirectTo: '/signin', pathMatch: 'full' },
+  { path: 'tailor/:id', component: TailorComponent, children: [
+    { path: '', redirectTo: 'detail', pathMatch: 'full' },
     { path: 'design', component: MyDesignComponent },
+    { path: 'design/:id', component: ClothComponent},
     { path: 'order', component: OrderComponent },
+    { path: 'order/:id', component: OrderDetailsComponent },
     { path: 'post', component: PostDesignComponent },
+    { path: 'edit-detail', component: EditDetailsComponent },
     { path: 'detail', component: DetailComponent }
     ]}
   ];

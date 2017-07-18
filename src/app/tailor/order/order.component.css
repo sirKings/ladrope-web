@@ -1,0 +1,43 @@
+.tabs li{
+	list-style: none;
+	display: inline;
+	margin-right: 10px;
+	font-size: 1.9rem;
+	transition: 0.5s ease-in-out;
+	cursor: pointer;
+}
+
+.order {
+	padding: 20px;
+	margin: 20px auto
+}
+
+.active {
+	border-bottom: 4px solid rgb(0,74,0);
+	background-color: white;
+	padding: 10px;
+}
+
+.list {
+	margin-top: 20px;
+}
+
+.content {
+	float: right;
+	width: 80%
+}
+
+.group {
+	max-width: 70%;
+	height: 100px;
+	margin-top: 20px;
+}
+
+img {
+	max-height: 100px
+}
+
+.pointer{
+	cursor: pointer;
+	color: rgb(0,74,0);
+}
