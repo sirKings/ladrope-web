@@ -46,3 +46,8 @@ li:hover{
 li:focus {
 	outline: none;
 }
+
+.active {
+	border-left: 5px rgb(0,74,0) solid;
+	background-color: white;
+}

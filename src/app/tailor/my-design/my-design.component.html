@@ -1,38 +1,25 @@
 <div class='design'>
-	<div><h3>Designs by you</h3></div>
-	<div class='row'>
-		<div >
-			<div class='col-xs-10 col-sm-5 col-md-4' routerLink='21'>
-				<div class="thumbnail">
-      				<img [src]='image1' alt="...">
-   					<div class="caption">
-   						<h3>Thumbnail label</h3>
-        				<p>...</p>
-        				<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      				</div>
-    			</div>
-  			</div>
-  			<div class='col-xs-10 col-sm-5 col-md-4' routerLink='21'>
-				<div class="thumbnail">
-      				<img [src]='image2' alt="...">
-   					<div class="caption">
-   						<h3>Thumbnail label</h3>
-        				<p>...</p>
-        				<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      				</div>
-    			</div>
-  			</div>
-  			<div class='col-xs-10 col-sm-5 col-md-4' routerLink='21'>
-				<div class="thumbnail">
-      				<img [src]='image3' alt="...">
-   					<div class="caption">
-   						<h3>Thumbnail label</h3>
-        				<p>...</p>
-        				<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      				</div>
-    			</div>
-  			</div>
-		</div>
-	</div>
+  <div *ngIf = '!cloths'> <p>You have not posted any designs, <span class='pointer' routerLink='../post'>go to post design</span> and start posting awesome products</p></div>
+  <div *ngIf = 'isCloth'>
+      <div><h3>Designs by you</h3></div>
+      <div>
+        <div class='list' *ngFor= ' let cloth of cloths'>
+          <div class="group" >
+          <div class='content'>
+              <a class='pointer' (click)='select(cloth)'>
+                <h4 >{{cloth.name}}</h4>
+                <p >Number sold: {{cloth?.numSold}}</p>
+                <p >Price: NGN{{cloth.price}}.00</p>
+                <p>{{cloth.likes}} likes</p>
+              </a>
+            </div>
+            <div class='thumbnail'>
+              <img src="{{cloth.image1}}">
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+	
 </div>
 	

@@ -9,6 +9,8 @@ export class AuthServiceService {
 authObserver;
 tailor;
 user;
+selectedCloth;
+selectedOrder;
 
   constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase) { 
 

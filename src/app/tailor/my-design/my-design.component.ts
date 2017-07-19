@@ -1,22 +1,75 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthServiceService } from '../../services/auth-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import * as firebase from 'firebase';
+
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+
 @Component({
   selector: 'app-my-design',
   templateUrl: './my-design.component.html',
   styleUrls: ['./my-design.component.css']
 })
 export class MyDesignComponent implements OnInit {
+authObserver;
+tailor;
+cloths;
+isCloth = false;
+selectedCloth;
 
-image1 = 'https://i1.wp.com/lh3.googleusercontent.com/-hoO9Asm2bwM/VvR3qF9MDzI/AAAAAAAA-50/ILmKVaBXiAg/s0/img752348f13017b7af9abd935a4b315a31.jpg?w=840&ssl=1'
-
-image2 = 'https://i2.wp.com/afrocosmopolitan.com/wp-content/uploads/2016/11/Amazing-Ankara-Short-Gown-Styles-For-Ladies-afrocosmopolitan.com-african-fashion-latest-ankara-styles-2016-6.jpg?resize=512%2C640'
-
-
-image3 = 'https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg'
-
-  constructor() { }
+  constructor(public afAuth: AngularFireAuth, public router: Router, public db: AngularFireDatabase, public service: AuthServiceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+      this.authObserver = this.afAuth.authState.subscribe( user => {
+        if (user) {
+            this.db.object('tailors/'+user.uid)
+              .subscribe(res => {
+                this.tailor = res;
+                console.log(this.tailor)
+                if(this.tailor.cloths){
+                	this.cloths = this.getCloths(this.tailor.cloths)
+                	this.isCloth = true
+                }
+                
+              })
+          
+        } 
+
+      });
+
+  }   
+
+  ngOnDestroy() {
+    this.authObserver.unsubscribe();
+    this.service.selectedCloth = this.selectedCloth
   }
+
+  getCloths(obj){
+      let result = Object.keys(obj).map(function(e) {
+       return obj[e]
+      });
+      return result;
+  }
+
+  onDelete(cloth){
+  	this.db.object('/cloths/'+cloth.clothKey).set(null);
+  	this.db.object('/tailors/'+this.tailor.uid+'/cloths/'+cloth.tailorKey).set(null);
+  }
+
+  select(cloth){
+  	this.selectedCloth = cloth;
+  	this.router.navigate([cloth.name], { relativeTo: this.route })
+  }
+
+  // deleteFileStorage(name:string) {
+  	
+  //   let storageRef = firebase.storage().ref();
+  //   storageRef.child(`${name}`).delete()
+  // }
+
 
 }

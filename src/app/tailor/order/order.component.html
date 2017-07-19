@@ -1,140 +1,77 @@
 <div class='order'>
 <ul class='tabs'>
-	<li (click)='pend()' [ngClass]="{'active': pending}">Pending Orders (5)</li>
-	<li (click)='complete()' [ngClass]="{'active': completed}">Completed Orders (34)</li>
-	<li (click)='cancel()' [ngClass]="{'active': canceled}">Canceled Orders (12)</li>
+	<li (click)='pend()' [ngClass]="{'active': pending}">Pending Orders ({{pendingOrders.length}})</li>
+	<li (click)='complete()' [ngClass]="{'active': completed}">Completed Orders ({{completedOrders.length}})</li>
+	<li (click)='cancel()' [ngClass]="{'active': canceled}">Canceled Orders ({{canceledOrders.length}})</li>
 </ul>
 
 <div *ngIf='pending'>
-	<div class='list'>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer'>
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer' >
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer'>
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-	</div>
+  <div *ngIf = '!isPendingOrder'>
+    <p class= 'story' >You don't have have any pending order</p>
+  </div>
+  <div *ngIf = 'isPendingOrder'>
+    <div class='list' *ngFor = ' let order of pendingOrders'>
+      <div class="group">
+      
+      <div class='content'>
+          <a class='pointer' (click)='select(order)'>
+            <h4 >{{order.name}}</h4>
+            <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
+            <p >Price: NGN{{order.price}}.00</p>
+          </a>
+        </div>
+        <div class='thumbnail'>
+          <img src="{{order.image1}}">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div *ngIf='completed'>
-	<div class='list'>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer' routerLink='21'>
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer'>
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer'>
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-	</div>
+  <div *ngIf = '!isCompletedOrder'>
+    <p class= 'story'>You don't have have any completed order</p>
+  </div>
+  <div *ngIf = 'isCompletedOrder'>
+    <div class='list' *ngFor = ' let order of completedOrders'>
+      <div class="group">
+      
+      <div class='content'>
+          <a class='pointer' (click)='select(order)'>
+            <h4 >{{order.name}}</h4>
+            <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
+            <p >Price: NGN{{order.price}}.00</p>
+          </a>
+        </div>
+        <div class='thumbnail'>
+          <img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div *ngIf='canceled'>
-	<div class='list'>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer'>
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer' >
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-		<div class="group" routerLink='21'>
-		
-		<div class='content'>
-  			<a class='pointer'>
-    			<h4 >heading</h4>
-    			<p >Delivery date</p>
-    			<p >Price</p>
-  			</a>
-  		</div>
-  		<div class='thumbnail'>
-  			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
-  		</div>
-		</div>
-	</div>
+  <div *ngIf = '!isCanceledOrder'>
+    <p class= 'story'>You don't have have any canceled order</p>
+  </div>
+  <div *ngIf = 'isCanceledOrder'>
+    <div class='list' *ngFor = ' let order of canceledOrders'>
+    	<div class="group">
+    	
+    	<div class='content'>
+    			<a class='pointer' (click)='select(order)'>
+            <h4 >{{order.name}}</h4>
+            <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
+            <p >Price: NGN{{order.price}}.00</p>
+          </a>
+    		</div>
+    		<div class='thumbnail'>
+    			<img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg">
+    		</div>
+    	</div>
+    </div>
+  </div>
 </div>
 
 </div>

@@ -41,3 +41,8 @@ img {
 	cursor: pointer;
 	color: rgb(0,74,0);
 }
+
+.story {
+	padding: 10px;
+	margin: 10px;
+}

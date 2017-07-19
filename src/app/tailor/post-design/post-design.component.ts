@@ -53,7 +53,7 @@ export class PostDesignComponent implements OnInit {
     console.log(this.postDesign)
     if(this.postDesign.valid){
       if(this.image1 && this.image2 && this.image3 && this.image4) {
-        this.db.list('/cloths')
+        let clothKey = this.db.list('/cloths')
         .push({
           image1: this.image1,
           image2: this.image2,
@@ -71,8 +71,37 @@ export class PostDesignComponent implements OnInit {
           rating: 0,
           numComment: 0,
           likes: 0,
-          label: this.tailor.name
-        })
+          label: this.tailor.name,
+          labelId: this.tailor.uid,
+          numSold: 0
+        }).key
+
+        let tailorkey = this.db.list('/tailors/'+ this.tailor.uid+ '/cloths')
+        .push({
+          image1: this.image1,
+          image2: this.image2,
+          image3: this.image3,
+          image4: this.image4,
+          name: this.postDesign.value.name,
+          price: this.postDesign.value.price,
+          time: this.postDesign.value.time,
+          gender: this.postDesign.value.gender,
+          tags: this.postDesign.value.tags,
+          description: this.postDesign.value.description,
+          likers: {
+                hello: true
+              },
+          rating: 0,
+          numComment: 0,
+          likes: 0,
+          label: this.tailor.name,
+          labelId: this.tailor.uid,
+          numSold: 0
+        }).key
+
+        this.db.object('/cloths/'+ clothKey).update({clothKey: clothKey, tailorKey: tailorkey});
+        this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey});
+
         this.postDesign.reset();
       }else{
         alert('upload atleast four images')

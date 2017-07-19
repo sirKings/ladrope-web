@@ -9,7 +9,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit, OnDestroy{
-user;
+
 authObserver;
 tailor
 
@@ -20,8 +20,7 @@ tailor
   ngOnInit() {
   		this.authObserver = this.afAuth.authState.subscribe( user => {
       	if (user) {
-        		this.user = user;
-        		this.db.object('tailors/'+this.user.uid)
+        		this.db.object('tailors/'+ user.uid)
         			.subscribe(res => {
         				this.tailor = res;
         				console.log(this.tailor)

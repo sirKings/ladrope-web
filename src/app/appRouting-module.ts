@@ -34,7 +34,8 @@ const appRoutes: Routes = [
     { path: 'post', component: PostDesignComponent },
     { path: 'edit-detail', component: EditDetailsComponent },
     { path: 'detail', component: DetailComponent }
-    ]}
+    ]},
+  { path: '**' , redirectTo: ''}
   ];
 
 

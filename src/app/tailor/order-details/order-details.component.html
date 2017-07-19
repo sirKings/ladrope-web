@@ -1,11 +1,40 @@
-<div class='detail'>
-	<div class='header'>
-		<div class='thumbnail' align="left"> <img src="https://s-media-cache-ak0.pinimg.com/736x/14/22/b8/1422b83c4d36cc8439e771c23c7941af.jpg"></div>
-		<div class='content'>
-			<div>hello</div>
-		</div>
+<div class='content'>
+	<div>	
+			<div class='right'>
+				<div class='header'>Name: <span>{{order.name}}</span></div>
+				<div class='header'>Price: <span>NGN{{order.price}}.00</span></div>
+				<div class='header date'>Delivery Date: <span>{{order.date | date: 'dd/MM/yyyy'}}</span></div>
+				<button (click)='back()' class='btn'>Go back</button>
+			</div>
+			<div>
+  				<img src="{{order.image1}}">
+			</div>
 	</div>
-	<div class='size-container'>
-		<div class='sizes'>hello</div>
+</div>
+
+<div class=''>
+	<div class= 'row'>
+		<div class="clearfix visible-sm"></div>
+		<div class='col-sm-5 col-md-4 col-lg-2'>
+			<div class='card'>
+				<img src="assets/images/size/belly.jpg">
+			</div>
+		</div>
+		
+		<div class='col-sm-5 col-md-4 col-lg-3'>
+			<div class='card'>
+				<img src="assets/images/size/belly.jpg">
+			</div>
+		</div>
+		<div class='col-sm-5 col-md-4 col-lg-3'>
+			<div class='card'>
+				<img src="assets/images/size/belly.jpg">
+			</div>
+		</div>
+		<div class='col-sm-5 col-md-4 col-lg-3'>
+			<div class='card'>
+				<img src="assets/images/size/belly.jpg">
+			</div>
+		</div>
 	</div>
 </div>

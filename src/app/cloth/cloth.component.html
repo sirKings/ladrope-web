@@ -1,12 +1,13 @@
 <div class='content'>
 	<div>	
 			<div class='right'>
-				<div class='header'>ClothName</div>
-				<div class='header'>N40000</div>
-				<div class='header'>Label Name</div>
-				<div class='header'>Production Time</div>
-				<div class='header'>20likes</div>
-				<div class='header'>5 star Rating</div>
+				<div class='header'>Name: <span>{{cloth.name}}</span></div>
+				<div class='header'>Price: <span>NGN{{cloth.price}}.00</span></div>
+				<div class='header'>Designer: <span>{{cloth.label}}</span></div>
+				<div class='header'>Production time: <span>{{cloth.time}} days</span></div>
+				<div class='header'><span>{{cloth.likes}} likes</span></div>
+				<div class='header'><span>{{cloth.rating}} star Rating</span></div>
+				<button (click)='back()' class='btn'>Go back</button>
 			</div>
 			<div style="width: 400px; height: 600px">
   				<carousel [sources]="imageSources" [config]="config"></carousel>

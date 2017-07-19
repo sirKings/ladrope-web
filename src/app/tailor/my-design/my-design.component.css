@@ -5,3 +5,43 @@
 img {
 	height: 400px;
 }
+
+
+.order {
+	padding: 20px;
+	margin: 20px auto
+}
+
+.active {
+	border-bottom: 4px solid rgb(0,74,0);
+	background-color: white;
+	padding: 10px;
+}
+
+.list {
+	margin-top: 20px;
+}
+
+.content {
+	float: right;
+	width: 80%
+}
+
+p{
+	margin: 0px
+}
+
+.group {
+	max-width: 70%;
+	height: 120px;
+	margin-top: 5px;
+}
+
+img {
+	max-height: 100px
+}
+
+.pointer{
+	cursor: pointer;
+	color: rgb(0,74,0);
+}
