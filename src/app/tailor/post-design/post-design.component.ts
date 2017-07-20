@@ -45,7 +45,7 @@ export class PostDesignComponent implements OnInit {
       'description': new FormControl(null, Validators.required)
     });
 
-   this.tailor = this.auth.getTailor()
+   this.tailor = this.auth.user
   
   }
 

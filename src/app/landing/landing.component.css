@@ -178,6 +178,10 @@
 
 /*shop*/
 
+.pointer{
+    cursor: pointer;
+}
+
 .shop {
     
     padding: 50px 0 80px;

@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
+import { AuthServiceService } from '../services/auth-service.service';
+
 import { Observable } from 'rxjs/Observable';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -15,11 +18,11 @@ import * as firebase from 'firebase/app';
 export class SignupComponent implements OnInit {
 signupForm;
 passwordMatch = true;
-user: Observable<firebase.User>;
+user;
 
 @ViewChild('alert') alert:ElementRef;
 
-  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public router: Router) {
+  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public router: Router, private auth: AuthServiceService) {
     this.user = afAuth.authState;
   }
 
@@ -38,16 +41,30 @@ user: Observable<firebase.User>;
   				console.log(error);
 			})
   			.then((res) => {
-  				this.db.object('/tailors/'+ res.uid)
-  				.set({
-  					name: this.signupForm.value.name,
-  					address: this.signupForm.value.address,
-  					phone: this.signupForm.value.phone,
-  					email: this.signupForm.value.email,
-            uid: res.uid
-  				})
-  				console.log (res)
-  				this.router.navigate(['/tailor', res.uid]);
+          
+          if(this.signupForm.value.isTailor === 'true'){
+                    this.db.object('/tailors/'+ res.uid)
+                    .set({
+                      name: this.signupForm.value.name,
+                      address: this.signupForm.value.address,
+                      phone: this.signupForm.value.phone,
+                      email: this.signupForm.value.email,
+                      displayName: this.signupForm.value.displayName,
+                      uid: res.uid
+                    })
+                    console.log (res)
+                    this.router.navigate(['/tailor', res.uid]);
+                  }else{
+                      this.db.object('/users/'+ res.uid)
+                      .set({
+                        email: this.signupForm.value.email,
+                        gender: this.signupForm.value.gender,
+                        displayName: this.signupForm.value.displayName
+                      })
+                      console.log (res)
+                      this.router.navigate(['/shop']);
+                  }
+  				this.user = this.getUser(res.uid);
   			});
   		}  else {
     	this.passwordMatch = false;
@@ -62,13 +79,39 @@ user: Observable<firebase.User>;
 
   ngOnInit() {
   	this.signupForm = new FormGroup({
+      'displayName': new FormControl(null, Validators.required),
+      'isTailor': new FormControl(null, Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.compose([Validators.minLength(6), Validators.required])]),
       'password2': new FormControl(null, [Validators.required]),
-      'name': new FormControl(null, [Validators.required]),
-      'address': new FormControl(null, [Validators.required]),
-      'phone': new FormControl(null, Validators.required)
+      'name': new FormControl(null),
+      'address': new FormControl(null),
+      'phone': new FormControl(null)
       });
+  }
+
+  getUser(uid){
+        let sub = this.db.object('/users/'+uid)
+          .subscribe(snapshot => {
+              this.user = snapshot;
+              console.log(this.user.$value)
+              this.auth.user = this.user;
+              if(this.user.$value === null){
+                sub.unsubscribe();
+                let sub1 = this.db.object('/tailors/'+uid)
+                  .subscribe(snapshot => {
+                    this.user = snapshot;
+                    console.log(this.user)
+                    this.auth.user = this.user;
+                  })
+              } 
+              
+          })
+  }
+
+  ngOnDestroy(){
+    this.auth.user = this.user;
+    console.log(this.user)
   }
 
 }

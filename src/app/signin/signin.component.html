@@ -9,6 +9,15 @@
 
 			<form [formGroup]="signinForm" (ngSubmit)="signin()">
 				<div class="form-group pad">
+            <h3>Are you a tailor?</h3>
+              <div class='form-inline pad1'>
+                <div class="radio">
+                      <label><input type="radio" formControlName="isTailor" value=true >Yes</label>
+                </div>
+                <div class="radio">
+                      <label><input type="radio" formControlName="isTailor" value= false >No</label>
+                </div>
+              </div>  
            			<label for="name">Email</label>
             		<input
               			type="email"

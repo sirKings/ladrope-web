@@ -25,6 +25,7 @@ export class EditDetailsComponent implements OnInit {
 	storageRef;
 	currentUpload;
 	updateForm;
+	
 	@ViewChild('logo') logo: ElementRef;
 	@ViewChild('fi') progress: ElementRef;
 	image1 = null;
@@ -52,7 +53,7 @@ export class EditDetailsComponent implements OnInit {
       		'bank': new FormControl(null, [Validators.required]),
       		'accountname': new FormControl(null, [Validators.required]),
       		'account': new FormControl(null, [Validators.required]),
-      		'contact': new FormControl(null, [Validators.required]),
+      		'displayName': new FormControl(null, [Validators.required]),
       		'name': new FormControl(null, [Validators.required]),
       		'address': new FormControl(null, [Validators.required]),
       		'phone': new FormControl(null, Validators.required),
@@ -98,7 +99,7 @@ export class EditDetailsComponent implements OnInit {
     	this.updateForm.get("account").setValue(this.tailor.account);
     	this.updateForm.get("accountname").setValue(this.tailor.accountname);
 		this.updateForm.get("bank").setValue(this.tailor.bank);
-		this.updateForm.get("contact").setValue(this.tailor.contact);
+		this.updateForm.get("displayName").setValue(this.tailor.displayName);
   }
 
   update(){
@@ -112,7 +113,7 @@ export class EditDetailsComponent implements OnInit {
   			bank: this.updateForm.value.bank,
   			account: this.updateForm.value.account,
   			accountname: this.updateForm.value.accountname,
-  			contact: this.updateForm.value.contact,
+  			displayName: this.updateForm.value.displayName,
   			logo: this.image1,
   		})
   	} else{
@@ -125,7 +126,7 @@ export class EditDetailsComponent implements OnInit {
   				bank: this.updateForm.value.bank,
   				account: this.updateForm.value.account,
   				accountname: this.updateForm.value.accountname,
-  				contact: this.updateForm.value.contact
+  				displayName: this.updateForm.value.displayName
   			})
   	}
 

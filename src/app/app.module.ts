@@ -11,6 +11,7 @@ import { UploadService } from './services/upload.service';
 
 import { AppRoutingModule } from './appRouting-module';
 import { CarouselModule } from 'angular4-carousel';
+import { StarRatingModule } from 'angular-star-rating';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -31,6 +32,9 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { EditDetailsComponent } from './edit-details/edit-details.component';
+import { ShopComponent } from './shop/shop.component';
+import { ContentComponent } from './shop/content/content.component';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +56,9 @@ import { EditDetailsComponent } from './edit-details/edit-details.component';
     SigninComponent,
     SignupComponent,
     ForgetPasswordComponent,
-    EditDetailsComponent
+    EditDetailsComponent,
+    ShopComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,8 @@ import { EditDetailsComponent } from './edit-details/edit-details.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    CarouselModule
+    CarouselModule,
+    StarRatingModule.forRoot()
   ],
   providers: [AuthServiceService, UploadService],
   bootstrap: [AppComponent]
