@@ -2,22 +2,6 @@
 	margin: 20px 20px;
 }
 
-img {
-	height: 400px;
-}
-
-
-.order {
-	padding: 20px;
-	margin: 20px auto
-}
-
-.active {
-	border-bottom: 4px solid rgb(0,74,0);
-	background-color: white;
-	padding: 10px;
-}
-
 .list {
 	margin-top: 20px;
 }
@@ -31,10 +15,8 @@ p{
 	margin: 0px
 }
 
-.group {
-	max-width: 70%;
-	height: 120px;
-	margin-top: 5px;
+.card {
+	width: 70%;
 }
 
 img {
@@ -45,3 +27,23 @@ img {
 	cursor: pointer;
 	color: rgb(0,74,0);
 }
+
+@media only screen and (max-width: 800px) {
+    /* For mobile phones: */
+    .content{
+    	margin-bottom: 5px;
+    	width: 50%
+    }
+
+    .card {
+    	width: 100%;
+    }
+
+}
+
+
+
+
+
+
+

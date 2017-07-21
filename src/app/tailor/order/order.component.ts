@@ -90,9 +90,21 @@ isCompletedOrder = false;
   }
 
   select(cloth){
+    this.acceptOrder(cloth)
     this.selectedOrder = cloth;
     console.log(this.selectedOrder)
     this.router.navigate([cloth.name], { relativeTo: this.route })
+  }
+
+  acceptOrder(order){
+    console.log(order)
+    if(order.accepted === true){
+
+    }else{
+      this.db.object('/users/'+order.user+'/orders/'+ order.userOrderKey).update({status: 'In progress', accepted: true});
+      this.db.object('/tailors/' + order.labelId +'/orders/' + order.tailorOrderKey).update({status: 'In progress', accepted: true});
+      this.db.object('/orders/'+ order.ordersKey).update({status: 'In progress', accepted: true});
+    }
   }
 
 }

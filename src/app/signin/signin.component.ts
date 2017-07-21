@@ -23,6 +23,7 @@ export class SigninComponent implements OnInit, OnDestroy {
 user
 signinForm;
 isTailor = true;
+loading = false;
 
 @ViewChild('alert') alert:ElementRef;
 
@@ -34,6 +35,7 @@ isTailor = true;
 
 
   signin() {
+    this.loading = true;
     console.log(this.signinForm.value)
 
   	if(this.signinForm.valid){
@@ -46,10 +48,12 @@ isTailor = true;
     		this.alert.nativeElement.innerHTML = errorMessage;
   			
   			console.log(error);
+        this.loading = false;
 		})
   		.then((res) => {
-
+        this.loading = false;
         this.user = this.getUser(res.uid);
+        this.auth.uid = res.uid;
         if(this.signinForm.value.isTailor === 'true'){
           console.log (res)
           this.router.navigate(['/tailor', res.uid]);
@@ -63,7 +67,8 @@ isTailor = true;
   	}
   	else{
   		this.alert.nativeElement.style.display = 'block';
-  		this.alert.nativeElement.innerHTML = 'Please enter signin details'
+  		this.alert.nativeElement.innerHTML = 'Please enter signin details';
+      this.loading = false
   	}
     
   }
@@ -101,8 +106,6 @@ isTailor = true;
   }
 
   ngOnDestroy(){
-    
-    console.log(this.user)
   }
 
 }

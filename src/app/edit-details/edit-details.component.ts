@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Location } from '@angular/common';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthServiceService } from '../services/auth-service.service'
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
@@ -28,27 +29,15 @@ export class EditDetailsComponent implements OnInit {
 	
 	@ViewChild('logo') logo: ElementRef;
 	@ViewChild('fi') progress: ElementRef;
-	image1 = null;
+	image1 = '';
 
-  constructor(public afAuth: AngularFireAuth, public router: Location, public db: AngularFireDatabase) { 
+  constructor(public afAuth: AngularFireAuth, public router: Location, public db: AngularFireDatabase, private auth: AuthServiceService) { 
   		 
   }
 
 
   ngOnInit() {
-  		this.authObserver = this.afAuth.authState.subscribe( user => {
-      	if (user) {
-        		this.user = user;
-        		this.db.object('tailors/'+this.user.uid)
-        			.subscribe(res => {
-        				this.tailor = res;
-        				console.log(this.tailor)
-        				this.updateform()
-        			})
-  				
-                } 
-
-           	});
+      this.tailor = this.auth.user
   		this.updateForm = new FormGroup({
       		'bank': new FormControl(null, [Validators.required]),
       		'accountname': new FormControl(null, [Validators.required]),
@@ -60,7 +49,7 @@ export class EditDetailsComponent implements OnInit {
       		'email': new FormControl(null, Validators.required)
       	});
 
-  		
+  		this.updateform()
 
   }
 
@@ -103,34 +92,39 @@ export class EditDetailsComponent implements OnInit {
   }
 
   update(){
-  	if(this.image1){
-  		this.db.object('tailors/'+this.tailor.uid)
-  		.update({
-  			name: this.updateForm.value.name,
-  			address: this.updateForm.value.address,
-  			phone: this.updateForm.value.phone,
-  			email: this.updateForm.value.email,
-  			bank: this.updateForm.value.bank,
-  			account: this.updateForm.value.account,
-  			accountname: this.updateForm.value.accountname,
-  			displayName: this.updateForm.value.displayName,
-  			logo: this.image1,
-  		})
-  	} else{
-  		this.db.object('tailors/'+this.tailor.uid)
-  			.update({
-  				name: this.updateForm.value.name,
-  				address: this.updateForm.value.address,
-  				phone: this.updateForm.value.phone,
-  				email: this.updateForm.value.email,
-  				bank: this.updateForm.value.bank,
-  				account: this.updateForm.value.account,
-  				accountname: this.updateForm.value.accountname,
-  				displayName: this.updateForm.value.displayName
-  			})
-  	}
+    if(this.updateForm.valid){
+      if(this.image1){
+        this.db.object('tailors/'+this.tailor.uid)
+        .update({
+          name: this.updateForm.value.name,
+          address: this.updateForm.value.address,
+          phone: this.updateForm.value.phone,
+          email: this.updateForm.value.email,
+          bank: this.updateForm.value.bank,
+          account: this.updateForm.value.account,
+          accountname: this.updateForm.value.accountname,
+          displayName: this.updateForm.value.displayName,
+          logo: this.image1,
+        })
+      } else{
+        this.db.object('tailors/'+this.tailor.uid)
+          .update({
+            name: this.updateForm.value.name,
+            address: this.updateForm.value.address,
+            phone: this.updateForm.value.phone,
+            email: this.updateForm.value.email,
+            bank: this.updateForm.value.bank,
+            account: this.updateForm.value.account,
+            accountname: this.updateForm.value.accountname,
+            displayName: this.updateForm.value.displayName
+          })
+      }
 
-  	this.router.back();
+      this.router.back();
+    }else {
+      alert('Please fill in your details')
+    }
+  	
   	
   }
 

@@ -3,7 +3,7 @@
 	margin: 20px;
 	color: rgb(0,74,0);
 	border: 2px solid rgb(0,74,0);
-	max-width: 60%;
+	width: 60%;
 	background-color: white;
 }
 
@@ -27,3 +27,33 @@
 span {
 	font-weight: bold;
 }
+
+.carousel{
+	height: 600px;
+	width: 400px;
+}
+
+
+@media only screen and (max-width: 390px) {
+    /* For mobile phones: */
+    .content{
+    	width: 90%
+    }
+
+    .carousel {
+    	height: 400px;
+    	width: 300px;
+    }
+
+    .right{
+    	float: none;
+    	width: 100%;
+    	vertical-align: baseline;
+    }
+
+    .header {
+    	font-size: 1.5rem
+    }
+}
+
+

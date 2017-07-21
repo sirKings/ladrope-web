@@ -11,13 +11,14 @@
   </div>
   <div *ngIf = 'isPendingOrder'>
     <div class='list' *ngFor = ' let order of pendingOrders'>
-      <div class="group">
+      <div class="card">
       
       <div class='content'>
           <a class='pointer' (click)='select(order)'>
             <h4 >{{order.name}}</h4>
             <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
             <p >Price: NGN{{order.price}}.00</p>
+            <p>Status: {{order.status}}</p>
           </a>
         </div>
         <div class='thumbnail'>
@@ -34,13 +35,14 @@
   </div>
   <div *ngIf = 'isCompletedOrder'>
     <div class='list' *ngFor = ' let order of completedOrders'>
-      <div class="group">
+      <div class="card">
       
       <div class='content'>
           <a class='pointer' (click)='select(order)'>
             <h4 >{{order.name}}</h4>
             <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
             <p >Price: NGN{{order.price}}.00</p>
+            <p>Status: {{order.status}}</p>
           </a>
         </div>
         <div class='thumbnail'>
@@ -57,13 +59,14 @@
   </div>
   <div *ngIf = 'isCanceledOrder'>
     <div class='list' *ngFor = ' let order of canceledOrders'>
-    	<div class="group">
+    	<div class="card">
     	
     	<div class='content'>
     			<a class='pointer' (click)='select(order)'>
             <h4 >{{order.name}}</h4>
             <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
             <p >Price: NGN{{order.price}}.00</p>
+            <p>Status: {{order.status}}</p>
           </a>
     		</div>
     		<div class='thumbnail'>

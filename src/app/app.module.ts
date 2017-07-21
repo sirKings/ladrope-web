@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -69,7 +71,15 @@ import { ContentComponent } from './shop/content/content.component';
     ReactiveFormsModule,
     FormsModule,
     CarouselModule,
-    StarRatingModule.forRoot()
+    StarRatingModule.forRoot(),
+    LoadingModule.forRoot({
+        animationType: ANIMATION_TYPES.wanderingCubes,
+        backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+        backdropBorderRadius: '14px',
+        primaryColour: '#004A00', 
+        secondaryColour: '#004A00', 
+        tertiaryColour: '#004A00'
+    })
   ],
   providers: [AuthServiceService, UploadService],
   bootstrap: [AppComponent]

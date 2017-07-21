@@ -1,18 +1,19 @@
 <nav id="myNavbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <button type="button" (click) ='toggleCollapse()' class="navbar-toggle">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </button>
-        <a routerLink = '/' class="navbar-brand">Ladrope</a>
+      </button>
+
+      <a class="navbar-brand"><i class="fa fa-bars pointer menu" (click)='menu()' aria-hidden="true" ></i> <span routerLink = '/' class='pointer'>Ladrope</span></a>
     </div>
 
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" [class.collapse]="!showMenu">
       <ul class="nav navbar-nav navbar-right">
-                <li><a class='pointer' (click)='goToTailor()'>Tailor</a></li>
-                <li><a routerLink="#contact">Contact</a></li>
+                <li><a class='pointer' (click)='goToShop()'>Shop</a></li>
+                <li><a routerLink="#contact">Contact Us</a></li>
                 <li><a routerLink='/faq'>FAQ</a></li>
                 <li *ngIf = '!user'><a routerLink = '/signin'>Sign In</a></li>
                 <li *ngIf = 'user'><a routerLink = '/' (click)= 'signout()'>Sign out</a></li>

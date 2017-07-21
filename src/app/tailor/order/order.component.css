@@ -5,6 +5,7 @@
 	font-size: 1.9rem;
 	transition: 0.5s ease-in-out;
 	cursor: pointer;
+	padding: 10px;
 }
 
 .order {
@@ -27,14 +28,12 @@
 	width: 80%
 }
 
-.group {
-	max-width: 70%;
-	height: 100px;
-	margin-top: 20px;
+.card {
+	width: 70%;
 }
 
 img {
-	max-height: 100px
+	height: 120px
 }
 
 .pointer{
@@ -46,3 +45,32 @@ img {
 	padding: 10px;
 	margin: 10px;
 }
+
+
+
+@media only screen and (max-width: 800px) {
+    /* For mobile phones: */
+    .content{
+    	margin-bottom: 5px;
+    	width: 50%
+    }
+
+    .card {
+    	width: 100%;
+    }
+
+}
+
+
+@media only screen and (max-width: 650px) {
+	.tabs li{
+    	display: block;
+    }
+
+    .content p {
+    	line-height: 15px
+    }
+
+}
+
+

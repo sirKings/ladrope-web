@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
 signupForm;
 passwordMatch = true;
 user;
+loading;
 
 @ViewChild('alert') alert:ElementRef;
 
@@ -27,6 +28,7 @@ user;
   }
 
   signup() {
+    this.loading = true;
   	if(this.signupForm.valid){
   		if(this.signupForm.value.password === this.signupForm.value.password2){
 
@@ -39,9 +41,10 @@ user;
     			this.alert.nativeElement.innerHTML = errorMessage;
   			
   				console.log(error);
+          this.loading = false;
 			})
   			.then((res) => {
-          
+          this.auth.uid = res.uid;
           if(this.signupForm.value.isTailor === 'true'){
                     this.db.object('/tailors/'+ res.uid)
                     .set({
@@ -64,15 +67,18 @@ user;
                       console.log (res)
                       this.router.navigate(['/shop']);
                   }
+          this.loading = false;
   				this.user = this.getUser(res.uid);
   			});
   		}  else {
     	this.passwordMatch = false;
+      this.loading = false;
     	} 
 	}
   	else{
   		this.alert.nativeElement.style.display = 'block';
-  		this.alert.nativeElement.innerHTML = 'Please enter valid details'
+  		this.alert.nativeElement.innerHTML = 'Please enter valid details';
+      this.loading = false;
   	}
     
   }

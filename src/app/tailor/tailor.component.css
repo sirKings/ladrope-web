@@ -6,3 +6,28 @@
 .content{
 	margin-left: 220px;
 }
+
+
+@media only screen and (max-width: 800px) {
+    /* For mobile phones: */
+    .content{
+    	margin-left: 0px;
+    }
+
+    .sidebar{
+    	display: none;
+    }
+}
+
+@media only screen and (min-width: 790px) {
+	.row {
+    	margin-left: 150px;
+    }
+}
+
+
+@media only screen and (min-width: 1280px) {
+	.row {
+    	margin-left: 0px;
+    }
+}

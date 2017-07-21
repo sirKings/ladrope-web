@@ -2,7 +2,7 @@
 		margin: 20px;
 		color: rgb(0,74,0);
 		border: 2px solid rgb(0,74,0);
-		max-width: 60%;
+		width: 60%;
 		background-color: white;
 	}
 
@@ -52,6 +52,30 @@
 		background-color: white;
 	}
 
+	.measurement{
+		padding: 15px;
+	}
 
+@media only screen and (max-width: 980px) {
+    /* For mobile phones: */
+    .content{
+    	margin-bottom: 5px;
+    	width: 90%
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    /* For mobile phones: */
+    .pad{
+    	padding-left: 20%;
+    }
+
+    .header {
+    	padding: 1px;
+    	font-size: 1.3rem;
+    }
+
+}
 
 

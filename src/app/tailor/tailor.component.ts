@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import { AuthServiceService } from '../services/auth-service.service';
 
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
@@ -9,20 +11,29 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
   templateUrl: './tailor.component.html',
   styleUrls: ['./tailor.component.css']
 })
-export class TailorComponent implements OnInit {
+export class TailorComponent implements OnInit, OnDestroy {
 
 tailor;
 sub;
 uid;
-  constructor(public db: AngularFireDatabase, public route: ActivatedRoute) { }
+menu;
+isMenu = false;
+
+  constructor(public db: AngularFireDatabase, public route: ActivatedRoute, private auth: AuthServiceService) { }
 
   ngOnInit() {
   	this.sub = this.route.params.subscribe(params => {
        this.uid = +params['res.uid']; // (+) converts string 'id' to a number
-
-       // this.tailor = this.db.object('/tailors/'+ this.uid)
-       // 		console.log(this.tailor)
     });
+
+    this.menu = this.auth.showMenu.subscribe((res)=>{
+    	this.isMenu = res;
+    })
+  }
+
+  ngOnDestroy(){
+  	this.menu.unsubscribe()
+  	this.sub.unsubscribe()
   }
 
 }

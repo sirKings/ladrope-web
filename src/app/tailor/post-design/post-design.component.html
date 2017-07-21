@@ -56,7 +56,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 card">
+	<div class="col-xs-10 col-sm-10 col-md-8 col-md-offset-2 card">
         <div class="form-group pad">
            	<label for="name">Name</label>
             <input
@@ -96,7 +96,7 @@
               *ngIf="!postDesign.get('time').valid && postDesign.get('time').touched"
               class="help-block">Please enter a valid number of days!</span>
         </div>
-        <div class="pad">
+        <div class="pad form-group">
           <label for="gender">Gender</label>
           <div class="radio" *ngFor="let gender of genders">
             <input
@@ -106,24 +106,17 @@
               [value]="gender">   {{ gender }}
           </div>
         </div>
-        <div class='form-group pad'>
-          <label for='tags'>Tags:  </label> 
-          <input 
-            type="text" 
-            name="tags" 
-            formControlName="tags"
-            placeholder='e.g. native, shirt, etc' 
-            value='{{postDesign.value.tags}}'> <br>
-          <!-- <input type="text" name="tag"  #tag>
-          <button
-            class="btn btn-default"
-            type="button"
-            (click)="onAddTag(tag)">Add Tag</button>
-          <button
-            class="btn btn-default"
-            type="button"
-            (click)="clearTag(tag)">Clear Tag</button> -->
-        </div>
+       <div class='form-group'>
+        <label>Type</label>
+              <select formControlName="tags">
+               <option value="gown">Gowns</option>
+               <option value="shirt">Shirt</option>
+               <option value="trouser">Trousers</option>
+               <option value="native">Native</option>
+               <option value="suit">Suit</option>
+               <option value="ankara">Ankara</option>
+              </select>
+      </div>
         <span
           *ngIf="!postDesign.valid && postDesign.touched"
           class="help-block">Please enter valid data!</span>

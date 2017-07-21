@@ -1,11 +1,12 @@
 <div class='detail'>
+	<ngx-loading [show]="loading"></ngx-loading>
 	<div class='row'>
 		<div class='col-sm-9'>
 			<div class='card'>
 				<div class='row'>
 					<div class='col-sm-5 image'>
 						<div class='thumbnail'>
-							<img src="{{tailor.logo}}">
+							<img src="{{getImg()}}">
 						</div>
 					</div>
 					<div class='col-sm-5 title'>{{tailor.name}}</div>
