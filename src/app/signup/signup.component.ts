@@ -90,6 +90,7 @@ loading;
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.compose([Validators.minLength(6), Validators.required])]),
       'password2': new FormControl(null, [Validators.required]),
+      'agree': new FormControl(null, Validators.required),
       'name': new FormControl(null),
       'address': new FormControl(null),
       'phone': new FormControl(null)

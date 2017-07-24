@@ -1,0 +1,31 @@
+<div class='content'>
+	<div class='cloth'>
+		<div class='right'>
+			<div class='badge'>
+				<p>NGN{{cloth.price}}.00</p>
+			</div>
+			<star-rating-comp 
+				[staticColor]="'ok'" 
+				[readOnly]="true" 
+				[starType]="'svg'" 
+				rating={{cloth.rating}}>
+			</star-rating-comp>
+		</div>
+		<div class='head'>
+			<p>{{cloth.name}}</p>
+			<p>From {{cloth.label}}</p>
+		</div>
+		<div >
+			<img src="{{cloth.image1}}" class='img-responsive'>
+		</div>
+		<div class='footer'>
+			<div>
+				<span class='pointer' (click)='like()'>
+					<i *ngIf='!cloth.likers[uid]' class="fa fa-heart-o" aria-hidden="true"></i> 
+					<i *ngIf='cloth.likers[uid]' class="fa fa-heart green" aria-hidden="true"></i> 
+					{{cloth.likes}} likes
+				</span>
+			</div>
+		</div>
+	</div>
+</div>

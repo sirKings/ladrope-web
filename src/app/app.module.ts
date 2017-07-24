@@ -36,6 +36,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { EditDetailsComponent } from './edit-details/edit-details.component';
 import { ShopComponent } from './shop/shop.component';
 import { ContentComponent } from './shop/content/content.component';
+import { TermsComponent } from './terms/terms.component';
+import { AgreementComponent } from './agreement/agreement.component';
 
 
 @NgModule({
@@ -61,6 +63,8 @@ import { ContentComponent } from './shop/content/content.component';
     EditDetailsComponent,
     ShopComponent,
     ContentComponent,
+    TermsComponent,
+    AgreementComponent,
   ],
   imports: [
     BrowserModule,

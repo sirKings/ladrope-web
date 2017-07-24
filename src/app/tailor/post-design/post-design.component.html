@@ -85,6 +85,12 @@
               class="help-block">Please enter a valid amount!</span>
         </div>
         <div class="form-group pad">
+            <label for="price">Selling Price</label>
+            
+              <p>{{getSellingPrice(postDesign.value.price)}}</p>
+             
+        </div>
+        <div class="form-group pad">
             <label for="time">Production Time (days)</label>
             <input
               type='number'

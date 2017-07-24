@@ -87,8 +87,8 @@ export class EditDetailsComponent implements OnInit {
     	this.updateForm.get("email").setValue(this.tailor.email);
     	this.updateForm.get("account").setValue(this.tailor.account);
     	this.updateForm.get("accountname").setValue(this.tailor.accountname);
-		this.updateForm.get("bank").setValue(this.tailor.bank);
-		this.updateForm.get("displayName").setValue(this.tailor.displayName);
+		  this.updateForm.get("bank").setValue(this.tailor.bank);
+		  this.updateForm.get("displayName").setValue(this.tailor.displayName);
   }
 
   update(){

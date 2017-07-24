@@ -24,10 +24,10 @@
                     type='text'
                     id="name"
                     placeholder='What is your name'
-                    formControlName="contact"
+                    formControlName="displayName"
                     class="form-control">
                   <span
-                      *ngIf="!signupForm.get('contact').valid && signupForm.get('contact').touched"
+                      *ngIf="!signupForm.get('displayName').valid && signupForm.get('displayName').touched"
                       class="help-block">Please enter your name</span>
             </div>
             <div class="form-group pad">      
@@ -109,8 +109,11 @@
                       *ngIf="!signupForm.get('phone').valid && signupForm.get('phone').touched"
                       class="help-block">Please enter your phone number</span>
             </div>
+
             </div>
 
+            <p *ngIf = 'signupForm.value.isTailor === "true"'><input type="checkbox" formControlName= "agree"><a routerLink='/agreement' class='agree'> I agree to Terms And Conditions</a></p>
+            <p *ngIf = 'signupForm.value.isTailor !== "true"'><input type="checkbox" formControlName= "agree"><a routerLink='/terms' class='agree'> I agree to Terms And Conditions</a></p>
 
         		<button class='btn btn-primary'>SignUp</button>
 			</form>

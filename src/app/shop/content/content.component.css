@@ -1,0 +1,85 @@
+img {
+	width: 100%;
+	max-width: 500px;
+}
+
+.badge {
+	background-color: rgb(0,74,0);
+	
+}
+
+.content{
+	background-color: white;
+	max-width: 500px;
+	margin-bottom: 50px;
+}
+
+.right {
+	float: right;
+	padding: 10px;
+}
+
+.badge p {
+	margin-bottom: 0px;
+	font-weight: bolder;
+}
+
+.head {
+	padding: 10px;
+}
+
+.head p {
+	font-weight: bolder;
+	font-size: 2rem
+}
+
+span {
+	font-size: 1.5rem;
+	padding: 5px;
+}
+
+.footer {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+}
+
+.comment input {
+	width: 80%;
+	margin-top: 20px;
+	border: none;
+	border-top: 1px solid grey;
+	margin-right: 20px;
+}
+
+.green{
+	color: rgb(0,74,0);
+}
+
+.submitcomment {
+	float: right;
+}
+
+.submitcomment i {
+	padding: 20px;
+	font-size: 2.5rem;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .head {
+    	padding: 0px;
+    	padding-top: 5px
+    }
+
+    .head p {
+    	font-size: 1.3rem;
+    	font-weight: bold;
+    	margin-left: 5px
+    }
+}

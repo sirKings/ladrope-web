@@ -53,14 +53,15 @@ export class PostDesignComponent implements OnInit {
     console.log(this.postDesign)
     if(this.postDesign.valid){
       if(this.image1 && this.image2 && this.image3 && this.image4) {
-        let clothKey = this.db.list('/cloths')
+        let clothKey = this.db.list('/cloths/' + this.postDesign.value.gender)
         .push({
           image1: this.image1,
           image2: this.image2,
           image3: this.image3,
           image4: this.image4,
           name: this.postDesign.value.name,
-          price: this.postDesign.value.price,
+          cost: this.postDesign.value.price,
+          price: this.getSellingPrice(this.postDesign.value.price),
           time: this.postDesign.value.time,
           gender: this.postDesign.value.gender,
           tags: this.postDesign.value.tags,
@@ -83,7 +84,8 @@ export class PostDesignComponent implements OnInit {
           image3: this.image3,
           image4: this.image4,
           name: this.postDesign.value.name,
-          price: this.postDesign.value.price,
+          cost: this.postDesign.value.price,
+          price: this.getSellingPrice(this.postDesign.value.price),
           time: this.postDesign.value.time,
           gender: this.postDesign.value.gender,
           tags: this.postDesign.value.tags,
@@ -99,7 +101,7 @@ export class PostDesignComponent implements OnInit {
           numSold: 0
         }).key
 
-        this.db.object('/cloths/'+ clothKey).update({clothKey: clothKey, tailorKey: tailorkey});
+        this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey});
         this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey});
 
         this.postDesign.reset();
@@ -237,6 +239,18 @@ export class PostDesignComponent implements OnInit {
           console.log(upload)
         }
       );
+  }
+
+  getSellingPrice(num){
+    let sellingPrice = 0;
+    let percentage = 0.1* num;
+
+     if(percentage < 1000){
+      sellingPrice = num + 1000;
+    }else{
+      sellingPrice = num + percentage;
+    }
+    return sellingPrice;
   }
 
 }
