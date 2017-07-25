@@ -20,17 +20,17 @@ export class ShopComponent implements OnInit, OnDestroy{
 	loading;
 	menu: Subscription;
 	isMenu = false;
+	gender;
 	
 	constructor(public afAuth: AngularFireAuth, private db: AngularFireDatabase, private formBuilder: FormBuilder, private authservice: AuthServiceService){
 		
-        this.loading = true;
 
 	}
 
 	ngOnInit(){
 		this.user = this.authservice.user
 
-		this.initialise({})
+		
 
 		this.filterOptions = this.formBuilder.group({
 		  class: '',
@@ -44,21 +44,21 @@ export class ShopComponent implements OnInit, OnDestroy{
 	}
 
 	filter(){
-		this.loading = true;
 		let obj = {
 			orderByChild: 'tags',
 			equalTo: this.filterOptions.value.class
 		}
-		this.initialise(obj)
+		this.initialise(obj, this.user.gender)
 	}
 
 	cancel(){
-		this.loading;
-		this.initialise({})
+		this.loading = true;
+		this.initialise({}, this.gender)
 	}
 
-	initialise(obj){	
-    	this.db.list('/cloths', {
+	initialise(obj, gender){
+		this.loading = true;	
+    	this.db.list('/cloths/' + gender, {
     		query: obj
     	}).subscribe((res)=>{
     		this.cloths = res;

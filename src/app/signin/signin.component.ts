@@ -11,7 +11,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-signin',

@@ -74,6 +74,7 @@ export class PostDesignComponent implements OnInit {
           likes: 0,
           label: this.tailor.name,
           labelId: this.tailor.uid,
+          labelPhone: this.tailor.phone,
           numSold: 0
         }).key
 
@@ -88,6 +89,7 @@ export class PostDesignComponent implements OnInit {
           price: this.getSellingPrice(this.postDesign.value.price),
           time: this.postDesign.value.time,
           gender: this.postDesign.value.gender,
+          labelPhone: this.tailor.phone,
           tags: this.postDesign.value.tags,
           description: this.postDesign.value.description,
           likers: {

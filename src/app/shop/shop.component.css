@@ -21,6 +21,14 @@
 	padding-top: 50px;
 }
 
+.card {
+	padding: 20px;
+	background-color: white;
+	color: rgb(0,74,0);
+	text-align: center;
+	width: 50%;
+}
+
 
 @media only screen and (max-width: 800px) {
     /* For mobile phones: */
