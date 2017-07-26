@@ -28,12 +28,17 @@
 	width: 80%
 }
 
+.content p {
+	line-height: 15px
+}
+
+
 .card {
 	width: 70%;
 }
 
 img {
-	height: 120px
+	height: 140px
 }
 
 .pointer{
@@ -69,6 +74,10 @@ img {
 
     .content p {
     	line-height: 15px
+    }
+
+    .content button {
+    	padding: 0px;
     }
 
 }

@@ -16,10 +16,14 @@
       <div class='content'>
           <a class='pointer' (click)='select(order)'>
             <h4 >{{order.name}}</h4>
-            <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
+            <p >Delivery date: {{order.tailorDate | date: 'dd/MM/yyyy'}}</p>
             <p >Price: NGN{{order.price}}.00</p>
             <p>Status: {{order.status}}</p>
           </a>
+          <div class='action'>
+            <button (click)='acceptOrder(order)' class='btn btn-success'>Accept</button>
+            <button (click)='rejectOrder(order)' class='btn btn-danger'>Decline</button>
+          </div>
         </div>
         <div class='thumbnail'>
           <img src="{{order.image1}}">
@@ -40,7 +44,7 @@
       <div class='content'>
           <a class='pointer' (click)='select(order)'>
             <h4 >{{order.name}}</h4>
-            <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
+            <p >Delivery date: {{order.tailorDate | date: 'dd/MM/yyyy'}}</p>
             <p >Price: NGN{{order.price}}.00</p>
             <p>Status: {{order.status}}</p>
           </a>
@@ -64,7 +68,7 @@
     	<div class='content'>
     			<a class='pointer' (click)='select(order)'>
             <h4 >{{order.name}}</h4>
-            <p >Delivery date: {{order.date | date: 'dd/MM/yyyy'}}</p>
+            <p >Delivery date: {{order.tailorDate | date: 'dd/MM/yyyy'}}</p>
             <p >Price: NGN{{order.price}}.00</p>
             <p>Status: {{order.status}}</p>
           </a>

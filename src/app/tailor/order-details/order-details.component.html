@@ -3,7 +3,7 @@
 			<div class='right'>
 				<div class='header'>Name: <span>{{order.name}}</span></div>
 				<div class='header'>Price: <span>NGN{{order.price}}.00</span></div>
-				<div class='header date'>Delivery Date: <span>{{order.date | date: 'dd/MM/yyyy'}}</span></div>
+				<div class='header date'>Delivery Date: <span>{{order.tailorDate | date: 'dd/MM/yyyy'}}</span></div>
 				<button (click)='back()' class='btn'>Go back</button>
 			</div>
 			<div class='orderImage'>

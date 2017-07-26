@@ -90,7 +90,7 @@ isCompletedOrder = false;
   }
 
   select(cloth){
-    this.acceptOrder(cloth)
+    //this.acceptOrder(cloth)
     this.selectedOrder = cloth;
     console.log(this.selectedOrder)
     this.router.navigate([cloth.name], { relativeTo: this.route })
@@ -101,10 +101,16 @@ isCompletedOrder = false;
     if(order.accepted === true){
 
     }else{
-      this.db.object('/users/'+order.user+'/orders/'+ order.userOrderKey).update({status: 'In progress', accepted: true});
-      this.db.object('/tailors/' + order.labelId +'/orders/' + order.tailorOrderKey).update({status: 'In progress', accepted: true});
-      this.db.object('/orders/'+ order.ordersKey).update({status: 'In progress', accepted: true});
+      this.db.object('/users/'+order.user+'/orders/'+ order.userOrderKey).update({status: 'In Progress', accepted: true});
+      this.db.object('/tailors/' + order.labelId +'/orders/' + order.tailorOrderKey).update({status: 'In Progress', accepted: true});
+      this.db.object('/orders/'+ order.ordersKey).update({status: 'In Progress', accepted: true});
     }
+  }
+
+  rejectOrder(order){
+      this.db.object('/users/'+order.user+'/orders/'+ order.userOrderKey).update({status: 'Declined', accepted: false});
+      this.db.object('/tailors/' + order.labelId +'/orders/' + order.tailorOrderKey).update({status: 'Declined', accepted: false});
+      this.db.object('/orders/'+ order.ordersKey).update({status: 'Declined', accepted: false});
   }
 
 }
