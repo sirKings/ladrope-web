@@ -38,22 +38,22 @@
                  <a href="" target=""><img class='links img-responsive' src="assets/images/get_started/app_store.png" alt=""></a>
                  <a href="https://drive.google.com/open?id=0B_wjwMzVIfivTWXp1aWp6QzVaRHM" target="blank"><img class="links img-responsive " src="assets/images/get_started/play_store.png" alt=""></a>
                  <h4>Download App</h4>
-                 <p>Get to download the mobile app for both Android and IOS</p>
+                 <p>Download the mobile app</p>
              </div>
              <div class="col-lg-3 col-md-3 wow fadeInLeft" data-wow-delay="1.4s">
                  <img src="assets/images/get_started/measurement.jpg" class='img-responsive' alt="">
                  <h4>Get Measured</h4>
-                 <p>Get yourself measured. Follow hints on the mobile app</p>
+                 <p>Get yourself measured utilizing the full powers of your phone camera</p>
              </div>
              <div class="col-lg-3 col-md-3 wow fadeInLeft" data-wow-delay="0.8s">
                  <img src="assets/images/get_started/place_order.gif" class='img-responsive'  alt="">
                   <h4>Place an Order</h4>
-                 <p>Get your choice of clothes and pay through our online payment portal</p>
+                 <p>Select the design that best fits your style and place an order</p>
              </div>
              <div class="col-lg-3 col-md-3 wow fadeInLeft" data-wow-delay="0.4s">
                  <img src="assets/images/get_started/delivery.jpg" class='img-responsive'  alt="">
                  <h4>Delivery</h4>
-                 <p>We deliver at your doorstep</p>
+                 <p>We deliver at your doorstep on schedule</p>
              </div>
          </div>
      </div>
@@ -67,18 +67,12 @@
     <div class="container">
         <div class="row">
             <h2 class="wow fadeInUp" (click)='goToShop()' class='pointer'>Shop</h2>
-            <p class="wow fadeInUp" data-wow-delay="0.4">Get to select your choice of clothes at your convenience </p>
-            <div class="col-lg-3 col-md-3 wow flipInY" data-wow-delay="0.8s">
-                <img src="assets/images/shop/shop1.png"  alt="">
-            </div>
-            <div class="col-lg-3 col-md-3 wow flipInY" data-wow-delay="1.2s">
-                <img src="assets/images/shop/shop2.jpeg" alt="">
-            </div>
-            <div class="col-lg-3 col-md-3 wow flipInY" data-wow-delay="1.6s">
-                <img src="assets/images/shop/shop3.png" alt="">
-            </div>
-            <div class="col-lg-3 col-md-3 wow flipInY" data-wow-delay="2s">
-                <img src="assets/images/shop/shop4.jpg" alt="">
+            <p class="wow fadeInUp" data-wow-delay="0.4">Get to select your choice of designs at your convenience </p>
+            <div class='col-md-6 col-sm-8 col-xs-12 col-lg-5 col-sm-offset-2 col-md-offset-3'>
+                <div class='carousel'>
+                    <carousel [sources]="imageSources" [config]="config"></carousel>
+                </div>
+                <p class='pointer padding' (click)='goToShop()'>Visit shop</p>
             </div>
         </div>
     </div>
@@ -139,7 +133,6 @@
     <div class="container">
         <div class="row">
             <h2 class="wow fadeInUp">Supported by</h2>
-            <p class="wow fadeInUp" data-wow-delay="0.4">Ladrode is supported and sponsored by</p>
             <div class="col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="2s">
                 <li><img src="assets/images/support/support1.jpg" alt=""></li>
             </div>
@@ -158,8 +151,8 @@
 <form [formGroup]="contactForm" (ngSubmit)="contact()">
     <div class="container">
         <div class="row">
-            <h2 class="wow fadeInUp">Contact</h2>
-            <p class="wow fadeInUp" data-wow-delay="0.4">Ladrope</p>
+            <h2 class="wow fadeInUp">Contact Us</h2>
+            <p class="wow fadeInUp" data-wow-delay="0.4">We cant wait to hear from you</p>
             <div class="col-lg-6 col-md-6">
                 <div class="input-group input-group-lg wow fadeInUp" data-wow-delay="0.8s">
                     <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>

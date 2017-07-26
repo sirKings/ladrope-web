@@ -21,6 +21,17 @@
     margin-right: 20px;
 }
 
+.carousel{
+    height: 526px;
+    width: 650px;
+}
+
+.padding {
+    margin: 10px;
+    padding: 20px;
+    text-align: right;
+}
+
 .left-image {
     margin-top: -110px
 }

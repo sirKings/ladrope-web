@@ -1,5 +1,6 @@
 <div class='post'>
 <div><h3>Post a design</h3></div>
+  <p>For best presentation on the app, please upload images with the same dimensions.</p>
 	<form [formGroup]="postDesign" (ngSubmit)="onSubmit()" class='form-inline'>
 	<div class='row pad'>
 		<div class='col-md-3 col-sm-6'>
@@ -145,8 +146,26 @@
 
             </span>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <div #options class='space'></div>
+        <div *ngIf='isOptions' class='space'>
+           <div class='form-group'>
+            <label>Type</label>
+                  <select >
+                        <option value="color">Color</option>
+                         <option value="sleeve">Sleeve</option>
+                         <option value="length">Long/Short</option>
+                  </select>
+          </div>
         </div>
+        <div class='space'>
+          <p>Is there options you would want to present?</p>
+          <button class='btn btn-primary' type='button' (click)='addOption()'>Add Options</button>
+        </div>
+        <div class='space'>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+        
+      </div>
 
     </form>
 </div>

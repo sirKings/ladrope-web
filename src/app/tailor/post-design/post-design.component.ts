@@ -22,6 +22,7 @@ export class PostDesignComponent implements OnInit {
   image2;
   image3;
   image4;
+  isOptions;
   
   @ViewChild('fi') fi: ElementRef;
   @ViewChild('s') s: ElementRef;
@@ -40,7 +41,7 @@ export class PostDesignComponent implements OnInit {
       'name': new FormControl(null, [Validators.required]),
       'price': new FormControl(null, [Validators.required]),
       'gender': new FormControl(null, Validators.required),
-      'tags': new FormControl(''),
+      'tags': new FormControl(null, Validators.required),
       'time': new FormControl(null, [Validators.required]),
       'description': new FormControl(null, Validators.required)
     });
@@ -253,6 +254,10 @@ export class PostDesignComponent implements OnInit {
       sellingPrice = num + percentage;
     }
     return sellingPrice;
+  }
+
+  addOption(){
+    this.isOptions = true;
   }
 
 }
