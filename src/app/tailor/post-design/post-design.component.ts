@@ -17,12 +17,15 @@ export class PostDesignComponent implements OnInit {
   genders = ['male', 'female'];
   postDesign: FormGroup;
   istag = false;
+  options = [];
   tailor;
+  optionImage;
   image1;
   image2;
   image3;
   image4;
   isOptions;
+  displayOptions;
   
   @ViewChild('fi') fi: ElementRef;
   @ViewChild('s') s: ElementRef;
@@ -32,6 +35,7 @@ export class PostDesignComponent implements OnInit {
   @ViewChild('imgs') imgs: ElementRef;
   @ViewChild('imgt') imgt: ElementRef;
   @ViewChild('imgf') imgf: ElementRef;
+  @ViewChild('optImg') optImg: ElementRef;
 
 
   constructor(public db: AngularFireDatabase, private auth: AuthServiceService) {}
@@ -43,7 +47,9 @@ export class PostDesignComponent implements OnInit {
       'gender': new FormControl(null, Validators.required),
       'tags': new FormControl(null, Validators.required),
       'time': new FormControl(null, [Validators.required]),
-      'description': new FormControl(null, Validators.required)
+      'description': new FormControl(null, Validators.required),
+      'option': new FormControl(),
+      'optionsName': new FormControl()
     });
 
    this.tailor = this.auth.user
@@ -76,6 +82,7 @@ export class PostDesignComponent implements OnInit {
           label: this.tailor.name,
           labelId: this.tailor.uid,
           labelPhone: this.tailor.phone,
+          options: this.getOptions(this.options),
           numSold: 0
         }).key
 
@@ -101,7 +108,8 @@ export class PostDesignComponent implements OnInit {
           likes: 0,
           label: this.tailor.name,
           labelId: this.tailor.uid,
-          numSold: 0
+          numSold: 0,
+          options: this.getOptions(this.options)
         }).key
 
         this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey});
@@ -118,27 +126,8 @@ export class PostDesignComponent implements OnInit {
     
   }
 
-  onAddTag(t) {
-    if(t.value === ''){
 
-    }else {
-        if(this.istag){
-          this.postDesign.value.tags = this.postDesign.value.tags + ', ' + t.value;
-        } else {
-          this.postDesign.value.tags = t.value;
-          this.istag = true;
-        }
-        console.log(this.postDesign.value.tags)
-        t.value = '';
-    }
-  	
-  }
-
-
-  clearTag() {
-    this.postDesign.value.tags = "";
-    this.istag = false;
-  }
+  
 
   uploadFirstImage(e){
       let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
@@ -248,8 +237,8 @@ export class PostDesignComponent implements OnInit {
     let sellingPrice = 0;
     let percentage = 0.1* num;
 
-     if(percentage < 1000){
-      sellingPrice = num + 1000;
+     if(percentage < 1500){
+      sellingPrice = num + 1500;
     }else{
       sellingPrice = num + percentage;
     }
@@ -257,7 +246,51 @@ export class PostDesignComponent implements OnInit {
   }
 
   addOption(){
-    this.isOptions = true;
+
+    if(this.isOptions === true){
+
+      this.options.push({name: this.postDesign.value.optionsName, image: this.optionImage})
+      //this.displayOptions = this.getOptions(this.options)
+      this.postDesign.value.optionsName = null;
+    }else{
+      this.isOptions = true;
+    }
+
+  }
+
+  getOptions(arr){
+    let options = {}
+      for( var i in arr){
+        options[i] = arr[i]
+      }
+      return options
+  }
+
+  uploadOptionImage(e){
+      let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
+
+      let upload = new file(e.target.files[0])
+
+      let storageRef = firebase.storage().ref();
+      let uploadTask = storageRef.child(`${basePath}/${upload.file.name}`).put(upload.file);
+
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) =>  {
+          // upload in progress
+          this.optImg.nativeElement.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        },
+        (error) => {
+          // upload failed
+          console.log(error)
+        },
+        () => {
+          // upload success
+          this.optionImage = uploadTask.snapshot.downloadURL;
+          //this.imgfi.nativeElement.src = this.image1;
+          
+          console.log(upload)
+        }
+      );
   }
 
 }

@@ -88,7 +88,7 @@
         <div class="form-group pad">
             <label for="price">Selling Price</label>
             
-              <p>{{getSellingPrice(postDesign.value.price)}}</p>
+              <p>NGN{{getSellingPrice(postDesign.value.price)}}.00</p>
              
         </div>
         <div class="form-group pad">
@@ -146,16 +146,33 @@
 
             </span>
         </div>
-        <div #options class='space'></div>
-        <div *ngIf='isOptions' class='space'>
-           <div class='form-group'>
-            <label>Type</label>
-                  <select >
-                        <option value="color">Color</option>
-                         <option value="sleeve">Sleeve</option>
-                         <option value="length">Long/Short</option>
-                  </select>
+        <div *ngIf= 'options[0]'>
+          <p>Available Options</p>
+          <div class='space' *ngFor = 'let opt of options'>
+            <div class='options'>
+              <div class=thumbnail>
+                <img src="{{opt.image}}">
+                  <h4>{{opt.name}}</h4>
+              </div>
+            </div>
           </div>
+        </div>
+        
+        <div *ngIf='isOptions' class='space'>
+          
+            <div class='form-group pad'>
+              <div>
+                <h5>You can add options of same design</h5>
+                <label for="optionsName">Name of options</label>
+                <input type="text" 
+                        id='optionsName'
+                        formControlName = 'optionsName'
+                        placeholder="eg. name of color ">
+                <progress value="0" max="" #optImg></progress>
+                <input type="file"  (change)='uploadOptionImage($event)'>
+              </div>
+            </div>
+         
         </div>
         <div class='space'>
           <p>Is there options you would want to present?</p>
