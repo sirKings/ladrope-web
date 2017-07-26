@@ -20,6 +20,7 @@ signupForm;
 passwordMatch = true;
 user;
 loading;
+genders = ['male', 'female'];
 
 @ViewChild('alert') alert:ElementRef;
 
@@ -29,6 +30,7 @@ loading;
 
   signup() {
     this.loading = true;
+    //console.log(this.signupForm.value)
   	if(this.signupForm.valid){
   		if(this.signupForm.value.password === this.signupForm.value.password2){
 
@@ -57,7 +59,7 @@ loading;
                     })
                     console.log (res)
                     this.router.navigate(['/tailor', res.uid]);
-                  }else{
+            } else {
                       this.db.object('/users/'+ res.uid)
                       .set({
                         email: this.signupForm.value.email,
@@ -93,6 +95,7 @@ loading;
       'agree': new FormControl(null, Validators.required),
       'name': new FormControl(null),
       'address': new FormControl(null),
+      'gender': new FormControl(null),
       'phone': new FormControl(null)
       });
   }

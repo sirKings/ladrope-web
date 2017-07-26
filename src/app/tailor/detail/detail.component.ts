@@ -45,5 +45,6 @@ loading;
 
   ngOnDestroy() {
   	this.authObserver.unsubscribe();
+    
   }
 }
