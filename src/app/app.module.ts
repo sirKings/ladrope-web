@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -73,6 +74,7 @@ import { AgreementComponent } from './agreement/agreement.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AppRoutingModule,
     ReactiveFormsModule,
+    InfiniteScrollModule,
     FormsModule,
     CarouselModule,
     StarRatingModule.forRoot(),
