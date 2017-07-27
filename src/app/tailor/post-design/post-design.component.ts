@@ -116,6 +116,8 @@ export class PostDesignComponent implements OnInit {
         this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey});
 
         this.postDesign.reset();
+        this.clearImages();
+        alert('Congratulation, Your design has been posted')
       }else{
         alert('upload atleast four images')
       }
@@ -291,6 +293,14 @@ export class PostDesignComponent implements OnInit {
           console.log(upload)
         }
       );
+  }
+
+  clearImages(){
+    let arr = [this.imgf, this.imgfi, this.imgs, this.imgt]
+
+    for(var i in arr){
+      arr[i].nativeElement.src = "assets/images/upload_placeholder.png"
+    }
   }
 
 }

@@ -22,7 +22,7 @@ export class ShopComponent implements OnInit, OnDestroy{
 	menu: Subscription;
 	isMenu = false;
 	gender;
-	limit:BehaviorSubject<number> = new BehaviorSubject<number>(10);
+	limit:BehaviorSubject<number> = new BehaviorSubject<number>(2);
 	lastKey: string;
 	queryable: boolean = true;
 	throttle = 300;
