@@ -61,7 +61,7 @@ export class ShopComponent implements OnInit, OnDestroy{
 
 	cancel(){
 		this.loading = true;
-		this.initialise({}, this.gender)
+		this.initialise({orderByChild: 'name', limitToFirst: this.limit}, this.gender)
 	}
 
 	initialise(obj, gender){
