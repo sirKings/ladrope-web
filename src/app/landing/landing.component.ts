@@ -95,7 +95,7 @@ export class LandingComponent implements OnInit, OnDestroy {
       this.contactForm.reset();
 
     }else{
-      this.alert.success('Error', 'Please fill all entries')
+      this.alert.error('Error', 'Please fill all entries')
     }
   }
 
