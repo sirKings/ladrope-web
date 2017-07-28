@@ -84,7 +84,7 @@ public options: AlertBarOptions = new AlertBarOptions({
             this.loading = false;
           }
         }else{
-          this.alert.error('Error', 'Please select no if you not a tailor')
+          this.alert.error('Error', 'Please select NO if you not a tailor')
           this.loading = false;
         }
   	
