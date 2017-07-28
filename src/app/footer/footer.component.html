@@ -1,3 +1,4 @@
+<alert-bar [options]="options"></alert-bar>
 <div id="footer" class="footer">
      <div class="container">
          <div class="row">
@@ -21,7 +22,9 @@
                  <a href="https://www.linkedin.com/company/ladrope" target="blank"><i class="social fa fa-linkedin" aria-hidden="true"></i></a>
                  <i class="social fa fa-instagram" aria-hidden="true"></i>
                  <i class="social fa fa-youtube" aria-hidden="true"></i><br>
-                <input type="email" placeholder="Subscribe For Updates"><button class="btn btn-success">Subscribe</button>
+                 <form [formGroup]="newsForm" (ngSubmit)="subscribe()">
+                <input type="email" placeholder="Subscribe For Updates" formControlName='email'><button class="btn btn-success">Subscribe</button>
+                </form>
              </div>
          </div>
      </div>

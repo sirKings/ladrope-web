@@ -18,7 +18,7 @@
 }
 
 .advert {
-	padding-top: 50px;
+	padding-top: 10px;
 }
 
 .card {
@@ -27,6 +27,11 @@
 	color: rgb(0,74,0);
 	text-align: center;
 	width: 50%;
+}
+
+.advert a {
+	color: rgb(0,74,0);
+	font-size: 2rem;
 }
 
 

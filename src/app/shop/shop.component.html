@@ -27,14 +27,14 @@
 		          </select>
 		  </div>
 		  <div>
-		  	<button class="btn" type="submit" (click)='filter()'>Filter</button>
-		  	<button class="btn" type="button" (click)='cancel()'>Cancel</button>
+		  	<button [disabled]='!gender' class="btn" type="submit" (click)='filter()'>Filter</button>
+		  	<button [disabled]='!gender' class="btn" type="button" (click)='cancel()'>Cancel</button>
 		  </div>
 		</form>
 		<div class='advert'>
 			<p>Switch Gender</p>
-			<button class='btn btn-success' (click)="initialise({orderByChild: 'name', limitToFirst: limit}, 'male')">Male</button>
-			<button class='btn btn-success' (click)="initialise({orderByChild: 'name', limitToFirst: limit}, 'female')">Female</button>
+			<button [disabled]='!gender' class='btn btn-success' (click)="initialise({orderByChild: 'name', limitToFirst: limit}, 'male')">Male</button>
+			<button [disabled]='!gender'  class='btn btn-success' (click)="initialise({orderByChild: 'name', limitToFirst: limit}, 'female')">Female</button>
 		</div>
 		<div class='advert'>
 			<h4>Get the best from Ladrope</h4>
@@ -43,7 +43,7 @@
 
 		<div *ngIf='user?.name'>
 			<div class='advert'>
-				<h4 [routerLink]="['/tailor', uid]">Tailor's Dashboard</h4>
+				<a [routerLink]="['/tailor', uid]">Go to My Dashboard</a>
 			</div>
 		</div>
 	</div>

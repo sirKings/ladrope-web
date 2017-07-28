@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 import { ICarouselConfig, AnimationConfig } from 'angular4-carousel';
+import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { AuthServiceService } from '../services/auth-service.service';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -16,13 +19,18 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class LandingComponent implements OnInit, OnDestroy {
 
 	user;
+  nav;
 	authObserver;
   contactForm;
   imageSources: string[];
   config: ICarouselConfig;
-  @ViewChild('contact') contactdiv: ElementRef
+  public options: AlertBarOptions = new AlertBarOptions({
+    placement: Placement.top,
+    textPlacement: TextPlacement.left
+  });
+
 	
-	constructor(public afAuth: AngularFireAuth, public router: Router, private db: AngularFireDatabase){
+	constructor(public afAuth: AngularFireAuth, private auth: AuthServiceService, public router: Router, private alert: AlertBar, private db: AngularFireDatabase){
 		this.authObserver = afAuth.authState.subscribe( user => {
       	if (user) {
         		this.user = user;
@@ -58,6 +66,12 @@ export class LandingComponent implements OnInit, OnDestroy {
         autoplayDelay: 3000,
         stopAutoplayMinWidth: 768
       };
+      this.nav = this.auth.nav.subscribe((res) => {
+        console.log(res)
+        let el = document.getElementById('contact')
+        el.scrollIntoView(true)
+
+      })
   }
 
   goToShop(){
@@ -70,15 +84,18 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
   	this.authObserver.unsubscribe();
+    this.nav.unsubscribe()
   }
 
   contact(){
     if(this.contactForm.valid){
       console.log(this.contactForm.value)
       this.db.list('/messages').push(this.contactForm.value)
-      this.contactdiv.nativeElement.innerHTML = 'Thank you for reaching out. Our support service will talk to you soon'
+      this.alert.success('Ladrope got you', 'and we will responf soon')
       this.contactForm.reset();
 
+    }else{
+      this.alert.success('Error', 'Please fill all entries')
     }
   }
 

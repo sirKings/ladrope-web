@@ -11,8 +11,10 @@ user;
 uid;
 selectedCloth;
 selectedOrder;
+gender;
 
 showMenu = new Subject<boolean>()
+nav = new Subject()
 
   constructor(public afAuth: AngularFireAuth) { 
 

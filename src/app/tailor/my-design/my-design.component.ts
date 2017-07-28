@@ -57,10 +57,10 @@ uid;
       return result;
   }
 
-  onDelete(cloth){
-  	this.db.object('/cloths/'+cloth.clothKey).set(null);
-  	this.db.object('/tailors/'+this.tailor.uid+'/cloths/'+cloth.tailorKey).set(null);
-  }
+  // onDelete(cloth){
+  // 	this.db.object('/cloths/'+cloth.clothKey).set(null);
+  // 	this.db.object('/tailors/'+this.tailor.uid+'/cloths/'+cloth.tailorKey).set(null);
+  // }
 
   select(cloth){
   	this.selectedCloth = cloth;
@@ -78,16 +78,21 @@ uid;
   //   storageRef.child(`${name}`).delete()
   // }
   deactivate(cloth){
-    console.log('deactivate')
+    //console.log('deactivate')
     this.db.object('/cloths/'+cloth.gender+'/'+cloth.clothKey).set(null);
 
     this.db.object('/tailors/'+this.uid+'/cloths/'+cloth.tailorKey).update({deactive: true});
   }
 
   activate(cloth){
-    let clothKey = this.db.list('/cloths/'+cloth.gender).push(cloth).key;
-    this.db.object('/tailors/'+this.uid+'/cloths/'+cloth.tailorKey).update({clothKey: clothKey, deactive: null});
-    this.db.object('/cloths/'+cloth.gender+'/'+clothKey).update({clothKey: clothKey});
+    if(cloth.deactive){
+     let clothKey = this.db.list('/cloths/'+cloth.gender).push(cloth).key;
+     this.db.object('/tailors/'+this.uid+'/cloths/'+cloth.tailorKey).update({clothKey: clothKey, deactive: null});
+     this.db.object('/cloths/'+cloth.gender+'/'+clothKey).update({clothKey: clothKey}); 
+   }else{
+
+   }
+    
   }
 
 }

@@ -26,6 +26,10 @@
 
 }
 
+.name{
+    text-transform: capitalize;
+}
+
 .menu {
     display: none
 }

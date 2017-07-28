@@ -68,8 +68,9 @@ export class ShopComponent implements OnInit, OnDestroy{
 
 	initialise(obj, gender){
 		this.gender = gender;
+		this.authservice.gender = gender;
 		this.loading = true;
-		this.startTracking();	
+		this.startTracking(gender);	
     	this.db.list('/cloths/' + gender, {
     		query: obj
     	}).subscribe((res)=>{
@@ -81,8 +82,8 @@ export class ShopComponent implements OnInit, OnDestroy{
 
 
 
-  	startTracking(){
-  		this.db.list('/cloths/' + this.gender, {
+  	startTracking(gender){
+  		this.db.list('/cloths/' + gender, {
   			query: {
   				orderByChild: 'name',
   				limitToLast: 1
@@ -95,7 +96,7 @@ export class ShopComponent implements OnInit, OnDestroy{
   				    }
   			});
 
-  		this.db.list('/cloths/' +this.gender, {
+  		this.db.list('/cloths/' +gender, {
   			query: {
   				orderByChild: 'name',
   				limitToFirst: this.limit

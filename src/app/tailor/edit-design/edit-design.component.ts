@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../../services/auth-service.service';
 import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
 
+import { Location } from '@angular/common';
+
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
@@ -21,7 +23,7 @@ export class EditDesignComponent implements OnInit {
 		textPlacement: TextPlacement.left
 	});
 
-  constructor(private auth: AuthServiceService, public db: AngularFireDatabase, private alert: AlertBar) { }
+  constructor(public router: Location,  private auth: AuthServiceService, public db: AngularFireDatabase, private alert: AlertBar) { }
 
   ngOnInit() {
   	 this.postDesign = new FormGroup({
@@ -85,6 +87,10 @@ export class EditDesignComponent implements OnInit {
     	  }else {
     	    this.alert.error('Error','Please provide all details')
     	  }
-    	}
+   	}
+
+   	back(){
+   	    this.router.back();
+   	  }
 
 }

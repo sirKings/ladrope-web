@@ -7,13 +7,14 @@
                 <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand"><i class="fa fa-bars pointer menu" (click)='menu()' aria-hidden="true" ></i> <span routerLink = '/' class='pointer'>Ladrope</span></a>
+      <a class="navbar-brand"><i class="fa fa-bars pointer menu" (click)='menu()' aria-hidden="true" ></i> <a routerLink = '/' class='pointer'>Ladrope</a></a>
+      <a *ngIf = 'user' class="navbar-brand name">Hi {{user.displayName}}</a>
     </div>
 
     <div class="collapse navbar-collapse" [class.collapse]="!showMenu">
       <ul class="nav navbar-nav navbar-right">
                 <li><a class='pointer' (click)='goToShop()'>Shop</a></li>
-                <li><a routerLink="#contact">Contact Us</a></li>
+                <li><a class='pointer' (click)="scroll()">Contact Us</a></li>
                 <li><a routerLink='/faq'>FAQ</a></li>
                 <li *ngIf = '!user'><a routerLink = '/signin'>Sign In</a></li>
                 <li *ngIf = 'user'><a routerLink = '/' (click)= 'signout()'>Sign out</a></li>
