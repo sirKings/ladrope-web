@@ -11,6 +11,10 @@
 	width: 80%
 }
 
+.content p {
+	line-height: 15px
+}
+
 p{
 	margin: 0px
 }
@@ -20,7 +24,7 @@ p{
 }
 
 img {
-	max-height: 100px
+	max-height: 140px
 }
 
 .pointer{
@@ -39,6 +43,9 @@ img {
     	width: 100%;
     }
 
+    .content button {
+    	padding: 0px;
+    }
 }
 
 

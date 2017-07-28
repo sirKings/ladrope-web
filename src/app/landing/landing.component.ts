@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 import { ICarouselConfig, AnimationConfig } from 'angular4-carousel';
 
@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-landing',
@@ -19,8 +20,9 @@ export class LandingComponent implements OnInit, OnDestroy {
   contactForm;
   imageSources: string[];
   config: ICarouselConfig;
+  @ViewChild('contact') contactdiv: ElementRef
 	
-	constructor(public afAuth: AngularFireAuth, public router: Router){
+	constructor(public afAuth: AngularFireAuth, public router: Router, private db: AngularFireDatabase){
 		this.authObserver = afAuth.authState.subscribe( user => {
       	if (user) {
         		this.user = user;
@@ -72,8 +74,11 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   contact(){
     if(this.contactForm.valid){
-      //this.db.list('/mails').push(this.contactForm.value)
+      console.log(this.contactForm.value)
+      this.db.list('/messages').push(this.contactForm.value)
+      this.contactdiv.nativeElement.innerHTML = 'Thank you for reaching out. Our support service will talk to you soon'
       this.contactForm.reset();
+
     }
   }
 

@@ -19,6 +19,7 @@ tailor;
 cloths;
 isCloth = false;
 selectedCloth;
+uid;
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public db: AngularFireDatabase, public service: AuthServiceService, private route: ActivatedRoute) { }
 
@@ -26,6 +27,7 @@ selectedCloth;
 
       this.authObserver = this.afAuth.authState.subscribe( user => {
         if (user) {
+          this.uid = user.uid;
             this.db.object('tailors/'+user.uid)
               .subscribe(res => {
                 this.tailor = res;
@@ -65,11 +67,27 @@ selectedCloth;
   	this.router.navigate([cloth.name], { relativeTo: this.route })
   }
 
+  edit(cloth){
+    this.selectedCloth = cloth;
+    this.router.navigate(['edit'], { relativeTo: this.route })
+  }
+
   // deleteFileStorage(name:string) {
   	
   //   let storageRef = firebase.storage().ref();
   //   storageRef.child(`${name}`).delete()
   // }
+  deactivate(cloth){
+    console.log('deactivate')
+    this.db.object('/cloths/'+cloth.gender+'/'+cloth.clothKey).set(null);
 
+    this.db.object('/tailors/'+this.uid+'/cloths/'+cloth.tailorKey).update({deactive: true});
+  }
+
+  activate(cloth){
+    let clothKey = this.db.list('/cloths/'+cloth.gender).push(cloth).key;
+    this.db.object('/tailors/'+this.uid+'/cloths/'+cloth.tailorKey).update({clothKey: clothKey, deactive: null});
+    this.db.object('/cloths/'+cloth.gender+'/'+clothKey).update({clothKey: clothKey});
+  }
 
 }

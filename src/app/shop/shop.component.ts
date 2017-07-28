@@ -16,6 +16,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class ShopComponent implements OnInit, OnDestroy{
 	user;
+	uid;
 	cloths;
 	filterOptions;
 	loading;
@@ -34,7 +35,8 @@ export class ShopComponent implements OnInit, OnDestroy{
 	}
 
 	ngOnInit(){
-		this.user = this.authservice.user
+		this.user = this.authservice.user;
+		this.uid = this.authservice.uid;
 
 		
 

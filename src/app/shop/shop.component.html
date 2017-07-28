@@ -31,10 +31,20 @@
 		  	<button class="btn" type="button" (click)='cancel()'>Cancel</button>
 		  </div>
 		</form>
-
+		<div class='advert'>
+			<p>Switch Gender</p>
+			<button class='btn btn-success' (click)="initialise({orderByChild: 'name', limitToFirst: limit}, 'male')">Male</button>
+			<button class='btn btn-success' (click)="initialise({orderByChild: 'name', limitToFirst: limit}, 'female')">Female</button>
+		</div>
 		<div class='advert'>
 			<h4>Get the best from Ladrope</h4>
 			<p>Download the app</p>
+		</div>
+
+		<div *ngIf='user?.name'>
+			<div class='advert'>
+				<h4 [routerLink]="['/tailor', uid]">Tailor's Dashboard</h4>
+			</div>
 		</div>
 	</div>
 	<div class='row'>

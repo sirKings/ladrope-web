@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AlertBarModule } from 'ng2-alert-bar';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -39,6 +40,7 @@ import { ShopComponent } from './shop/shop.component';
 import { ContentComponent } from './shop/content/content.component';
 import { TermsComponent } from './terms/terms.component';
 import { AgreementComponent } from './agreement/agreement.component';
+import { EditDesignComponent } from './tailor/edit-design/edit-design.component';
 
 
 @NgModule({
@@ -66,6 +68,7 @@ import { AgreementComponent } from './agreement/agreement.component';
     ContentComponent,
     TermsComponent,
     AgreementComponent,
+    EditDesignComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import { AgreementComponent } from './agreement/agreement.component';
     AppRoutingModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
+    AlertBarModule,
     FormsModule,
     CarouselModule,
     StarRatingModule.forRoot(),

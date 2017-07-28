@@ -14,6 +14,7 @@ import { OrderDetailsComponent } from './tailor/order-details/order-details.comp
 import { ClothComponent } from './cloth/cloth.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { EditDesignComponent } from './tailor/edit-design/edit-design.component';
 import { ShopComponent } from './shop/shop.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { EditDetailsComponent } from './edit-details/edit-details.component';
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
   { path: 'tailor/:id', component: TailorComponent, children: [
     { path: '', redirectTo: 'detail', pathMatch: 'full' },
     { path: 'design', component: MyDesignComponent },
+    { path: 'design/edit', component: EditDesignComponent },
     { path: 'design/:id', component: ClothComponent},
     { path: 'order', component: OrderComponent },
     { path: 'order/:id', component: OrderDetailsComponent },

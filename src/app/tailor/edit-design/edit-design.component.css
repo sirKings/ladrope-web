@@ -1,0 +1,27 @@
+.btn-primary{
+	background-color: rgb(0,74,0);
+}
+
+.card{
+	max-width: 450px;
+	padding: 20px;
+	margin: 40px;
+	background-color: white;
+	border: 1px #e5e5e5 solid;
+	color: rgb(0,74,0);
+}
+
+.pad{
+	padding-right: 20px;
+	margin: 20px;
+	margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+    /* For mobile phones: */
+    .card{
+    	margin: 2px;
+    	width: 100%
+    }
+
+}

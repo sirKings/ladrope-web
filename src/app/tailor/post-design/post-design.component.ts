@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 
 import { file } from '../../services/file';
 import { AuthServiceService } from '../../services/auth-service.service';
+import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class PostDesignComponent implements OnInit {
   genders = ['male', 'female'];
   postDesign: FormGroup;
   istag = false;
-  options = [];
+  option = [];
   tailor;
   optionImage;
   image1;
@@ -26,6 +27,11 @@ export class PostDesignComponent implements OnInit {
   image4;
   isOptions;
   displayOptions;
+
+  public options: AlertBarOptions = new AlertBarOptions({
+    placement: Placement.top,
+    textPlacement: TextPlacement.left
+  });
   
   @ViewChild('fi') fi: ElementRef;
   @ViewChild('s') s: ElementRef;
@@ -38,7 +44,7 @@ export class PostDesignComponent implements OnInit {
   @ViewChild('optImg') optImg: ElementRef;
 
 
-  constructor(public db: AngularFireDatabase, private auth: AuthServiceService) {}
+  constructor(public db: AngularFireDatabase, private alert: AlertBar, private auth: AuthServiceService) {}
 
   ngOnInit() {
     this.postDesign = new FormGroup({
@@ -82,7 +88,7 @@ export class PostDesignComponent implements OnInit {
           label: this.tailor.name,
           labelId: this.tailor.uid,
           labelPhone: this.tailor.phone,
-          options: this.getOptions(this.options),
+          options: this.getOptions(this.option),
           numSold: 0
         }).key
 
@@ -109,7 +115,7 @@ export class PostDesignComponent implements OnInit {
           label: this.tailor.name,
           labelId: this.tailor.uid,
           numSold: 0,
-          options: this.getOptions(this.options)
+          options: this.getOptions(this.option)
         }).key
 
         this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey});
@@ -117,13 +123,13 @@ export class PostDesignComponent implements OnInit {
 
         this.postDesign.reset();
         this.clearImages();
-        alert('Congratulation, Your design has been posted')
+        this.alert.success('Congratulation', 'Your design has been posted')
       }else{
-        alert('upload atleast four images')
+        this.alert.error('Error', 'upload atleast four images')
       }
       
     }else {
-        alert('Please provide all details')
+        this.alert.error('Error','Please provide all details')
       }
     
   }
@@ -244,14 +250,14 @@ export class PostDesignComponent implements OnInit {
     }else{
       sellingPrice = num + percentage;
     }
-    return sellingPrice;
+    return Math.ceil(sellingPrice/100)*100;
   }
 
   addOption(){
 
     if(this.isOptions === true){
 
-      this.options.push({name: this.postDesign.value.optionsName, image: this.optionImage})
+      this.option.push({name: this.postDesign.value.optionsName, image: this.optionImage})
       //this.displayOptions = this.getOptions(this.options)
       this.postDesign.value.optionsName = null;
     }else{

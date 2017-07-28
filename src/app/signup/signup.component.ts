@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 import { AuthServiceService } from '../services/auth-service.service';
+import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
 
 import { Observable } from 'rxjs/Observable';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -21,10 +22,13 @@ passwordMatch = true;
 user;
 loading;
 genders = ['male', 'female'];
+public options: AlertBarOptions = new AlertBarOptions({
+  placement: Placement.top,
+  textPlacement: TextPlacement.left
+});
 
-@ViewChild('alert') alert:ElementRef;
 
-  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public router: Router, private auth: AuthServiceService) {
+  constructor(public db: AngularFireDatabase, private alert: AlertBar, public afAuth: AngularFireAuth, public router: Router, private auth: AuthServiceService) {
     this.user = afAuth.authState;
   }
 
@@ -39,10 +43,7 @@ genders = ['male', 'female'];
   			// Handle Errors here.
   			let errorMessage = error.message;
   			
-  				this.alert.nativeElement.style.display = 'block';
-    			this.alert.nativeElement.innerHTML = errorMessage;
-  			
-  				console.log(error);
+  				this.alert.error('Error', errorMessage)
           this.loading = false;
 			})
   			.then((res) => {
@@ -78,8 +79,7 @@ genders = ['male', 'female'];
     	} 
 	}
   	else{
-  		this.alert.nativeElement.style.display = 'block';
-  		this.alert.nativeElement.innerHTML = 'Please enter valid details';
+  		this.alert.error('Error', 'Please enter Valid Details')
       this.loading = false;
   	}
     

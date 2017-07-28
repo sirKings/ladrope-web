@@ -1,0 +1,90 @@
+<alert-bar [options]="options"></alert-bar>
+<form [formGroup]="postDesign" (ngSubmit)="onSubmit()" >
+	<div class="col-xs-10 col-sm-10 col-md-8 col-md-offset-2 card">
+	<h4>Edit Your Design</h4>
+
+        <div class="form-group pad">
+           	<label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder='Whats the name of this design'
+              formControlName="name"
+              class="form-control">
+            <span
+              *ngIf="!postDesign.get('name').valid && postDesign.get('name').touched"
+              class="help-block">
+              <span *ngIf="postDesign.get('name').errors['required']">This field is required!</span>
+
+            </span>
+        </div>
+        <div class="form-group pad">
+            <label for="price">Price</label>
+            <input
+              type='number'
+              id="price"
+              placeholder='How much are you selling'
+              formControlName="price"
+              class="form-control">
+            <span
+              *ngIf="!postDesign.get('price').valid && postDesign.get('price').touched"
+              class="help-block">Please enter a valid amount!</span>
+        </div>
+        <div class="form-group pad">
+            <label for="price">Selling Price</label>
+            
+              <p>NGN{{getSellingPrice(postDesign.value.price)}}.00</p>
+             
+        </div>
+        <div class="form-group pad">
+            <label for="time">Production Time (days)</label>
+            <input
+              type='number'
+              id="time"
+              placeholder='How long is it going to take to make this design'
+              formControlName="time"
+              class="form-control">
+            <span
+              *ngIf="!postDesign.get('time').valid && postDesign.get('time').touched"
+              class="help-block">Please enter a valid number of days!</span>
+        </div>
+       <div class='form-group'>
+        <label>Type</label>
+              <select formControlName="tags">
+                    <option value="casuals">Casual Wears</option>
+                     <option value="corporate">Corporate Wears</option>
+                     <option value="native">Traditional Wears</option>
+                     <option value="shirt">Shirts</option>
+                     <option value="trousers">Trousers</option>
+                     <option value="gown">Gown</option>
+                     <option value="wedding">Wedding Outfits</option>
+                     <option value="ankara">Ankara</option>
+                     <option value="suit">Suits</option>
+              </select>
+      </div>
+        <span
+          *ngIf="!postDesign.valid && postDesign.touched"
+          class="help-block">Please enter valid data!</span>
+        <div class="form-group pad">
+            <label for="name">Description</label>
+            <textarea
+              rows="4" cols="50"
+              type="text"
+              id="name"
+              placeholder='Tell people about your design, what material is it made of? What occasionis it best suited for? etc'
+              formControlName="description"
+              class="form-control"></textarea>
+            <span
+              *ngIf="!postDesign.get('description').valid && postDesign.get('description').touched"
+              class="help-block">
+              <span *ngIf="postDesign.get('description').errors['required']">This field is required!</span>
+
+            </span>
+        </div>
+        <div class='space'>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+        
+    </div>
+
+</form>

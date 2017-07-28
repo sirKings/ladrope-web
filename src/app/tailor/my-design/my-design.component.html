@@ -10,8 +10,14 @@
                 <h4 >{{cloth.name}}</h4>
                 <p >Number sold: {{cloth?.numSold}}</p>
                 <p >Price: NGN{{cloth.price}}.00</p>
-                <p>{{cloth.likes}} likes</p>
+                <p *ngIf = '!cloth.deactive'>Status: Active</p>
+                <p *ngIf = 'cloth.deactive'>Status: Not Active</p>
               </a>
+              <div class='action'>
+                <button *ngIf = 'cloth.deactive' (click)='activate(cloth)' class='btn btn-success'>Activate</button>
+                <button *ngIf = '!cloth.deactive' (click)='deactivate(cloth)' class='btn btn-danger'>Deactivate</button>
+                <button (click)='edit(cloth)' class='btn btn-info'>Edit</button>
+              </div>
             </div>
             <div class='thumbnail'>
               <img src="{{cloth.image1}}">
