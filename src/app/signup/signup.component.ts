@@ -21,6 +21,7 @@ signupForm;
 passwordMatch = true;
 user;
 loading;
+phone;
 genders = ['male', 'female'];
 public options: AlertBarOptions = new AlertBarOptions({
   placement: Placement.top,
@@ -54,7 +55,7 @@ public options: AlertBarOptions = new AlertBarOptions({
                           .set({
                             name: this.signupForm.value.name,
                             address: this.signupForm.value.address,
-                            phone: this.signupForm.value.phone,
+                            phone: this.phone,
                             email: this.signupForm.value.email,
                             displayName: this.signupForm.value.displayName,
                             uid: res.uid
@@ -102,7 +103,7 @@ public options: AlertBarOptions = new AlertBarOptions({
       'name': new FormControl(null),
       'address': new FormControl(null),
       'gender': new FormControl(null),
-      'phone': new FormControl(null)
+      'phone': new FormControl(null, Validators.compose([Validators.minLength(11)]))
       });
   }
 
@@ -128,6 +129,22 @@ public options: AlertBarOptions = new AlertBarOptions({
   ngOnDestroy(){
     this.auth.user = this.user;
     console.log(this.user)
+  }
+
+  checkNumber(str: string){
+    if((str.length === 11)&& (str.slice(0,1)==='0')){
+      let num = str.slice(1)
+      num = '+234'+num;
+      this.phone = num;
+      return true
+    }else{
+      if ((str.length === 14) && (str.slice(0,1)==='+')){
+        this.phone = str
+        return true;
+      }else{
+        return false;
+      }
+    }
   }
 
 }

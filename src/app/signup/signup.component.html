@@ -115,12 +115,13 @@
                 <input
                     type='text'
                     id="phone"
-                    placeholder='Please enter your phone number'
+                    placeholder='Please enter your number'
                     formControlName="phone"
                     class="form-control">
+                    <span *ngIf = '!checkNumber(signupForm.value.phone)'>Please enter valid phone 08xxxxxxxxx</span>
                   <span
                       *ngIf="!signupForm.get('phone').valid && signupForm.get('phone').touched"
-                      class="help-block">Please enter your phone number</span>
+                      class="help-block">Please enter your correct phone number</span>
             </div>
 
             </div>
