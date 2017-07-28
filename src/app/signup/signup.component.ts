@@ -35,53 +35,59 @@ public options: AlertBarOptions = new AlertBarOptions({
   signup() {
     this.loading = true;
     //console.log(this.signupForm.value)
-  	if(this.signupForm.valid){
-  		if(this.signupForm.value.password === this.signupForm.value.password2){
+    if(this.signupForm.controls.isTailor.valid){
+          if(this.signupForm.valid){
+            if(this.signupForm.value.password === this.signupForm.value.password2){
 
-  			this.afAuth.auth.createUserWithEmailAndPassword(this.signupForm.value.email, this.signupForm.value.password)
-	  		.catch((error) => {
-  			// Handle Errors here.
-  			let errorMessage = error.message;
-  			
-  				this.alert.error('Error', errorMessage)
+              this.afAuth.auth.createUserWithEmailAndPassword(this.signupForm.value.email, this.signupForm.value.password)
+              .catch((error) => {
+              // Handle Errors here.
+              let errorMessage = error.message;
+              
+                this.alert.error('Error', errorMessage)
+                this.loading = false;
+            })
+              .then((res) => {
+                this.auth.uid = res.uid;
+                if(this.signupForm.value.isTailor === 'true'){
+                          this.db.object('/tailors/'+ res.uid)
+                          .set({
+                            name: this.signupForm.value.name,
+                            address: this.signupForm.value.address,
+                            phone: this.signupForm.value.phone,
+                            email: this.signupForm.value.email,
+                            displayName: this.signupForm.value.displayName,
+                            uid: res.uid
+                          })
+                          console.log (res)
+                          this.router.navigate(['/tailor', res.uid]);
+                  } else {
+                            this.db.object('/users/'+ res.uid)
+                            .set({
+                              email: this.signupForm.value.email,
+                              gender: this.signupForm.value.gender,
+                              displayName: this.signupForm.value.displayName
+                            })
+                            console.log (res)
+                            this.router.navigate(['/shop']);
+                        }
+                this.loading = false;
+                this.user = this.getUser(res.uid);
+              });
+            }  else {
+            this.passwordMatch = false;
+            this.loading = false;
+            } 
+        }
+          else{
+            this.alert.error('Error', 'Please enter Valid Details')
+            this.loading = false;
+          }
+        }else{
+          this.alert.error('Error', 'Please select no if you not a tailor')
           this.loading = false;
-			})
-  			.then((res) => {
-          this.auth.uid = res.uid;
-          if(this.signupForm.value.isTailor === 'true'){
-                    this.db.object('/tailors/'+ res.uid)
-                    .set({
-                      name: this.signupForm.value.name,
-                      address: this.signupForm.value.address,
-                      phone: this.signupForm.value.phone,
-                      email: this.signupForm.value.email,
-                      displayName: this.signupForm.value.displayName,
-                      uid: res.uid
-                    })
-                    console.log (res)
-                    this.router.navigate(['/tailor', res.uid]);
-            } else {
-                      this.db.object('/users/'+ res.uid)
-                      .set({
-                        email: this.signupForm.value.email,
-                        gender: this.signupForm.value.gender,
-                        displayName: this.signupForm.value.displayName
-                      })
-                      console.log (res)
-                      this.router.navigate(['/shop']);
-                  }
-          this.loading = false;
-  				this.user = this.getUser(res.uid);
-  			});
-  		}  else {
-    	this.passwordMatch = false;
-      this.loading = false;
-    	} 
-	}
-  	else{
-  		this.alert.error('Error', 'Please enter Valid Details')
-      this.loading = false;
-  	}
+        }
+  	
     
   }
 
