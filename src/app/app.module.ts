@@ -12,6 +12,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthServiceService } from './services/auth-service.service';
 import { UploadService } from './services/upload.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './appRouting-module';
 import { CarouselModule } from 'angular4-carousel';
@@ -79,6 +80,7 @@ import { EditDesignComponent } from './tailor/edit-design/edit-design.component'
     ReactiveFormsModule,
     InfiniteScrollModule,
     AlertBarModule,
+    BrowserAnimationsModule,
     FormsModule,
     CarouselModule,
     StarRatingModule.forRoot(),
