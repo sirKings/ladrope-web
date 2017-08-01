@@ -39,7 +39,7 @@ loading;
     if(this.tailor.logo){
       return this.tailor.logo
     }else {
-      return 'assets/images/upload_placeholder2.png'
+      return 'https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fupload_placeholder2.png?alt=media&token=1e857115-e1da-4954-ad01-21f6512afb6a'
     }
   }
 

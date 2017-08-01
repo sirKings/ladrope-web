@@ -54,7 +54,6 @@ export class PostDesignComponent implements OnInit {
       'tags': new FormControl(null, Validators.required),
       'time': new FormControl(null, [Validators.required]),
       'description': new FormControl(null, Validators.required),
-      'option': new FormControl(),
       'optionsName': new FormControl()
     });
 
@@ -123,7 +122,7 @@ export class PostDesignComponent implements OnInit {
 
         this.postDesign.reset();
         this.clearImages();
-        this.alert.success('Congratulation', 'Your design has been posted')
+        this.alert.info('Congratulations!!', 'Your design has been posted')
       }else{
         this.alert.error('Error', 'upload atleast four images')
       }
@@ -259,11 +258,16 @@ export class PostDesignComponent implements OnInit {
 
       this.option.push({name: this.postDesign.value.optionsName, image: this.optionImage})
       //this.displayOptions = this.getOptions(this.options)
+      console.log(this.option)
       this.postDesign.value.optionsName = null;
     }else{
       this.isOptions = true;
     }
 
+  }
+
+  clearOption(){
+    this.option = [];
   }
 
   getOptions(arr){
@@ -305,7 +309,7 @@ export class PostDesignComponent implements OnInit {
     let arr = [this.imgf, this.imgfi, this.imgs, this.imgt]
 
     for(var i in arr){
-      arr[i].nativeElement.src = "assets/images/upload_placeholder.png"
+      arr[i].nativeElement.src = "https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fupload_placeholder.png?alt=media&token=cb306f5d-1104-4585-9254-e93827db9502"
     }
   }
 

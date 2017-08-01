@@ -8,7 +8,7 @@
 
 .content {
 	float: right;
-	width: 80%
+	width: 60%
 }
 
 .content p {
@@ -46,11 +46,14 @@ img {
     .content button {
     	padding: 0px;
     }
+
 }
 
+@media only screen and (max-width: 800px) {
+    img {
+            max-width: 50%
+        }
 
-
-
-
+}
 
 

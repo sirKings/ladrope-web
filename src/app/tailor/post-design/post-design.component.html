@@ -9,7 +9,7 @@
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png" #imgfi>
+						<img src="https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fupload_placeholder.png?alt=media&token=cb306f5d-1104-4585-9254-e93827db9502" #imgfi>
 					</div>
 				</div>
         <div #f>
@@ -22,7 +22,7 @@
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png" #imgs>
+						<img src="https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fupload_placeholder.png?alt=media&token=cb306f5d-1104-4585-9254-e93827db9502" #imgs>
 					</div>
 				</div>
 				<div >
@@ -35,7 +35,7 @@
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png" #imgt>
+						<img src="https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fupload_placeholder.png?alt=media&token=cb306f5d-1104-4585-9254-e93827db9502" #imgt>
 					</div>
 				</div>
 				<div #h>
@@ -48,7 +48,7 @@
 			<div class='upload'>
 				<div class='image'>
 					<div class='thumbnail'>
-						<img src="assets/images/upload_placeholder.png" #imgf>
+						<img src="https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fupload_placeholder.png?alt=media&token=cb306f5d-1104-4585-9254-e93827db9502" #imgf>
 					</div>
 				</div>
 				<div >
@@ -148,12 +148,12 @@
 
             </span>
         </div>
-        <div *ngIf= 'options[0]'>
+        <div *ngIf= 'option[0]'>
           <p>Available Options</p>
-          <div class='space' *ngFor = 'let opt of options'>
+          <div class='space' *ngFor = 'let opt of option'>
             <div class='options'>
               <div class=thumbnail>
-                <img src="{{opt.image}}">
+                <img src="{{opt?.image}}">
                   <h4>{{opt.name}}</h4>
               </div>
             </div>
@@ -179,6 +179,7 @@
         <div class='space'>
           <p>Is there options you would want to present?</p>
           <button class='btn btn-primary' type='button' (click)='addOption()'>Add Options</button>
+          <button class='btn btn-primary' type='button' (click)='clearOption()'>Clear Options</button>
         </div>
         <div class='space'>
           <button class="btn btn-primary" type="submit">Submit</button>

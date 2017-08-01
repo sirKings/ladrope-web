@@ -55,7 +55,7 @@ export class EditDesignComponent implements OnInit {
 
     updateform(){
     	this.postDesign.get("name").setValue(this.cloth.name);
-    	this.postDesign.get("price").setValue(this.cloth.price);
+    	this.postDesign.get("price").setValue(this.cloth.cost);
     	this.postDesign.get("tags").setValue(this.cloth.tags);
     	this.postDesign.get("time").setValue(this.cloth.time);
     	this.postDesign.get("description").setValue(this.cloth.description);
@@ -83,7 +83,7 @@ export class EditDesignComponent implements OnInit {
     	      tags: this.postDesign.value.tags,
     	      description: this.postDesign.value.description,
     	    })
-    	    this.alert.success('Congratulation', 'Your design has been updated')
+    	    this.alert.success('Congratulations!!', 'Your design has been updated')
     	  }else {
     	    this.alert.error('Error','Please provide all details')
     	  }

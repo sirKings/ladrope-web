@@ -3,7 +3,7 @@
     height: 100%;
     width: 100%;
     padding: 0px;
-    background-image: url(/assets/images/header/background.png);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fbackground.png?alt=media&token=bdcc9a9a-7d65-4421-8cbd-1ebad55a6648);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -95,6 +95,11 @@
         
         font-size: 10px;
     }
+
+    .carousel{
+        height: 330px;
+        width: 350px;
+    }
 }
 
 @media(max-width: 800px) {
@@ -125,6 +130,7 @@
         
         font-size: 10px;
     }
+
 }
 
 

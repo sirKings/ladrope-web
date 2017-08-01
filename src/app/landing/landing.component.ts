@@ -51,10 +51,10 @@ export class LandingComponent implements OnInit, OnDestroy {
         });
 
         this.imageSources = [
-           'assets/images/shop/shop1.jpg',
-           'assets/images/shop/shop2.jpg',
-           'assets/images/shop/shop3.jpg',
-           'assets/images/shop/shop4.jpg',
+           'https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fshop1.jpg?alt=media&token=a08a9136-6095-4b52-b3b3-340ae685315f',
+           'https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fshop2.jpg?alt=media&token=9cfbc34e-249a-4f17-8cd7-0ea04d684ec5',
+           'https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fshop3.jpg?alt=media&token=4bda0859-8fb7-4d60-b37f-7c0de9acdb01',
+           'https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fshop4.jpg?alt=media&token=667305b8-528e-4227-b32a-fb5f12f0ee0c',
         ];
 
        this.config = {

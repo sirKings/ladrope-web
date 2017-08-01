@@ -41,7 +41,6 @@ public options: AlertBarOptions = new AlertBarOptions({
     this.loading = true;
     //console.log(this.signinForm)
 
-    if(this.signinForm.controls.isTailor.valid){
             if(this.signinForm.valid){
               this.afAuth.auth.signInWithEmailAndPassword(this.signinForm.value.email, this.signinForm.value.password)
               .catch((error) => {
@@ -52,16 +51,8 @@ public options: AlertBarOptions = new AlertBarOptions({
                 this.loading = false;
             })
               .then((res) => {
-                this.loading = false;
-                this.user = this.getUser(res.uid);
                 this.auth.uid = res.uid;
-                if(this.signinForm.value.isTailor === 'true'){
-                  console.log (res)
-                  this.router.navigate(['/tailor', res.uid]);
-                }else{
-                  console.log (res)
-                  this.router.navigate(['/shop']);
-                }
+                this.user = this.getUser(res.uid);
                 
 
               });
@@ -70,10 +61,6 @@ public options: AlertBarOptions = new AlertBarOptions({
               this.alert.error('Error', 'Please enter valid details')
               this.loading = false
             }
-    }else{
-      this.alert.error('Error', 'Please select NO if you are not a tailor')
-      this.loading = false
-    }
 
   	
     
@@ -87,7 +74,6 @@ public options: AlertBarOptions = new AlertBarOptions({
   	this.signinForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required]),
-      'isTailor': new FormControl(null, Validators.required)
       });
   }
 
@@ -105,10 +91,14 @@ public options: AlertBarOptions = new AlertBarOptions({
                     this.user = snapshot;
                     console.log(this.user)
                     this.auth.user = this.user;
+                    this.router.navigate(['/tailor', uid]);
                   })
-              } 
+              }else {
+                this.router.navigate(['/shop']);
+              }
               
           })
+        this.loading = false;
   }
 
   ngOnDestroy(){
