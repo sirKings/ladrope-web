@@ -20,9 +20,11 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { EditDetailsComponent } from './edit-details/edit-details.component';
 import { TermsComponent } from './terms/terms.component';
 import { AgreementComponent } from './agreement/agreement.component';
+import { AuthComponent } from './auth/auth.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
+  { path: 'auth', component: AuthComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'privacy', component: PrivayComponent },
   { path: 'signin', component: SigninComponent },

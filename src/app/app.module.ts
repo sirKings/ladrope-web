@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { AlertBarModule } from 'ng2-alert-bar';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -12,7 +11,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthServiceService } from './services/auth-service.service';
 import { UploadService } from './services/upload.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AlertComponent } from './services/_directives/index';
+import { AlertService } from './services/_services/index';
 
 import { AppRoutingModule } from './appRouting-module';
 import { CarouselModule } from 'angular4-carousel';
@@ -42,6 +43,7 @@ import { ContentComponent } from './shop/content/content.component';
 import { TermsComponent } from './terms/terms.component';
 import { AgreementComponent } from './agreement/agreement.component';
 import { EditDesignComponent } from './tailor/edit-design/edit-design.component';
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
@@ -70,7 +72,10 @@ import { EditDesignComponent } from './tailor/edit-design/edit-design.component'
     TermsComponent,
     AgreementComponent,
     EditDesignComponent,
+    AlertComponent,
+    AuthComponent
   ],
+  schemas: [ NO_ERRORS_SCHEMA],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -80,7 +85,6 @@ import { EditDesignComponent } from './tailor/edit-design/edit-design.component'
     ReactiveFormsModule,
     InfiniteScrollModule,
     BrowserAnimationsModule,
-    AlertBarModule,
     FormsModule,
     CarouselModule,
     StarRatingModule.forRoot(),
@@ -93,7 +97,7 @@ import { EditDesignComponent } from './tailor/edit-design/edit-design.component'
         tertiaryColour: '#004A00'
     })
   ],
-  providers: [AuthServiceService, UploadService],
+  providers: [AuthServiceService, UploadService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

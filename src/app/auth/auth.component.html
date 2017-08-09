@@ -1,0 +1,57 @@
+<alert class='flash'></alert>
+<div class='row'>
+  <ngx-loading [show]="loading"></ngx-loading>
+	<div class= 'col-md-6 col-md-offset-3'>
+		<div *ngIf = 'emailVerified'>
+			<div class='content'>
+				<h3>Congratulations!</h3>
+				<p>Your email have been verified</p>
+				<button class='btn btn-success' routerLink = '/signin'>Sign in</button>
+			</div>
+		</div>
+		<div *ngIf = 'emailVerifyfail'>
+			<div class='content'>
+				<h3>Oops!!</h3>
+				<p>Something went wrong</p>
+				<p>Try verifying your email again</p>
+				<div class='form-group'>
+					<label for='email'>Enter email</label>
+					<input type="text" name="email" placeholder="Enter email" [(ngModel)]= 'verifyemail'>
+				</div>
+				
+				<div class='form-group'>
+					<label for ='verifypass'>Password</label>
+					<input type="password" name="verifypass" placeholder='Enter password' [(ngModel)] = 'verifypass'>
+				</div>
+				
+				<button class='btn btn-success' (click) = 'verifyEmail()'>Verify Email</button>
+			</div>
+		</div>
+		<div *ngIf = 'resetPass'>
+			<div class='content'>
+				<h3>Reset Password</h3>
+				<p>Reset password for {{accountEmail}}</p>
+				<div class='form-group'>
+					<label for='email'>Enter new Password</label>
+					<input type="password" name="newPassword" placeholder="Enter password" [(ngModel)]= 'newPassword'>
+				</div>
+				<span>Your password has to be atleast six characters long</span>
+				
+				<div class='form-group'>
+					<label for ='verifypass'>Re-enter Password</label>
+					<input type="password" name="verifypass" placeholder='Re-enter password' [(ngModel)] = 'newPassword1'>
+				</div>
+				
+				<button class='btn btn-success' (click) = 'resetPassword()'>reset password</button>
+			</div>
+		</div>
+		<div *ngIf = 'passReseted'>
+			<div class='content'>
+				<h3>Congratulations!</h3>
+				<p>Password reset successful</p>
+				<button class='btn btn-success' routerLink = '/signin'>Sign in</button>
+			</div>
+		</div>
+	</div>
+</div>
+		

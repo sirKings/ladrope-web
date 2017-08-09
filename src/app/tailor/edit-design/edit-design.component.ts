@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../../services/auth-service.service';
-import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
+import { AlertService } from '../../services/_services/index';
 
 import { Location } from '@angular/common';
 
@@ -18,12 +18,8 @@ export class EditDesignComponent implements OnInit {
 	tailor;
 	cloth;
 	uid;
-	public options: AlertBarOptions = new AlertBarOptions({
-		placement: Placement.top,
-		textPlacement: TextPlacement.left
-	});
 
-  constructor(public router: Location,  private auth: AuthServiceService, public db: AngularFireDatabase, private alert: AlertBar) { }
+  constructor(public router: Location,  private auth: AuthServiceService, public db: AngularFireDatabase, private alert: AlertService) { }
 
   ngOnInit() {
   	 this.postDesign = new FormGroup({
@@ -83,9 +79,9 @@ export class EditDesignComponent implements OnInit {
     	      tags: this.postDesign.value.tags,
     	      description: this.postDesign.value.description,
     	    })
-    	    this.alert.success('Congratulations!!', 'Your design has been updated')
+    	    this.alert.success('Congratulations!! Your design has been updated')
     	  }else {
-    	    this.alert.error('Error','Please provide all details')
+    	    this.alert.error('Please provide all details')
     	  }
    	}
 

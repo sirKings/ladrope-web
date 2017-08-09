@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 
 import { file } from '../../services/file';
 import { AuthServiceService } from '../../services/auth-service.service';
-import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
+import { AlertService } from '../../services/_services/index';
 
 
 @Component({
@@ -28,10 +28,6 @@ export class PostDesignComponent implements OnInit {
   isOptions;
   displayOptions;
 
-  public options: AlertBarOptions = new AlertBarOptions({
-    placement: Placement.top,
-    textPlacement: TextPlacement.left
-  });
   
   @ViewChild('fi') fi: ElementRef;
   @ViewChild('s') s: ElementRef;
@@ -44,7 +40,7 @@ export class PostDesignComponent implements OnInit {
   @ViewChild('optImg') optImg: ElementRef;
 
 
-  constructor(public db: AngularFireDatabase, private alert: AlertBar, private auth: AuthServiceService) {}
+  constructor(public db: AngularFireDatabase, private alert: AlertService, private auth: AuthServiceService) {}
 
   ngOnInit() {
     this.postDesign = new FormGroup({
@@ -122,13 +118,13 @@ export class PostDesignComponent implements OnInit {
 
         this.postDesign.reset();
         this.clearImages();
-        this.alert.info('Congratulations!!', 'Your design has been posted')
+        this.alert.success('Congratulations!! Your design has been posted')
       }else{
-        this.alert.error('Error', 'upload atleast four images')
+        this.alert.error('Error upload atleast four images')
       }
       
     }else {
-        this.alert.error('Error','Please provide all details')
+        this.alert.error('Error Please provide all details')
       }
     
   }

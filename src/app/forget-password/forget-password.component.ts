@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { AlertService } from '../services/_services/index';
+
 import { Observable } from 'rxjs/Observable';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -15,12 +17,9 @@ export class ForgetPasswordComponent implements OnInit {
 
 user: Observable<firebase.User>;
 signinForm;
-isError = false;
+loading = false;
 
-@ViewChild('alert') alert:ElementRef;
-@ViewChild('alert1') alert1:ElementRef;
-
-  constructor(public afAuth: AngularFireAuth, public router: Router) {
+  constructor(public afAuth: AngularFireAuth, private alert: AlertService, public router: Router) {
     this.user = afAuth.authState;
   }
 
@@ -28,33 +27,24 @@ isError = false;
 
 
   signin() {
-  	this.alert.nativeElement.style.display = 'none';
-  	this.alert1.nativeElement.style.display = 'none';
 
   	if(this.signinForm.valid){
+      this.loading = true;
   		this.afAuth.auth.sendPasswordResetEmail(this.signinForm.value.email)
   		.catch((error) => {
   			// Handle Errors here.
   			let errorMessage = error.message;
-  			this.isError = true;
-  			this.alert.nativeElement.style.display = 'block';
-    		this.alert.nativeElement.innerHTML = errorMessage;
+  			this.alert.error(errorMessage)
   			
-  			console.log(error);
 		})
   		.then((res) => {
-  			console.log (res) 
-  			if(!this.isError){
-  				this.alert1.nativeElement.style.display = 'block';
-  				this.alert1.nativeElement.innerHTML = 'A reset password mail has been sent to your email, please follow the link to reset your password'
-
-  			}
+        this.loading = false;
+  				this.alert.success('A reset password link has been sent to your email, please follow the link to reset your password')
   			
   		});
   	}
   	else{
-  		this.alert.nativeElement.style.display = 'block';
-  		this.alert.nativeElement.innerHTML = 'Please enter signin details'
+  		this.alert.error('Please enter signin details')
   	}
     
   }

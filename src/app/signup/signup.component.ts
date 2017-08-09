@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 import { AuthServiceService } from '../services/auth-service.service';
-import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
+
+import { AlertService } from '../services/_services/index';
 
 import { Observable } from 'rxjs/Observable';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,13 +24,10 @@ user;
 loading;
 phone;
 genders = ['male', 'female'];
-public options: AlertBarOptions = new AlertBarOptions({
-  placement: Placement.top,
-  textPlacement: TextPlacement.left
-});
 
 
-  constructor(public db: AngularFireDatabase, private alert: AlertBar, public afAuth: AngularFireAuth, public router: Router, private auth: AuthServiceService) {
+
+  constructor(public db: AngularFireDatabase, private alert: AlertService, public afAuth: AngularFireAuth, public router: Router, private auth: AuthServiceService) {
     this.user = afAuth.authState;
   }
 
@@ -45,7 +43,7 @@ public options: AlertBarOptions = new AlertBarOptions({
               // Handle Errors here.
               let errorMessage = error.message;
               
-                this.alert.error('Error', errorMessage)
+                this.alert.error('Error')
                 this.loading = false;
             })
               .then((res) => {
@@ -81,11 +79,11 @@ public options: AlertBarOptions = new AlertBarOptions({
             } 
         }
           else{
-            this.alert.error('Error', 'Please enter Valid Details')
+            this.alert.error('Please enter Valid Details')
             this.loading = false;
           }
         }else{
-          this.alert.error('Error', 'Please select NO if you not a tailor')
+          this.alert.error('Please select NO if you not a tailor')
           this.loading = false;
         }
   	

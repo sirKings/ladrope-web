@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 import { ICarouselConfig, AnimationConfig } from 'angular4-carousel';
-import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
+import { AlertService } from '../services/_services/index';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -24,13 +24,9 @@ export class LandingComponent implements OnInit, OnDestroy {
   contactForm;
   imageSources: string[];
   config: ICarouselConfig;
-  public options: AlertBarOptions = new AlertBarOptions({
-    placement: Placement.top,
-    textPlacement: TextPlacement.left
-  });
 
 	
-	constructor(public afAuth: AngularFireAuth, private auth: AuthServiceService, public router: Router, private alert: AlertBar, private db: AngularFireDatabase){
+	constructor(public afAuth: AngularFireAuth, private alt: AlertService, private auth: AuthServiceService, public router: Router, private db: AngularFireDatabase){
 		this.authObserver = afAuth.authState.subscribe( user => {
       	if (user) {
         		this.user = user;
@@ -91,11 +87,11 @@ export class LandingComponent implements OnInit, OnDestroy {
     if(this.contactForm.valid){
       console.log(this.contactForm.value)
       this.db.list('/messages').push(this.contactForm.value)
-      this.alert.success('Ladrope got you', 'and we will responf soon')
+      this.alt.success('Ladrope got you and we will respond soon')
       this.contactForm.reset();
 
     }else{
-      this.alert.error('Error', 'Please fill all entries')
+      this.alt.error('Please fill all entries')
     }
   }
 

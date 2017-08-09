@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 import { AuthServiceService } from '../services/auth-service.service';
-import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
+import { AlertService } from '../services/_services/index';
 
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -24,13 +24,10 @@ user
 signinForm;
 isTailor = true;
 loading = false;
-public options: AlertBarOptions = new AlertBarOptions({
-  placement: Placement.top,
-  textPlacement: TextPlacement.left
-});
 
 
-  constructor(public afAuth: AngularFireAuth, private alert: AlertBar, public router: Router, public db: AngularFireDatabase, private auth: AuthServiceService) {
+
+  constructor(public afAuth: AngularFireAuth, private alt: AlertService, public router: Router, public db: AngularFireDatabase, private auth: AuthServiceService) {
     this.user = afAuth.authState;
   }
 
@@ -47,7 +44,7 @@ public options: AlertBarOptions = new AlertBarOptions({
                 // Handle Errors here.
                 let errorMessage = error.message;
                 
-                this.alert.error('Error', errorMessage)
+                this.alt.error(errorMessage)
                 this.loading = false;
             })
               .then((res) => {
@@ -58,7 +55,7 @@ public options: AlertBarOptions = new AlertBarOptions({
               });
             }
             else{
-              this.alert.error('Error', 'Please enter valid details')
+              this.alt.error('Please enter valid details')
               this.loading = false
             }
 

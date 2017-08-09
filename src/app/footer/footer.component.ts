@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
+import { AlertService } from '../services/_services/index';
 
 @Component({
   selector: 'app-footer',
@@ -13,12 +13,7 @@ export class FooterComponent implements OnInit {
 newsForm: FormGroup;
 
 
-public options: AlertBarOptions = new AlertBarOptions({
-  placement: Placement.top,
-  textPlacement: TextPlacement.left
-});
-
-  constructor(private db: AngularFireDatabase, private alert: AlertBar) { }
+  constructor(private db: AngularFireDatabase, private alert: AlertService) { }
 
   ngOnInit() {
 
@@ -30,10 +25,10 @@ public options: AlertBarOptions = new AlertBarOptions({
   subscribe(){
   	if(this.newsForm.valid){
   		this.db.list('/newsletter').push({email: this.newsForm.value.email})
-  		this.alert.success('Ladrope got you', 'Sure you will like our newsletters')
+  		this.alert.success('Ladrope got you Sure you will like our newsletters')
   		this.newsForm.reset()
   	}else{
-  		this.alert.error('Please enter email', '')
+  		this.alert.error('Please enter email')
   	}
   }
 

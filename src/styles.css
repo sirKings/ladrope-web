@@ -28,6 +28,22 @@ a:active {
     text-decoration: none;
 }
 
+.flash{
+    position: fixed;
+    z-index: 100;
+    width: 400px
+}
+
+.alert-success{
+    color: white;
+    background-color: rgb(0,74,0);
+}
+
+.alert-danger{
+    color: white;
+    background-color: #a94442;
+}
+
 h1,
 h2,
 h4 {
@@ -39,6 +55,16 @@ h4 {
 p {
     font-size: 15px;
     line-height: 21px;
+}
+
+@media only screen and (max-width: 600px) {
+    /* For mobile phones: */
+    .flash{
+    position: fixed;
+    z-index: 100;
+    width: 100%
+}
+
 }
 
 .btn {

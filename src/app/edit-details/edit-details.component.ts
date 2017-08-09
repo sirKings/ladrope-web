@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Location } from '@angular/common';
 
-import {AlertBar, AlertBarOptions, Placement, TextPlacement } from 'ng2-alert-bar';
+import { AlertService } from '../services/_services/index';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../services/auth-service.service';
@@ -28,16 +28,13 @@ export class EditDetailsComponent implements OnInit {
 	storageRef;
 	currentUpload;
 	updateForm;
-  public options: AlertBarOptions = new AlertBarOptions({
-    placement: Placement.top,
-    textPlacement: TextPlacement.left
-  });
+  
 	
 	@ViewChild('logo') logo: ElementRef;
 	@ViewChild('fi') progress: ElementRef;
 	image1 = '';
 
-  constructor(public afAuth: AngularFireAuth, private alert: AlertBar, public router: Location, public db: AngularFireDatabase, private auth: AuthServiceService) { 
+  constructor(public afAuth: AngularFireAuth, private alert: AlertService, public router: Location, public db: AngularFireDatabase, private auth: AuthServiceService) { 
   		 
   }
 
@@ -125,10 +122,10 @@ export class EditDetailsComponent implements OnInit {
             displayName: this.updateForm.value.displayName
           })
       }
-      this.alert.success('Your details has been updated', '')
+      this.alert.success('Your details has been updated')
       this.router.back();
     }else {
-      this.alert.error('Error', 'Please enter all details')
+      this.alert.error('Please enter all details')
     }
   	
   	
