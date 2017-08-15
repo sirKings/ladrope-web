@@ -16,6 +16,7 @@
 
     .sidebar{
     	display: none;
+        transition: ease-in-out 2s;
     }
 }
 
