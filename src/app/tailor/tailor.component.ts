@@ -17,7 +17,7 @@ tailor;
 sub;
 uid;
 menu;
-isMenu = false;
+isMenu = true;
 
   constructor(public db: AngularFireDatabase, public route: ActivatedRoute, private auth: AuthServiceService) { }
 
