@@ -79,14 +79,12 @@ loading = false;
         let sub = this.db.object('/users/'+uid)
           .subscribe(snapshot => {
               this.user = snapshot;
-              console.log(this.user.$value)
               this.auth.user = this.user;
               if(this.user.$value === null){
                 sub.unsubscribe();
                 let sub1 = this.db.object('/tailors/'+uid)
                   .subscribe(snapshot => {
                     this.user = snapshot;
-                    console.log(this.user)
                     this.auth.user = this.user;
                     this.router.navigate(['/tailor', uid]);
                   })

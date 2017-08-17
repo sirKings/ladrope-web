@@ -15,7 +15,6 @@ order;
 
   ngOnInit() {
   	this.order = this.service.selectedOrder;
-  	console.log(this.order)
   }
 
    back(){

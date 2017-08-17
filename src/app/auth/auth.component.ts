@@ -26,7 +26,6 @@ newPassword;
 
   ngOnInit() {
   	this.loading = true
-  	console.log('auth component init')
    this.query = this.routeparam.snapshot.queryParams
   	switch (this.query.mode) {
   	    case 'resetPassword':

@@ -58,7 +58,6 @@ genders = ['male', 'female'];
                             displayName: this.signupForm.value.displayName,
                             uid: res.uid
                           })
-                          console.log (res)
                           this.router.navigate(['/tailor', res.uid]);
                   } else {
                             this.db.object('/users/'+ res.uid)
@@ -67,7 +66,6 @@ genders = ['male', 'female'];
                               gender: this.signupForm.value.gender,
                               displayName: this.signupForm.value.displayName
                             })
-                            console.log (res)
                             this.router.navigate(['/shop']);
                         }
                 this.loading = false;
@@ -109,14 +107,12 @@ genders = ['male', 'female'];
         let sub = this.db.object('/users/'+uid)
           .subscribe(snapshot => {
               this.user = snapshot;
-              console.log(this.user.$value)
               this.auth.user = this.user;
               if(this.user.$value === null){
                 sub.unsubscribe();
                 let sub1 = this.db.object('/tailors/'+uid)
                   .subscribe(snapshot => {
                     this.user = snapshot;
-                    console.log(this.user)
                     this.auth.user = this.user;
                   })
               } 
@@ -126,7 +122,6 @@ genders = ['male', 'female'];
 
   ngOnDestroy(){
     this.auth.user = this.user;
-    console.log(this.user)
   }
 
   checkNumber(str: string){

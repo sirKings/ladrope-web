@@ -59,8 +59,6 @@ isCompletedOrder = false;
                  if(this.tailor.orders){
                   this.pendingOrders = this.getCloths(this.tailor.orders)
                   this.isPendingOrder = true;
-                  console.log(this.pendingOrders);
-                  console.log(this.tailor)
                   }
                  if(this.tailor.completedOrders){
                   this.completedOrders = this.getCloths(this.tailor.completedOrders)
@@ -92,12 +90,10 @@ isCompletedOrder = false;
   select(cloth){
     //this.acceptOrder(cloth)
     this.selectedOrder = cloth;
-    console.log(this.selectedOrder)
     this.router.navigate([cloth.name], { relativeTo: this.route })
   }
 
   acceptOrder(order){
-    console.log(order)
     if(order.accepted === true){
 
     }else{

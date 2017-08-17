@@ -44,6 +44,7 @@ import { TermsComponent } from './terms/terms.component';
 import { AgreementComponent } from './agreement/agreement.component';
 import { EditDesignComponent } from './tailor/edit-design/edit-design.component';
 import { AuthComponent } from './auth/auth.component';
+import { ClothsComponent } from './cloths/cloths.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { AuthComponent } from './auth/auth.component';
     AgreementComponent,
     EditDesignComponent,
     AlertComponent,
-    AuthComponent
+    AuthComponent,
+    ClothsComponent
   ],
   schemas: [ NO_ERRORS_SCHEMA],
   imports: [

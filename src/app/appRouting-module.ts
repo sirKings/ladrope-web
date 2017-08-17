@@ -21,6 +21,7 @@ import { EditDetailsComponent } from './edit-details/edit-details.component';
 import { TermsComponent } from './terms/terms.component';
 import { AgreementComponent } from './agreement/agreement.component';
 import { AuthComponent } from './auth/auth.component';
+import { ClothsComponent } from './cloths/cloths.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
   { path: 'reset-password', component: ForgetPasswordComponent },
   { path: 'tailor', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'terms', component: TermsComponent },
+  { path: 'cloth/:key', component: ClothsComponent },
   { path: 'agreement', component: AgreementComponent },
   { path: 'tailor/:id', component: TailorComponent, children: [
     { path: '', redirectTo: 'detail', pathMatch: 'full' },

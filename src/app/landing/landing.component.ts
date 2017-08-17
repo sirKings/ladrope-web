@@ -63,7 +63,6 @@ export class LandingComponent implements OnInit, OnDestroy {
         stopAutoplayMinWidth: 768
       };
       this.nav = this.auth.nav.subscribe((res) => {
-        console.log(res)
         let el = document.getElementById('contact')
         el.scrollIntoView(true)
 
@@ -85,7 +84,6 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   contact(){
     if(this.contactForm.valid){
-      console.log(this.contactForm.value)
       this.db.list('/messages').push(this.contactForm.value)
       this.alt.success('Ladrope got you and we will respond soon')
       this.contactForm.reset();

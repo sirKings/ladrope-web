@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.ladrope.app",
+    "sha256_cert_fingerprints":
+    ["79:FC:00:B3:52:D5:A8:71:CF:E6:97:2F:B5:91:2E:C7:5A:E7:B6:F7:E3:F7:9A:C7:ED:8D:F4:3C:F6:74:8F:65"]
+  }
+}]

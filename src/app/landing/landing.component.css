@@ -430,3 +430,21 @@
     background-color: #ededed !important;
     color: #fff !important;
 }
+
+.call-to-action {
+    
+    padding: 50px 0 80px;
+    background-color: rgb(0,74,0);
+    text-align: center;
+    color: #fff;
+}
+
+.call-to-action img {
+    cursor: pointer;
+    margin: 40px auto;
+    transition: all 500ms ease-in-out;
+}
+
+
+
+

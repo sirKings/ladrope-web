@@ -58,7 +58,6 @@ export class PostDesignComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.postDesign)
     if(this.postDesign.valid){
       if(this.image1 && this.image2 && this.image3 && this.image4) {
         let clothKey = this.db.list('/cloths/' + this.postDesign.value.gender)
@@ -147,14 +146,12 @@ export class PostDesignComponent implements OnInit {
         },
         (error) => {
           // upload failed
-          console.log(error)
         },
         () => {
           // upload success
           this.image1 = uploadTask.snapshot.downloadURL;
           this.imgfi.nativeElement.src = this.image1;
           
-          console.log(upload)
         }
       );
   }
@@ -174,13 +171,11 @@ export class PostDesignComponent implements OnInit {
         },
         (error) => {
           // upload failed
-          console.log(error)
         },
         () => {
           // upload success
          this.image2 = uploadTask.snapshot.downloadURL;
          this.imgs.nativeElement.src = this.image2;
-          console.log(upload)
         }
       );
   }
@@ -200,13 +195,11 @@ export class PostDesignComponent implements OnInit {
         },
         (error) => {
           // upload failed
-          console.log(error)
         },
         () => {
           // upload success
           this.image3 = uploadTask.snapshot.downloadURL;
           this.imgt.nativeElement.src = this.image3;
-          console.log(upload)
         }
       );
   }
@@ -225,13 +218,11 @@ export class PostDesignComponent implements OnInit {
         },
         (error) => {
           // upload failed
-          console.log(error)
         },
         () => {
           // upload success
           this.image4 = uploadTask.snapshot.downloadURL;
           this.imgf.nativeElement.src = this.image4;
-          console.log(upload)
         }
       );
   }
@@ -254,7 +245,6 @@ export class PostDesignComponent implements OnInit {
 
       this.option.push({name: this.postDesign.value.optionsName, image: this.optionImage})
       //this.displayOptions = this.getOptions(this.options)
-      console.log(this.option)
       this.postDesign.value.optionsName = null;
     }else{
       this.isOptions = true;
@@ -289,14 +279,10 @@ export class PostDesignComponent implements OnInit {
         },
         (error) => {
           // upload failed
-          console.log(error)
         },
         () => {
           // upload success
           this.optionImage = uploadTask.snapshot.downloadURL;
-          //this.imgfi.nativeElement.src = this.image1;
-          
-          console.log(upload)
         }
       );
   }

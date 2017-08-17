@@ -42,11 +42,11 @@ export class ShopComponent implements OnInit, OnDestroy{
 
 		this.filterOptions = this.formBuilder.group({
 		  class: '',
+      price: ''
 		})
 
 		this.menu = this.authservice.showMenu.subscribe((res) =>{
 			this.isMenu = res;
-			console.log(this.isMenu); 
 		})
 
 
@@ -54,11 +54,16 @@ export class ShopComponent implements OnInit, OnDestroy{
 	}
 
 	filter(){
-		let obj = {
-			orderByChild: 'tags',
-			equalTo: this.filterOptions.value.class
-		}
-		this.initialise(obj, this.gender)
+
+    if(this.filterOptions.value.price === ''){
+  		let obj = {
+  			orderByChild: 'tags',
+  			equalTo: this.filterOptions.value.class
+  		}
+  		this.initialise(obj, this.gender)
+    }else{
+      this.filterWithPrice()
+    }
 	}
 
 	cancel(){
@@ -78,9 +83,33 @@ export class ShopComponent implements OnInit, OnDestroy{
     		this.loading = false;
     	});
      	
-  	}
+  }
 
-
+    filterWithPrice(){
+      this.loading = true;
+      if(this.filterOptions.value.class !== ''){
+        this.db.list('/cloths/' + this.gender, {
+          query: {
+            orderByChild: 'tags', 
+            equalTo: this.filterOptions.value.class
+          }
+        }).subscribe((res) => {
+          this.loading = false;
+          this.cloths = res.filter((cloth)=>{
+            return cloth.price < this.filterOptions.value.price;
+          })
+        })
+      }else{
+        this.db.list('/cloths/'+this.gender)
+          .subscribe((res)=>{
+            this.loading = false;
+            this.cloths = res.filter((cloth)=>{
+              return cloth.price < this.filterOptions.value.price;
+            })
+          })
+      }
+      
+    }
 
   	startTracking(gender){
   		this.db.list('/cloths/' + gender, {

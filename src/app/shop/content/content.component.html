@@ -4,12 +4,16 @@
 			<div class='badge'>
 				<p>NGN{{cloth.price}}.00</p>
 			</div>
-			<star-rating-comp 
-				[staticColor]="'ok'" 
-				[readOnly]="true" 
-				[starType]="'svg'" 
-				rating={{cloth.rating}}>
-			</star-rating-comp>
+			<div>({{cloth.numSold}})
+				<div class='pull-right'>
+					<star-rating-comp 
+						[staticColor]="'ok'" 
+						[readOnly]="true" 
+						[starType]="'svg'" 
+						rating={{cloth.rating}}>
+					</star-rating-comp>
+				</div>
+			</div>
 		</div>
 		<div class='head'>
 			<p>{{cloth.name}}</p>
@@ -25,6 +29,7 @@
 					<i *ngIf='cloth.likers[uid]' class="fa fa-heart green" aria-hidden="true"></i> 
 					{{cloth.likes}} likes
 				</span>
+				<span class="pull-right up pointer" [routerLink] = "['/cloth/', cloth.$key]" >See more</span>
 			</div>
 		</div>
 	</div>

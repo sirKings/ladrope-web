@@ -31,7 +31,6 @@ uid;
             this.db.object('tailors/'+user.uid)
               .subscribe(res => {
                 this.tailor = res;
-                console.log(this.tailor)
                 if(this.tailor.cloths){
                 	this.cloths = this.getCloths(this.tailor.cloths)
                 	this.isCloth = true

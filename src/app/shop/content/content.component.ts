@@ -31,7 +31,6 @@ export class ContentComponent implements OnInit {
   }
 
   like () {
-      console.log(this.cloth.likers)
       let num = this.cloth.likes
       if(this.cloth.likers[this.uid] === true){
         num--;

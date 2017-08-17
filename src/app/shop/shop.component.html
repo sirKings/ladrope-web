@@ -26,6 +26,18 @@
 	                    <option value="suit">Suits</option>
 		          </select>
 		  </div>
+	  	  <div class='form-group'>
+	  	    <label>Price</label>
+	  	          <select formControlName="price">
+	  	           		<option value="5000">Below NGN5000</option>
+	                      <option value="10000">Below NGN10000</option>
+	                      <option value="20000">Below NGN20000</option>
+	                      <option value="40000">Below NGN40000</option>
+	                      <option value="50000">Below NGN50000</option>
+	                      <option value="100000">Below NGN100000</option>
+	  	          </select>
+	  	  </div>
+
 		  <div>
 		  	<button [disabled]='!gender' class="btn" type="submit" (click)='filter()'>Filter</button>
 		  	<button [disabled]='!gender' class="btn" type="button" (click)='cancel()'>Cancel</button>

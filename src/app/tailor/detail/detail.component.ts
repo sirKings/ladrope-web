@@ -26,7 +26,6 @@ loading;
         			.subscribe(res => {
         				this.tailor = res;
                 this.loading = false;
-        				console.log(this.tailor)
         			})
   				
                 } 
