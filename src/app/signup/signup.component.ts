@@ -48,7 +48,7 @@ genders = ['male', 'female'];
             })
               .then((res) => {
                 this.auth.uid = res.uid;
-                if(this.signupForm.value.isTailor === 'true'){
+                if(this.signupForm.value.isTailor === '1'){
                           this.db.object('/tailors/'+ res.uid)
                           .set({
                             name: this.signupForm.value.name,

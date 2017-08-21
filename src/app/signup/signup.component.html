@@ -12,10 +12,10 @@
               <h3>Are you a tailor?</h3>
                 <div class='form-inline pad1'>
                   <div class="radio">
-                        <label><input type="radio" formControlName="isTailor" value=true >Yes</label>
+                        <label><input type="radio" formControlName="isTailor" value='1' >Yes</label>
                   </div>
                   <div class="radio">
-                        <label><input type="radio" formControlName="isTailor" value= false >No</label>
+                        <label><input type="radio" formControlName="isTailor" value= '0' >No</label>
                   </div>
                 </div>
 
@@ -44,7 +44,7 @@
               			class="help-block">Please enter a valid email</span>
               		
         		</div>
-            <div *ngIf='signupForm.value.isTailor === "false"'>
+            <div *ngIf='signupForm.value.isTailor === "0"'>
                 <div class="pad form-group form-inline">
                   <label for="gender">Gender</label>
                   <div class="radio" *ngFor="let gender of genders">
@@ -126,8 +126,8 @@
 
             </div>
 
-            <p *ngIf = 'signupForm.value.isTailor === "true"'><input type="checkbox" formControlName= "agree"><a routerLink='/agreement' class='agree'> I agree to Terms And Conditions</a></p>
-            <p *ngIf = 'signupForm.value.isTailor !== "true"'><input type="checkbox" formControlName= "agree"><a routerLink='/terms' class='agree'> I agree to Terms And Conditions</a></p>
+            <p *ngIf = 'signupForm.value.isTailor === "1"'><input type="checkbox" formControlName= "agree"><a routerLink='/agreement' class='agree'> I agree to Terms And Conditions</a></p>
+            <p *ngIf = 'signupForm.value.isTailor === "0"'><input type="checkbox" formControlName= "agree"><a routerLink='/terms' class='agree'> I agree to Terms And Conditions</a></p>
 
         		<button class='btn btn-primary'>Sign Up</button>
 			</form>

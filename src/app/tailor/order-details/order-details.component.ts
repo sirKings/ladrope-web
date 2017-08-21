@@ -11,10 +11,12 @@ import { Location } from '@angular/common';
 })
 export class OrderDetailsComponent implements OnInit {
 order;
+unit;
   constructor(private service: AuthServiceService, private router: Location) { }
 
   ngOnInit() {
   	this.order = this.service.selectedOrder;
+    this.unit = this.order.size.unit;
   }
 
    back(){

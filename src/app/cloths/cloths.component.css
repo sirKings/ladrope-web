@@ -1,0 +1,76 @@
+img {
+	width: 100%;
+	max-width: 500px;
+}
+
+.badge {
+	background-color: rgb(0,74,0);
+	
+}
+
+.content{
+	background-color: white;
+	max-width: 500px;
+	margin: 20px auto;
+}
+
+.info{
+	padding-left: 10px;
+}
+
+.pad{
+	padding-bottom: 10px;
+}
+.text{
+	text-align: center;
+}
+
+.right {
+	float: right;
+	padding: 10px;
+}
+
+.badge p {
+	margin-bottom: 0px;
+	font-weight: bolder;
+	font-size: 1.8rem
+}
+
+.head {
+	padding: 10px;
+}
+
+
+
+.head p {
+	font-weight: bolder;
+	font-size: 2rem
+}
+
+span {
+	font-size: 1.5rem;
+	padding: 5px;
+}
+
+.green{
+	color: rgb(0,74,0);
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .head {
+    	padding: 0px;
+    	padding-top: 5px
+    }
+
+    .head p {
+    	font-size: 1.3rem;
+    	font-weight: bold;
+    	margin-left: 5px
+    }
+}
