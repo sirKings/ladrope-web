@@ -27,20 +27,26 @@ loading = false;
 
 
   signin() {
-
+    let err = null;
   	if(this.signinForm.valid){
       this.loading = true;
   		this.afAuth.auth.sendPasswordResetEmail(this.signinForm.value.email)
   		.catch((error) => {
   			// Handle Errors here.
+        err = error;
   			let errorMessage = error.message;
   			this.alert.error(errorMessage)
   			
 		})
   		.then((res) => {
-        this.loading = false;
-  				this.alert.success('A reset password link has been sent to your email, please follow the link to reset your password')
-  			
+        if(err){
+          this.loading = false;
+        } else {
+          this.loading = false;  
+          this.alert.success('A reset password link has been sent to your email, please follow the link to reset your password')
+          
+        }
+        
   		});
   	}
   	else{

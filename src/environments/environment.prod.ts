@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
 
-  // Initialize Firebase
+  //Initialize Firebase
   firebase: {
     apiKey: "AIzaSyDlN-RFjSBq4jBipkkyDYtF2AMuu8Kz1TY",
     authDomain: "ladrope-9e888.firebaseapp.com",

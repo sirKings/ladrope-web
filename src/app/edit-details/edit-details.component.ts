@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Location } from '@angular/common';
 
@@ -30,11 +30,11 @@ export class EditDetailsComponent implements OnInit {
 	updateForm;
   
 	
-	@ViewChild('logo') logo: ElementRef;
-	@ViewChild('fi') progress: ElementRef;
+	@ViewChild('logo') logo;
+	@ViewChild('fi') progress;
 	image1 = '';
 
-  constructor(public afAuth: AngularFireAuth, private alert: AlertService, public router: Location, public db: AngularFireDatabase, private auth: AuthServiceService) { 
+  constructor(private r: Renderer2, public afAuth: AngularFireAuth, private alert: AlertService, public router: Location, public db: AngularFireDatabase, private auth: AuthServiceService) { 
   		 
   }
 
@@ -67,18 +67,17 @@ export class EditDetailsComponent implements OnInit {
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) =>  {
           // upload in progress
-          this.progress.nativeElement.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          let progres = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          this.r.setAttribute(this.progress.nativeElement, 'value', progres.toString())
         },
         (error) => {
           // upload failed
-          console.log(error)
         },
         () => {
           // upload success
           this.image1 = uploadTask.snapshot.downloadURL;
           this.logo.nativeElement.src = this.image1;
           
-          console.log(upload)
         }
       );
   }

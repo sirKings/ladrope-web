@@ -53,7 +53,7 @@ genders = ['male', 'female'];
                           .set({
                             name: this.signupForm.value.name,
                             address: this.signupForm.value.address,
-                            phone: this.phone,
+                            phone: this.signupForm.value.phone,
                             email: this.signupForm.value.email,
                             displayName: this.signupForm.value.displayName,
                             uid: res.uid
@@ -122,22 +122,6 @@ genders = ['male', 'female'];
 
   ngOnDestroy(){
     this.auth.user = this.user;
-  }
-
-  checkNumber(str: string){
-    if((str.length === 11)&& (str.slice(0,1)==='0')){
-      let num = str.slice(1)
-      num = '+234'+num;
-      this.phone = num;
-      return true
-    }else{
-      if ((str.length === 14) && (str.slice(0,1)==='+')){
-        this.phone = str
-        return true;
-      }else{
-        return false;
-      }
-    }
   }
 
 }

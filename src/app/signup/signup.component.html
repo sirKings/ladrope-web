@@ -83,7 +83,7 @@
                       *ngIf="!passwordMatch"
                       class="help-block">Please your password must match</span>
             </div>
-            <div *ngIf = 'signupForm.value.isTailor === "true"'>
+            <div *ngIf = 'signupForm.value.isTailor === "1"'>
             <div class="form-group pad">
                 <label for="name">Business name</label>
                 <input
@@ -118,7 +118,7 @@
                     placeholder='Please enter your number'
                     formControlName="phone"
                     class="form-control">
-                    <span *ngIf = '!checkNumber(signupForm.value.phone)'>Please enter valid phone 08xxxxxxxxx</span>
+                    <span> Please enter valid phone with this format 08xxxxxxxxx/07xxxxxxxxxx</span>
                   <span
                       *ngIf="!signupForm.get('phone').valid && signupForm.get('phone').touched"
                       class="help-block">Please enter your correct phone number</span>
