@@ -8,19 +8,10 @@ admin.initializeApp(functions.config().firebase);
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
-const gmailEmail = 'ryme4kings@gmail.com'
-const gmailPassword = 'oloko91#'
-// const mailTransport = nodemailer.createTransport(
-// `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
-const mailTransport = nodemailer.createTransport({
-	host: 'smtp.gmail.com',
-	    port: 465,
-	    secure: true, // use SSL
-	    auth: {
-	        user: gmailEmail,
-	        pass: gmailPassword
-	    }
-})
+const gmailEmail = encodeURIComponent(functions.config().gmail.email);
+const gmailPassword = encodeURIComponent(functions.config().gmail.pass);
+const mailTransport = nodemailer.createTransport(
+`smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
 
 exports.sendTailorWelcomeEmail = functions.database.ref('/tailors/{pushid}/')
   .onCreate(event => {
@@ -44,13 +35,13 @@ exports.sendReceipt = functions.database.ref('/orders/{pushid}/')
 	return sendReceipt(order.email, order.displayName, order.orderId, start, date, order.clientAddress, order.price)
 })
 
-exports.notifyTailor = functions.database.ref('/tailors/{pushid}/orders/{pushid}/')
+exports.notifyTailor = functions.database.ref('/orders/{pushid}/')
 	.onCreate(event => {
 	order = event.data.val()
 	start = moment(order.startDate).format('YYYY MM DD')
 	date = moment(order.date).format('YYYY MM DD')
 
-	return sendTailorNotification(order.labelEmail, order.orderId, start, date, order.price)
+	return sendTailorNotification(order.labelEmail, order.orderId, start, date, order.cost)
 })
 // [END onWrite]
 
@@ -838,7 +829,7 @@ function sendReceipt(email, name, orderId, start, date, address, price) {
 }
 
 
-function sendTailorNotification(email, orderId, start, date, price) {
+function sendTailorNotification(email, orderId, start, date, cost) {
   const mailOptions = {
     from: `Ladrope <noreply@Ladrope.com>`,
     to: email

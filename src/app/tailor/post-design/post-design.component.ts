@@ -81,6 +81,7 @@ export class PostDesignComponent implements OnInit {
           likes: 0,
           label: this.tailor.name,
           labelId: this.tailor.uid,
+          labelEmail: this.tailor.email,
           labelPhone: this.tailor.phone,
           options: this.getOptions(this.option),
           numSold: 0
@@ -108,6 +109,7 @@ export class PostDesignComponent implements OnInit {
           likes: 0,
           label: this.tailor.name,
           labelId: this.tailor.uid,
+          labelEmail: this.tailor.email,
           numSold: 0,
           options: this.getOptions(this.option)
         }).key
