@@ -2,6 +2,10 @@
   "hosting": {
     "public": "dist",
     "rewrites": [
+    	{
+    		"source": "/verify",
+    		"function": "verify"
+    	},
       {
         "source": "**",
         "destination": "/index.html"

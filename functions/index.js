@@ -2,6 +2,10 @@ const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const moment = require('moment');
 
+const request = require('request')
+
+const secretKey = 'sk_test_29cd1555470991605a58ea724c6648e15d68e528'
+
 // The Firebase Admin SDK to access the Firebase Realtime Database. 
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
@@ -19,11 +23,47 @@ exports.sendTailorWelcomeEmail = functions.database.ref('/tailors/{pushid}/')
 	return sendTailorEmail(user.email, user.name);
 })
 
+exports.verify = functions.https.onRequest((req, res) => {
+  	let code = req.body.code;
+  	let amount = req.body.amount;
+  	var request = require('request');
+  	 
+  	var options = {
+  	  url: 'https://api.paystack.co/transaction/verify/'+code,
+  	  headers: {
+  	    'Authorization': 'Bearer '+ secretKey
+  	    }
+  	};
+  	 
+  	function callback(error, response, body) {
+  	  if (!error && response.statusCode == 200) {
+  	    var info = JSON.parse(body);
+  	    if(info.data.gateway_response == 'Successful' || info.data.gateway_response == 'Approved'){
+  	     	if(info.data.amount == amount){
+  	    	res.status(200).send('OK')
+  	    }else{
+  	    	res.status(200).send('NOK')
+  	    }
+  	  }else{
+  	  	res.status(200).send('NOK')
+  	  }
+  	}
+  	}
+  	 
+  	request(options, callback);
+});
 
 exports.sendCustomerWelcomeEmail = functions.database.ref('/users/{pushid}/')
 	.onCreate(event => {
 	user = event.data.val()
 	return sendCustomerEmail(user.email, user.displayName);
+})
+
+exports.alertMe = functions.database.ref('/orders/{pushid}/')
+	.onCreate(event =>{
+	order = event.data.val()
+	
+	return alertme(order)	
 })
 
 exports.sendReceipt = functions.database.ref('/orders/{pushid}/')
@@ -1091,6 +1131,21 @@ function sendTailorNotification(email, orderId, start, date, cost) {
 	});
 
 }
+
+function alertme(order) {
+  const mailOptions = {
+    from: `Ladrope <noreply@Ladrope.com>`,
+    to: 'globalladrope@gmail.com'
+  };
+ mailOptions.subject = 'New Order';
+ mailOptions.text =  JSON.parse(order);
+
+  return mailTransport.sendMail(mailOptions).then(() => {
+	  
+	});
+
+}
+
 
 
 
