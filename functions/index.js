@@ -1043,6 +1043,7 @@ function sendTailorNotification(email, orderId, start, date, cost) {
 						            </td>
 						            </tr>
 						            </table>
+						            <h4>Please visit your <a href="https://ladrope.com/">dashboard</a>. Accept the order within 24hrs if you are ready to complete it else the order will be canceled.</h4>
 						            <![endif]-->
 						        </td>
 						    </tr>
