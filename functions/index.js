@@ -535,7 +535,7 @@ function sendReceipt(email, name, orderId, start, date, address, price) {
     to: email
   };
   // The user subscribed to the newsletter.
-  mailOptions.subject = `Welcome to Ladrope!`;
+  mailOptions.subject = `Transaction Reciept`;
   mailOptions.html = `<head>
 						<title>Transaction Receipt</title>
 						<!--
@@ -875,7 +875,7 @@ function sendTailorNotification(email, orderId, start, date, cost) {
     to: email
   };
   // The user subscribed to the newsletter.
-  mailOptions.subject = `Welcome to Ladrope!`;
+  mailOptions.subject = `Order Notification`;
   mailOptions.html = `<head>
 						<title>Transaction Receipt</title>
 						<!--
@@ -1138,7 +1138,7 @@ function alertme(order) {
     to: 'globalladrope@gmail.com'
   };
  mailOptions.subject = 'New Order';
- mailOptions.text =  JSON.parse(order);
+ mailOptions.text =  ` There is a new order. Delivery date: ${order.date}  Start date: ${order.startDate} Tailor: ${order.labelEmail} ${order.labelPhone}, Client: ${order.email}`;
 
   return mailTransport.sendMail(mailOptions).then(() => {
 	  
