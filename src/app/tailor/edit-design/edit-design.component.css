@@ -17,6 +17,10 @@
 	margin-bottom: 5px;
 }
 
+.options img {
+	width: 130px;
+}
+
 @media only screen and (max-width: 800px) {
     /* For mobile phones: */
     .card{

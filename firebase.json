@@ -7,6 +7,10 @@
     		"function": "verify"
     	},
       {
+        "source": "/decline",
+        "function": "declineOrders"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

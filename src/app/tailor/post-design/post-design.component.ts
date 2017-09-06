@@ -21,12 +21,14 @@ export class PostDesignComponent implements OnInit {
   option = [];
   tailor;
   optionImage;
+  optionImgName
   image1;
   image2;
   image3;
   image4;
   isOptions;
   displayOptions;
+  submitable = true;
 
   
   @ViewChild('fi') fi: ElementRef;
@@ -137,9 +139,9 @@ export class PostDesignComponent implements OnInit {
       let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
 
       let upload = new file(e.target.files[0])
-
+      let name = this.getUniqueName()
       let storageRef = firebase.storage().ref();
-      let uploadTask = storageRef.child(`${basePath}/${upload.file.name}`).put(upload.file);
+      let uploadTask = storageRef.child(`${basePath}/${name}`).put(upload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) =>  {
@@ -162,9 +164,9 @@ export class PostDesignComponent implements OnInit {
       let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
 
       let upload = new file(e.target.files[0])
-
+      let name = this.getUniqueName()
       let storageRef = firebase.storage().ref();
-      let uploadTask = storageRef.child(`${basePath}/${upload.file.name}`).put(upload.file);
+      let uploadTask = storageRef.child(`${basePath}/${name}`).put(upload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) =>  {
@@ -186,9 +188,9 @@ export class PostDesignComponent implements OnInit {
       let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
 
       let upload = new file(e.target.files[0])
-
+      let name = this.getUniqueName()
       let storageRef = firebase.storage().ref();
-      let uploadTask = storageRef.child(`${basePath}/${upload.file.name}`).put(upload.file);
+      let uploadTask = storageRef.child(`${basePath}/${name}`).put(upload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) =>  {
@@ -209,9 +211,9 @@ export class PostDesignComponent implements OnInit {
       let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
 
       let upload = new file(e.target.files[0])
-
+      let name = this.getUniqueName()
       let storageRef = firebase.storage().ref();
-      let uploadTask = storageRef.child(`${basePath}/${upload.file.name}`).put(upload.file);
+      let uploadTask = storageRef.child(`${basePath}/${name}`).put(upload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) =>  {
@@ -245,17 +247,13 @@ export class PostDesignComponent implements OnInit {
 
     if(this.isOptions === true){
 
-      this.option.push({name: this.postDesign.value.optionsName, image: this.optionImage})
+      this.option.push({name: this.postDesign.value.optionsName, image: this.optionImage, imgName: this.optionImgName})
       //this.displayOptions = this.getOptions(this.options)
       this.postDesign.value.optionsName = null;
     }else{
       this.isOptions = true;
     }
-
-  }
-
-  clearOption(){
-    this.option = [];
+    this.submitable = true;
   }
 
   getOptions(arr){
@@ -267,12 +265,13 @@ export class PostDesignComponent implements OnInit {
   }
 
   uploadOptionImage(e){
+      this.submitable = false;
       let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
 
       let upload = new file(e.target.files[0])
-
+      let name = this.getUniqueName()
       let storageRef = firebase.storage().ref();
-      let uploadTask = storageRef.child(`${basePath}/${upload.file.name}`).put(upload.file);
+      let uploadTask = storageRef.child(`${basePath}/${name}`).put(upload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) =>  {
@@ -285,6 +284,7 @@ export class PostDesignComponent implements OnInit {
         () => {
           // upload success
           this.optionImage = uploadTask.snapshot.downloadURL;
+          this.optionImgName = name;
         }
       );
   }
@@ -295,6 +295,29 @@ export class PostDesignComponent implements OnInit {
     for(var i in arr){
       arr[i].nativeElement.src = "https://firebasestorage.googleapis.com/v0/b/ladrope-9e888.appspot.com/o/assets%2Fupload_placeholder.png?alt=media&token=cb306f5d-1104-4585-9254-e93827db9502"
     }
+  }
+
+  remove(item, i){
+    this.option.splice(i, 1);
+    this.removeInStorage(item)
+  }
+
+  getUniqueName() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  removeInStorage(item){
+      let basePath = '/tailors/'+ this.tailor.uid + '/cloth';
+      let storageRef = firebase.storage().ref();
+      storageRef.child(`${basePath}/${item.imgName}`).delete().then(() =>{
+
+      })
+      .catch(()=>{
+
+      });
   }
 
 }

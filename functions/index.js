@@ -4,7 +4,9 @@ const moment = require('moment');
 
 const request = require('request')
 
-const secretKey = 'sk_test_29cd1555470991605a58ea724c6648e15d68e528'
+const secretKey = 'sk_test_29cd1555470991605a58ea724c6648e15d68e528';
+
+const sender = 'Ladrope <support@ladrope.com>'
 
 // The Firebase Admin SDK to access the Firebase Realtime Database. 
 const admin = require('firebase-admin');
@@ -12,15 +14,33 @@ admin.initializeApp(functions.config().firebase);
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
-const gmailEmail = encodeURIComponent(functions.config().gmail.email);
-const gmailPassword = encodeURIComponent(functions.config().gmail.pass);
-const mailTransport = nodemailer.createTransport(
-`smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
+const email = encodeURIComponent(functions.config().email.email);
+const pass = encodeURIComponent(functions.config().email.pass);
+// const mailTransport = nodemailer.createTransport(
+// `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
+
+var mailTransport = nodemailer.createTransport({
+    host: 'smtp.office365.com', // Office 365 server
+    port: 587, // secure SMTP
+    secureConnection: 'false', // false for TLS
+    auth: {
+        user: 'support@ladrope.com',
+        pass: 'Ladrope123#'
+    },
+    tls: {
+        ciphers: 'SSLv3'
+    }
+});
 
 exports.sendTailorWelcomeEmail = functions.database.ref('/tailors/{pushid}/')
   .onCreate(event => {
   	user = event.data.val()
 	return sendTailorEmail(user.email, user.name);
+})
+
+exports.declineOrders = functions.https.onRequest((req, res)=>{
+	let order = JSON.parse(req.body);
+	return alertme(order, "Order Declined")
 })
 
 exports.verify = functions.https.onRequest((req, res) => {
@@ -62,8 +82,8 @@ exports.sendCustomerWelcomeEmail = functions.database.ref('/users/{pushid}/')
 exports.alertMe = functions.database.ref('/orders/{pushid}/')
 	.onCreate(event =>{
 	order = event.data.val()
-	
-	return alertme(order)	
+	let info = JSON.parse(order)
+	return alertme(info, 'New Order')	
 })
 
 exports.sendReceipt = functions.database.ref('/orders/{pushid}/')
@@ -88,7 +108,7 @@ exports.notifyTailor = functions.database.ref('/orders/{pushid}/')
 // Sends a welcome email to the given user.
 function sendTailorEmail(email, name) {
   const mailOptions = {
-    from: `Ladrope <noreply@Ladrope.com>`,
+    from: sender,
     to: email
   };
   // The user subscribed to the newsletter.
@@ -306,7 +326,7 @@ function sendTailorEmail(email, name) {
 
 function sendCustomerEmail(email, name) {
   const mailOptions = {
-    from: `Ladrope <noreply@Ladrope.com>`,
+    from: sender,
     to: email
   };
   // The user subscribed to the newsletter.
@@ -531,7 +551,7 @@ function sendCustomerEmail(email, name) {
 
 function sendReceipt(email, name, orderId, start, date, address, price) {
   const mailOptions = {
-    from: `Ladrope <noreply@Ladrope.com>`,
+    from: sender,
     to: email
   };
   // The user subscribed to the newsletter.
@@ -643,7 +663,7 @@ function sendReceipt(email, name, orderId, start, date, address, price) {
 
 						<!-- HIDDEN PREHEADER TEXT -->
 						<div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
-						    Entice the open with some amazing preheader text. Use a little mystery and get those subscribers to read through...
+						    Your transaction receipt from Ladrope
 						</div>
 
 						<!-- HEADER -->
@@ -871,7 +891,7 @@ function sendReceipt(email, name, orderId, start, date, address, price) {
 
 function sendTailorNotification(email, orderId, start, date, cost) {
   const mailOptions = {
-    from: `Ladrope <noreply@Ladrope.com>`,
+    from: sender,
     to: email
   };
   // The user subscribed to the newsletter.
@@ -983,7 +1003,7 @@ function sendTailorNotification(email, orderId, start, date, cost) {
 
 						<!-- HIDDEN PREHEADER TEXT -->
 						<div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
-						    Entice the open with some amazing preheader text. Use a little mystery and get those subscribers to read through...
+						    Congratulations! You have got an order on Ladrope
 						</div>
 
 						<!-- HEADER -->
@@ -1039,11 +1059,11 @@ function sendTailorNotification(email, orderId, start, date, cost) {
 						                    </td>
 						                </tr>
 						            </table>
+						            <h4>Please visit your <a href="https://ladrope.com/">dashboard. </a> Accept the order within 24hrs if you are ready to complete it, else the order will be canceled.</h4>
 						            <!--[if (gte mso 9)|(IE)]>
 						            </td>
 						            </tr>
 						            </table>
-						            <h4>Please visit your <a href="https://ladrope.com/">dashboard</a>. Accept the order within 24hrs if you are ready to complete it else the order will be canceled.</h4>
 						            <![endif]-->
 						        </td>
 						    </tr>
@@ -1133,14 +1153,15 @@ function sendTailorNotification(email, orderId, start, date, cost) {
 
 }
 
-function alertme(order) {
+function alertme(order, header) {
+
   const mailOptions = {
-    from: `Ladrope <noreply@Ladrope.com>`,
+    from: sender,
     to: 'globalladrope@gmail.com'
   };
- mailOptions.subject = 'New Order';
- mailOptions.text =  ` There is a new order. Delivery date: ${order.date}  Start date: ${order.startDate} Tailor: ${order.labelEmail} ${order.labelPhone}, Client: ${order.email}`;
-
+ mailOptions.subject = header;
+ //mailOptions.text =  ` There is a new order. Delivery date: ${order.date}  Start date: ${order.startDate} Tailor: ${order.labelEmail} ${order.labelPhone}, Client: ${order.email}`;
+ mailOptions.text =  ` There is a new order. Details: ${info}`;
   return mailTransport.sendMail(mailOptions).then(() => {
 	  
 	});

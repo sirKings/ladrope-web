@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -87,6 +88,7 @@ import { ClothsComponent } from './cloths/cloths.component';
     ReactiveFormsModule,
     InfiniteScrollModule,
     BrowserAnimationsModule,
+    HttpModule,
     FormsModule,
     CarouselModule,
     StarRatingModule.forRoot(),

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Http } from '@angular/http';
 
 import { AuthServiceService } from '../../services/auth-service.service';
 
@@ -27,7 +28,7 @@ isPendingOrder = false;
 isCanceledOrder = false;
 isCompletedOrder = false;
 
-  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase, public router: Router, private service: AuthServiceService, private route: ActivatedRoute) { }
+  constructor( private http: Http, public afAuth: AngularFireAuth, public db: AngularFireDatabase, public router: Router, private service: AuthServiceService, private route: ActivatedRoute) { }
 
   
 
@@ -104,9 +105,10 @@ isCompletedOrder = false;
   }
 
   rejectOrder(order){
-      this.db.object('/users/'+order.user+'/orders/'+ order.userOrderKey).update({status: 'Declined', accepted: false});
+      //this.db.object('/users/'+order.user+'/orders/'+ order.userOrderKey).update({status: 'Declined', accepted: false});
       this.db.object('/tailors/' + order.labelId +'/orders/' + order.tailorOrderKey).update({status: 'Declined', accepted: false});
       this.db.object('/orders/'+ order.ordersKey).update({status: 'Declined', accepted: false});
+      this.http.post('http://ladrope.com/decline', order)
   }
 
 }

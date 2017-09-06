@@ -149,8 +149,11 @@
         </div>
         <div *ngIf= 'option[0]'>
           <p>Available Options</p>
-          <div class='space' *ngFor = 'let opt of option'>
+          <div class='space' *ngFor = 'let opt of option; let index = i'>
             <div class='options'>
+            <div class='pull-right'>
+              <button class='btn btn-danger' type='button' (click)='remove(opt, i)'>Remove</button>
+            </div>
               <div class=thumbnail>
                 <img src="{{opt?.image}}">
                   <h4>{{opt.name}}</h4>
@@ -181,7 +184,7 @@
           <button class='btn btn-primary' type='button' (click)='clearOption()'>Clear Options</button>
         </div>
         <div class='space'>
-          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary" [disable]='submitable' type="submit">Submit</button>
         </div>
         
       </div>
