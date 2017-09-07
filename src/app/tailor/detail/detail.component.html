@@ -9,7 +9,7 @@
 							<img src="{{getImg()}}">
 						</div>
 					</div>
-					<div class='col-sm-5 title'>{{tailor.name}}</div>
+					<div class='col-sm-5 title'>{{tailor?.name}}</div>
 
 					<button class='edit' routerLink= '../edit-detail'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Details</button>
 					<p>Please endeavour to complete your details before posting</p>
@@ -21,16 +21,16 @@
 				</div>
 				<div>
 					<div>
-						<h5>Name: {{tailor.displayName}} </h5>
+						<h5>Name: {{tailor?.displayName}} </h5>
 					</div>
 					<div>
-						<h5>Address:  {{tailor.address}}</h5>
+						<h5>Address:  {{tailor?.address}}</h5>
 					</div>
 					<div>
-						<h5>Phone:  {{tailor.phone}}</h5>
+						<h5>Phone:  {{tailor?.phone}}</h5>
 					</div>
 					<div>
-						<h5>Email:  {{tailor.email}}</h5>
+						<h5>Email:  {{tailor?.email}}</h5>
 					</div>
 				</div>
 			</div>
@@ -40,13 +40,13 @@
 				</div>
 				<div>
 					<div>
-						<h5> Bank Name: {{tailor.bank}} </h5>
+						<h5> Bank Name: {{tailor?.bank}} </h5>
 					</div>
 					<div>
-						<h5>Account Name: {{tailor.accountname}}</h5>
+						<h5>Account Name: {{tailor?.accountname}}</h5>
 					</div>
 					<div>
-						<h5>Account Number: {{tailor.account}}</h5>
+						<h5>Account Number: {{tailor?.account}}</h5>
 					</div>
 				</div>
 			</div>

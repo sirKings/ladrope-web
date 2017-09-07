@@ -95,6 +95,7 @@ isCompletedOrder = false;
   }
 
   acceptOrder(order){
+
     if(order.accepted === true){
 
     }else{
@@ -105,10 +106,15 @@ isCompletedOrder = false;
   }
 
   rejectOrder(order){
+      if(order.accepted === false){
+
+      }else{
       //this.db.object('/users/'+order.user+'/orders/'+ order.userOrderKey).update({status: 'Declined', accepted: false});
-      this.db.object('/tailors/' + order.labelId +'/orders/' + order.tailorOrderKey).update({status: 'Declined', accepted: false});
-      this.db.object('/orders/'+ order.ordersKey).update({status: 'Declined', accepted: false});
-      this.http.post('http://ladrope.com/decline', order)
+        this.db.object('/tailors/' + order.labelId +'/orders/' + order.tailorOrderKey).update({status: 'Declined', accepted: false});
+        this.db.object('/orders/'+ order.ordersKey).update({status: 'Declined', accepted: false});
+        console.log('declined')
+        this.http.post('https://ladrope.com/decline', order).subscribe()
+     }
   }
 
 }

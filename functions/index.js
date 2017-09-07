@@ -39,8 +39,10 @@ exports.sendTailorWelcomeEmail = functions.database.ref('/tailors/{pushid}/')
 })
 
 exports.declineOrders = functions.https.onRequest((req, res)=>{
-	let order = JSON.parse(req.body);
-	return alertme(order, "Order Declined")
+	let order = JSON.stringify(req.body);
+	return alertme(order, "Order Declined").then(()=>{
+		res.end()
+	})
 })
 
 exports.verify = functions.https.onRequest((req, res) => {
@@ -82,7 +84,7 @@ exports.sendCustomerWelcomeEmail = functions.database.ref('/users/{pushid}/')
 exports.alertMe = functions.database.ref('/orders/{pushid}/')
 	.onCreate(event =>{
 	order = event.data.val()
-	let info = JSON.parse(order)
+	let info = JSON.stringify(order)
 	return alertme(info, 'New Order')	
 })
 
@@ -1161,7 +1163,7 @@ function alertme(order, header) {
   };
  mailOptions.subject = header;
  //mailOptions.text =  ` There is a new order. Delivery date: ${order.date}  Start date: ${order.startDate} Tailor: ${order.labelEmail} ${order.labelPhone}, Client: ${order.email}`;
- mailOptions.text =  ` There is a new order. Details: ${info}`;
+ mailOptions.text =  ` There is a new order. Details: ${order}`;
   return mailTransport.sendMail(mailOptions).then(() => {
 	  
 	});

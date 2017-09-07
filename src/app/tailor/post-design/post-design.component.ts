@@ -121,6 +121,7 @@ export class PostDesignComponent implements OnInit {
 
         this.postDesign.reset();
         this.clearImages();
+        this.clearOptions()
         this.alert.success('Congratulations!! Your design has been posted')
       }else{
         this.alert.error('Error upload atleast four images')
@@ -262,6 +263,10 @@ export class PostDesignComponent implements OnInit {
         options[i] = arr[i]
       }
       return options
+  }
+
+  clearOptions(){
+    this.option = []
   }
 
   uploadOptionImage(e){
