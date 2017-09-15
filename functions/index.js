@@ -24,18 +24,30 @@ var mailTransport = nodemailer.createTransport({
     port: 587, // secure SMTP
     secureConnection: 'false', // false for TLS
     auth: {
-        user: 'support@ladrope.com',
-        pass: 'Ladrope123#'
+        user: email,
+        pass: pass
     },
     tls: {
         ciphers: 'SSLv3'
     }
 });
 
+exports.subscribeToNewsletter = functions.database.ref('/newsletter/{pushid}/')
+	.onCreate(event =>{
+		return subscribe(info.email, 'Guest')
+})
+// exports.addToSubscription = functions.database.ref('/tailors/{pushid}/')
+// 	.onCreate(event => {
+// 		user = event.data.val()
+		
+// })
+
 exports.sendTailorWelcomeEmail = functions.database.ref('/tailors/{pushid}/')
   .onCreate(event => {
   	user = event.data.val()
-	return sendTailorEmail(user.email, user.name);
+	return sendTailorEmail(user.email, user.name).then(()=>{
+		return subscribeTailor(user.email, user.displayName)
+	});
 })
 
 exports.declineOrders = functions.https.onRequest((req, res)=>{
@@ -48,7 +60,6 @@ exports.declineOrders = functions.https.onRequest((req, res)=>{
 exports.verify = functions.https.onRequest((req, res) => {
   	let code = req.body.code;
   	let amount = req.body.amount;
-  	var request = require('request');
   	 
   	var options = {
   	  url: 'https://api.paystack.co/transaction/verify/'+code,
@@ -78,7 +89,9 @@ exports.verify = functions.https.onRequest((req, res) => {
 exports.sendCustomerWelcomeEmail = functions.database.ref('/users/{pushid}/')
 	.onCreate(event => {
 	user = event.data.val()
-	return sendCustomerEmail(user.email, user.displayName);
+	return sendCustomerEmail(user.email, user.displayName).then(()=>{
+		return subscribe(user.email, user.displayName)
+	});
 })
 
 exports.alertMe = functions.database.ref('/orders/{pushid}/')
@@ -86,6 +99,13 @@ exports.alertMe = functions.database.ref('/orders/{pushid}/')
 	order = event.data.val()
 	let info = JSON.stringify(order)
 	return alertme(info, 'New Order')	
+})
+
+exports.contactUs = functions.database.ref('/messages/{pushid}/')
+	.onCreate(event =>{
+	order = event.data.val()
+	let info = JSON.stringify(order)
+	return alertme(info, 'New Contact Us Message')
 })
 
 exports.sendReceipt = functions.database.ref('/orders/{pushid}/')
@@ -1169,6 +1189,62 @@ function alertme(order, header) {
 	});
 
 }
+
+function subscribe(email, fname){
+	var options = {
+	  url: 'https://us16.api.mailchimp.com/3.0/lists/9b0b80a772/members/',
+	  user: {
+	    'anystring:efa4f0f40f8a543b13bb9bb6097e7b88-us16'
+	    },
+	  body: {
+	  	    "email_address": email,
+	  	    "status": "subscribed",
+	  	    "merge_fields": {
+	  	        "FNAME": fname,
+	  	        "LNAME": ''
+	      }
+	};
+
+	function callback(error, response, body) {
+	  if(error){
+	  	console.log(error)
+	  	return
+	  }else{
+	  	console.log(response)
+	  	return
+	  }
+	}
+	request(options, callback);
+}
+
+function subscribeTailor(email, fname){
+	var options = {
+	  url: 'https://us16.api.mailchimp.com/3.0/lists/e3163aa4ca/members/',
+	  user: {
+	    'anystring:efa4f0f40f8a543b13bb9bb6097e7b88-us16'
+	    },
+	  body: {
+	  	    "email_address": email,
+	  	    "status": "subscribed",
+	  	    "merge_fields": {
+	  	        "FNAME": fname,
+	  	        "LNAME": ''
+	      }
+	};
+
+	function callback(error, response, body) {
+	  if(error){
+	  	console.log(error)
+	  	return
+	  }else{
+	  	console.log(response)
+	  	return
+	  }
+	}
+	request(options, callback);
+}
+
+
 
 
 
