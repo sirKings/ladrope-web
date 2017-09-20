@@ -86,7 +86,8 @@ export class PostDesignComponent implements OnInit {
           labelEmail: this.tailor.email,
           labelPhone: this.tailor.phone,
           options: this.getOptions(this.option),
-          numSold: 0
+          numSold: 0,
+          date: firebase.database.ServerValue.TIMESTAMP
         }).key
 
         let tailorkey = this.db.list('/tailors/'+ this.tailor.uid+ '/cloths')
@@ -113,11 +114,20 @@ export class PostDesignComponent implements OnInit {
           labelId: this.tailor.uid,
           labelEmail: this.tailor.email,
           numSold: 0,
+          date: firebase.database.ServerValue.TIMESTAMP,
           options: this.getOptions(this.option)
         }).key
 
-        this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey});
-        this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey});
+        let timestamp
+
+        let date = this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey)
+          .subscribe(data =>{
+            timestamp = data.date * -1
+          })
+        date.unsubscribe()
+
+        this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
+        this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
 
         this.postDesign.reset();
         this.clearImages();

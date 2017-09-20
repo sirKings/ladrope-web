@@ -2,6 +2,8 @@ const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const moment = require('moment');
 
+const http = require('https')
+
 const request = require('request')
 
 const secretKey = 'sk_test_29cd1555470991605a58ea724c6648e15d68e528';
@@ -14,15 +16,18 @@ admin.initializeApp(functions.config().firebase);
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
-const email = encodeURIComponent(functions.config().email.email);
-const pass = encodeURIComponent(functions.config().email.pass);
+const email = functions.config().email.email;
+const pass = functions.config().email.pass;
+const mailchimpKey = functions.config().mailchimp.key;
+const whatsNew = '9b0b80a772';
+const tailorNews = 'e3163aa4ca';
 // const mailTransport = nodemailer.createTransport(
 // `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
 
 var mailTransport = nodemailer.createTransport({
     host: 'smtp.office365.com', // Office 365 server
     port: 587, // secure SMTP
-    secureConnection: 'false', // false for TLS
+    secure: false, // false for TLS
     auth: {
         user: email,
         pass: pass
@@ -34,7 +39,8 @@ var mailTransport = nodemailer.createTransport({
 
 exports.subscribeToNewsletter = functions.database.ref('/newsletter/{pushid}/')
 	.onCreate(event =>{
-		return subscribe(info.email, 'Guest')
+		info = event.data.val()
+		return subscribe(info.email, 'Guest', whatsNew)
 })
 // exports.addToSubscription = functions.database.ref('/tailors/{pushid}/')
 // 	.onCreate(event => {
@@ -46,7 +52,7 @@ exports.sendTailorWelcomeEmail = functions.database.ref('/tailors/{pushid}/')
   .onCreate(event => {
   	user = event.data.val()
 	return sendTailorEmail(user.email, user.name).then(()=>{
-		return subscribeTailor(user.email, user.displayName)
+		return subscribe(user.email, user.name, tailorNews)
 	});
 })
 
@@ -90,7 +96,7 @@ exports.sendCustomerWelcomeEmail = functions.database.ref('/users/{pushid}/')
 	.onCreate(event => {
 	user = event.data.val()
 	return sendCustomerEmail(user.email, user.displayName).then(()=>{
-		return subscribe(user.email, user.displayName)
+		return subscribe(user.email, user.displayName, whatsNew)
 	});
 })
 
@@ -1190,59 +1196,33 @@ function alertme(order, header) {
 
 }
 
-function subscribe(email, fname){
+function subscribe(email, fname, list){
+	var headers = {
+	    'content-type': 'application/json'
+	};
+
+	var dataString = '{"email_address":"'+email+'","merge_fields": {"FNAME": "'+fname+'","LNAME": ""}, "status":"subscribed"}'
 	var options = {
-	  url: 'https://us16.api.mailchimp.com/3.0/lists/9b0b80a772/members/',
-	  user: {
-	    'anystring:efa4f0f40f8a543b13bb9bb6097e7b88-us16'
-	    },
-	  body: {
-	  	    "email_address": email,
-	  	    "status": "subscribed",
-	  	    "merge_fields": {
-	  	        "FNAME": fname,
-	  	        "LNAME": ''
-	      }
+	    url: 'https://us16.api.mailchimp.com/3.0/lists/'+list+'/members/',
+	    method: 'POST',
+	    headers: headers,
+	    body: dataString,
+	    auth: {
+	        'user': 'ladrope',
+	        'pass': mailchimpKey
+	    }
 	};
 
 	function callback(error, response, body) {
-	  if(error){
-	  	console.log(error)
-	  	return
-	  }else{
-	  	console.log(response)
-	  	return
-	  }
+		console.log(dataString)
+	    if (!error && response.statusCode == 200) {
+	        console.log(body);
+	    }else(console.log(body))
 	}
+
 	request(options, callback);
 }
 
-function subscribeTailor(email, fname){
-	var options = {
-	  url: 'https://us16.api.mailchimp.com/3.0/lists/e3163aa4ca/members/',
-	  user: {
-	    'anystring:efa4f0f40f8a543b13bb9bb6097e7b88-us16'
-	    },
-	  body: {
-	  	    "email_address": email,
-	  	    "status": "subscribed",
-	  	    "merge_fields": {
-	  	        "FNAME": fname,
-	  	        "LNAME": ''
-	      }
-	};
-
-	function callback(error, response, body) {
-	  if(error){
-	  	console.log(error)
-	  	return
-	  }else{
-	  	console.log(response)
-	  	return
-	  }
-	}
-	request(options, callback);
-}
 
 
 

@@ -71,4 +71,8 @@ user;
      this.db.object('/cloths/'+this.cloth.gender+ '/'+this.cloth.$key).update({likers: this.cloth.likers})
   }
 
+  order(cloth) {
+
+  }
+
 }

@@ -38,7 +38,7 @@
 					<i *ngIf='cloth.likers[uid]' class="fa fa-heart green" aria-hidden="true"></i> 
 					{{cloth.likes}} likes
 				</span>
-				<span class="pull-right" *ngIf='user'><span  *ngIf='user.height && user.size'><h1>Order Now</h1></span></span>
+				<span class="pull-right" *ngIf='user'><span  *ngIf='user.height && user.size'><h3 (click)='order(cloth)'>Order Now</h3></span></span>
 			</div>
 		</div>
 		<div class='info'>
