@@ -104,6 +104,18 @@
               *ngIf="!postDesign.get('time').valid && postDesign.get('time').touched"
               class="help-block">Please enter a valid number of days!</span>
         </div>
+        <div class="form-group pad">
+            <label for="time">Type of Fabric</label>
+            <input
+              type='text'
+              id="fabric"
+              placeholder='What type of fabric is this made from'
+              formControlName="fabricType"
+              class="form-control">
+            <span
+              *ngIf="!postDesign.get('time').valid && postDesign.get('time').touched"
+              class="help-block">Please enter a valid number of days!</span>
+        </div>
         <div class="pad form-group">
           <label for="gender">Gender</label>
           <div class="radio" *ngFor="let gender of genders">

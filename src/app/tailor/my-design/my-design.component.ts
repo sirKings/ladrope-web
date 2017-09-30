@@ -87,7 +87,7 @@ uid;
     if(cloth.deactive){
      let clothKey = this.db.list('/cloths/'+cloth.gender).push(cloth).key;
      this.db.object('/tailors/'+this.uid+'/cloths/'+cloth.tailorKey).update({clothKey: clothKey, deactive: null});
-     this.db.object('/cloths/'+cloth.gender+'/'+clothKey).update({clothKey: clothKey}); 
+     this.db.object('/cloths/'+cloth.gender+'/'+clothKey).update({clothKey: clothKey, deactive: null}); 
    }else{
 
    }

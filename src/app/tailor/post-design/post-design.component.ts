@@ -52,6 +52,7 @@ export class PostDesignComponent implements OnInit {
       'tags': new FormControl(null, Validators.required),
       'time': new FormControl(null, [Validators.required]),
       'description': new FormControl(null, Validators.required),
+      'fabricType': new FormControl(null, Validators.required),
       'optionsName': new FormControl()
     });
 
@@ -78,6 +79,7 @@ export class PostDesignComponent implements OnInit {
           likers: {
                 hello: true
               },
+          fabricType: this.postDesign.value.fabricType,
           rating: 0,
           numComment: 0,
           likes: 0,
@@ -103,6 +105,7 @@ export class PostDesignComponent implements OnInit {
           gender: this.postDesign.value.gender,
           labelPhone: this.tailor.phone,
           tags: this.postDesign.value.tags,
+          fabricType: this.postDesign.value.fabricType,
           description: this.postDesign.value.description,
           likers: {
                 hello: true
@@ -118,17 +121,16 @@ export class PostDesignComponent implements OnInit {
           options: this.getOptions(this.option)
         }).key
 
-        let timestamp
-
         let date = this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey)
-          .subscribe(data =>{
-            timestamp = data.date * -1
+          .take(1)
+          .do(post => {
+
+            let timestamp = post.date * -1
+            this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
+            this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
           })
-        date.unsubscribe()
-
-        this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
-        this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
-
+          .subscribe()
+          
         this.postDesign.reset();
         this.clearImages();
         this.clearOptions()

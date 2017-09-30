@@ -1218,6 +1218,7 @@ function subscribe(email, fname, list){
 	    if (!error && response.statusCode == 200) {
 	        console.log(body);
 	    }else(console.log(body))
+	    return
 	}
 
 	request(options, callback);
