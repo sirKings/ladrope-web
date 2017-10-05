@@ -121,15 +121,18 @@ export class PostDesignComponent implements OnInit {
           options: this.getOptions(this.option)
         }).key
 
-        let date = this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey)
-          .take(1)
-          .do(post => {
-
-            let timestamp = post.date * -1
-            this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
-            this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
-          })
-          .subscribe()
+        let timestamp = 0
+        let date =this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey+ '/date')
+            .subscribe(snapshot =>{
+              timestamp = snapshot.$value;
+              timestamp = timestamp * -1
+            })
+        date.unsubscribe();
+        
+        this.db.object('/cloths/'+ this.postDesign.value.gender + '/' + clothKey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
+        this.db.object('/tailors/'+ this.tailor.uid+ '/cloths/' + tailorkey).update({clothKey: clothKey, tailorKey: tailorkey, date: timestamp});
+          
+        
           
         this.postDesign.reset();
         this.clearImages();

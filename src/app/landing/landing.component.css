@@ -298,7 +298,6 @@
 .testimonials h2,
 .testimonials h4 {
     
-    margin: 20px 0 20px;
     color: rgb(0,74,0);
     text-align: center;
 }
@@ -307,15 +306,15 @@
 .testimonials p {
     
     color: #737373;
-    font-size: 2rem
+    font-size: 1.5rem
 }
 
-.testimonials img {
+/*.testimonials img {
     
     height: 150px;
     width: 150px;
     margin-top: 80px;
-}
+}*/
 
 
 .testimonials i {
@@ -443,6 +442,12 @@
     cursor: pointer;
     margin: 40px auto;
     transition: all 500ms ease-in-out;
+}
+
+.img-card {
+    margin-left: -8%;
+    width: 116%;
+    height: 65%;
 }
 
 

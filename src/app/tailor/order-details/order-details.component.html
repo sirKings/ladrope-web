@@ -1,9 +1,20 @@
 <div class='content'>
 	<div>	
 			<div class='right'>
+				<div *ngIf = 'isOption'>
+					<div class='options'>
+						<h4>Selected Options</h4>
+						<div *ngFor='let opt of options'>
+							<p>{{opt.name}}</p>
+							<img src="{{opt.image}}">
+						</div>
+					</div>
+				</div>
 				<div class='header'>Name: <span>{{order.name}}</span></div>
 				<div class='header'>Price: <span>NGN{{order.price}}.00</span></div>
 				<div class='header date'>Delivery Date: <span>{{order.tailorDate | date: 'dd/MM/yyyy'}}</span></div>
+				<div class='header'>OrderId: {{order.orderId}}</div>
+				
 				<button (click)='back()' class='btn'>Go back</button>
 			</div>
 			<div class='orderImage'>

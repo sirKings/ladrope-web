@@ -58,6 +58,7 @@ exports.sendTailorWelcomeEmail = functions.database.ref('/tailors/{pushid}/')
 
 exports.declineOrders = functions.https.onRequest((req, res)=>{
 	let order = JSON.stringify(req.body);
+	console.log(order)
 	return alertme(order, "Order Declined").then(()=>{
 		res.end()
 	})

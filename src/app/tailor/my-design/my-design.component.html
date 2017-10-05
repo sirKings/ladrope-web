@@ -1,7 +1,13 @@
 <div class='design'>
   <div *ngIf = '!cloths'> <p>You have not posted any designs, <span class='pointer' routerLink='../post'>go to post design</span> and start posting awesome products</p></div>
   <div *ngIf = 'isCloth'>
-      <div><h3>Designs by you</h3></div>
+      <div>
+        <h3>Designs by you</h3>
+        <p>
+          Note: deactivating a design simply removes it from the store, that means clients can no longer see it.
+        </p>
+      </div>
+
       <div>
         <div class='list' *ngFor= ' let cloth of cloths'>
           <div class="card" >

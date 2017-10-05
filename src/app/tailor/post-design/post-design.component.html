@@ -2,6 +2,7 @@
 <div class='post'>
 <div><h3>Post a design</h3></div>
   <p>For best presentation on the app, please upload images with the same dimensions.</p>
+  <p>Please note that this page is for posting only one design. The four images are expected to be the front view, back view, and other views of same design that you might want clients to see.</p>
 	<form [formGroup]="postDesign" (ngSubmit)="onSubmit()" class='form-inline'>
 	<div class='row pad'>
 		<div class='col-md-3 col-sm-6'>
@@ -168,7 +169,7 @@
               <button class='btn btn-danger' type='button' (click)='remove(opt, i)'>Remove</button>
             </div>
             <h4>{{opt.name}}</h4>
-              <div class=thumbnail>
+              <div class='thumbnai'>
                 <img src="{{opt?.image}}">
               </div>
               <hr>
